@@ -93,11 +93,9 @@
   .hero-bottom .en{font-family:var(--fL);font-style:italic;font-size:31px;letter-spacing:.1em;}
   .hero-bottom .dt{font-family:var(--fS);font-weight:300;font-size:12px;letter-spacing:.24em;margin-top:10px;}
   .hero-bottom .seal{margin-bottom:14px;}
-  .hero-meta{padding:54px 30px 64px;}
-  .hero-and{font-family:var(--fL);font-style:italic;font-size:22px;color:var(--soft);margin:0 0 12px;}
-  .hero-kr{font-family:var(--fD);font-weight:800;font-size:30px;letter-spacing:.16em;color:var(--ink);}
-  .hero-full{margin-top:14px;font-family:var(--fS);font-size:13px;color:var(--soft);letter-spacing:.06em;font-weight:300;}
-  .hero-place{margin-top:20px;font-family:var(--fS);font-size:13px;color:var(--ink);letter-spacing:.05em;font-weight:400;line-height:2;}
+  .hero-meta{padding:50px 30px 58px;}
+  .hero-full{font-family:var(--fD);font-weight:700;font-size:19px;color:var(--ink);letter-spacing:.1em;line-height:1.7;}
+  .hero-place{margin-top:20px;font-family:var(--fS);font-size:13px;color:#5b574f;letter-spacing:.05em;font-weight:300;line-height:2;}
   .fade-up{opacity:0;transform:translateY(14px);animation:fadeUp 1.2s cubic-bezier(.2,.7,.2,1) forwards;}
   @keyframes fadeUp{to{opacity:1;transform:none}}
   .d1{animation-delay:.15s}.d2{animation-delay:.45s}.d3{animation-delay:.75s}.d4{animation-delay:1.05s}
@@ -203,6 +201,30 @@
   .copy-btn{padding:9px 14px;border:1px solid var(--line);background:#faf8f4;font-family:var(--fS);font-size:12px;color:var(--ink);cursor:pointer;transition:.2s;white-space:nowrap;}
   .copy-btn:active{background:var(--ink);color:#fff;}
 
+  /* ── 축하 메시지(방명록) ── */
+  .gb-intro{text-align:center;font-family:var(--fS);font-weight:300;font-size:14px;color:#5b574f;margin-top:22px;line-height:2.1;}
+  .gb-form{margin-top:26px;display:flex;flex-direction:column;gap:8px;}
+  .gb-row2{display:grid;grid-template-columns:1.5fr 1fr;gap:8px;}
+  .gb-form input,.gb-form textarea{width:100%;padding:13px 14px;border:1px solid var(--line);background:#fff;
+    font-family:var(--fS);font-size:14.5px;color:var(--ink);border-radius:0;}
+  .gb-form textarea{resize:vertical;min-height:88px;line-height:1.8;}
+  .gb-form input:focus,.gb-form textarea:focus{outline:none;border-color:var(--ink);}
+  .gb-list{margin-top:28px;}
+  .gb-item{border-top:1px solid var(--line);padding:18px 2px;position:relative;}
+  .gb-list .gb-item:last-child{border-bottom:1px solid var(--line);}
+  .gb-head{display:flex;align-items:baseline;gap:8px;font-family:var(--fS);}
+  .gb-who{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .gb-when{font-size:11.5px;color:var(--mute);font-weight:300;}
+  .gb-del{margin-left:auto;background:none;border:none;color:var(--mute);font-size:15px;cursor:pointer;padding:0 2px;line-height:1;font-family:serif;}
+  .gb-del:active{color:var(--seal);}
+  .gb-body{margin-top:8px;font-family:var(--fS);font-size:13.5px;font-weight:300;color:#4f4b44;line-height:2;
+    white-space:pre-wrap;word-break:break-word;}
+  .gb-state{text-align:center;font-family:var(--fS);font-size:12.5px;color:var(--soft);font-weight:300;padding:26px 0;}
+  .gb-more{display:block;width:100%;margin-top:14px;padding:13px 0;border:1px solid var(--line);background:#fff;
+    font-family:var(--fS);font-size:12.5px;color:var(--ink);cursor:pointer;}
+  .gb-more:active{background:var(--ink);color:#fff;}
+  .gb-more[hidden]{display:none;}
+
   /* ── footer ── */
   .foot{text-align:center;padding:62px 30px 74px;background:var(--sumi);color:#f0eee9;position:relative;z-index:2;}
   .foot .en{font-family:var(--fL);font-style:italic;font-size:24px;letter-spacing:.1em;cursor:default;user-select:none;}
@@ -244,6 +266,16 @@
   .ad-f textarea:focus{outline:none;border-color:var(--ink);}
   .ad-panel{display:none;}
   .ad-panel.on{display:block;}
+  .ad-row{display:flex;gap:8px;margin-bottom:14px;}
+  .ad-btn{flex:1;text-align:center;text-decoration:none;font-family:var(--fS);font-size:12.5px;padding:11px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;}
+  .ad-btn:active{background:var(--ink);color:#fff;}
+  .ad-sum{font-family:var(--fS);font-size:12.5px;line-height:1.9;color:#6b665e;background:#fff;border:1px solid var(--line);padding:12px 14px;margin-bottom:12px;}
+  .ad-sum b{color:var(--ink);}
+  .ad-table{overflow-x:auto;background:#fff;border:1px solid var(--line);}
+  .ad-table table{border-collapse:collapse;width:100%;font-family:var(--fS);font-size:11.5px;white-space:nowrap;}
+  .ad-table th,.ad-table td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+  .ad-table th{background:#f7f5f0;font-weight:700;color:var(--ink);position:sticky;top:0;}
+  .ad-table td{color:#5b574f;}
 
   @media (prefers-reduced-motion: reduce){
     #petals{display:none;}
@@ -299,8 +331,6 @@
       </div>
     </div>
     <div class="hero-meta">
-      <div class="hero-and">and</div>
-      <div class="hero-kr" data-i="names">상원 &amp; 노조미</div>
       <div class="hero-full" data-i="full">배상원 · 시바나카 노조미</div>
       <div class="hero-place" data-i="heroplace">2026년 11월 7일 토요일 오후 5시<br>울산 JW웨딩컨벤션센터 마제스틱홀</div>
     </div>
@@ -447,7 +477,7 @@
     <div class="form" id="rsvpForm">
       <div class="field"><label data-i="f_side">구분</label><div class="chip-row" data-name="side"><div class="chip on" data-i="c_g">신랑측</div><div class="chip" data-i="c_b">신부측</div></div></div>
       <div class="field"><label data-i="f_att">참석 여부</label><div class="chip-row" data-name="attend"><div class="chip on" data-i="c_y">참석</div><div class="chip" data-i="c_n">미참석</div></div></div>
-      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" placeholder="성함을 입력해 주세요"></div>
+      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" data-ph="name_ph" placeholder="성함을 입력해 주세요"></div>
       <div class="field"><label data-i="f_cnt">참석 인원</label><select id="rCnt"><option data-i="o1">1명</option><option data-i="o2">2명</option><option data-i="o3">3명</option><option data-i="o4">4명</option><option data-i="o5">5명 이상</option></select></div>
       <div class="field"><label data-i="f_meal">식사 여부</label><div class="chip-row" data-name="meal"><div class="chip on" data-i="c_m1">식사함</div><div class="chip" data-i="c_m2">식사안함</div></div></div>
       <button class="submit" id="rsvpBtn" data-i="submit">참석 여부 전달하기</button>
@@ -463,17 +493,34 @@
     <div class="acc-group">
       <button class="acc-toggle" data-acc><span data-i="acc_g">신랑측 계좌번호</span> <span class="arw">▾</span></button>
       <div class="acc-body">
-        <div class="acc-item"><div><div class="who" data-i="acc_g1">신랑 · 배상원</div><div class="num" data-i="acc_g1n">○○은행 000-0000-0000</div></div><button class="copy-btn" data-copy-from="acc_g1n" data-i="copy">복사</button></div>
-        <div class="acc-item"><div><div class="who" data-i="acc_g2">아버지 · 배종한</div><div class="num" data-i="acc_g2n">○○은행 000-0000-0000</div></div><button class="copy-btn" data-copy-from="acc_g2n" data-i="copy2">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_g1">신랑 · 배상원</div><div class="num" data-i="acc_g1n"></div></div><button class="copy-btn" data-copy-from="acc_g1n" data-i="copy">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_g2">아버지 · 배종한</div><div class="num" data-i="acc_g2n"></div></div><button class="copy-btn" data-copy-from="acc_g2n" data-i="copy2">복사</button></div>
       </div>
     </div>
     <div class="acc-group">
       <button class="acc-toggle" data-acc><span data-i="acc_b">신부측 계좌번호</span> <span class="arw">▾</span></button>
       <div class="acc-body">
-        <div class="acc-item"><div><div class="who" data-i="acc_b1">신부 · 노조미</div><div class="num" data-i="acc_b1n">○○은행 000-0000-0000</div></div><button class="copy-btn" data-copy-from="acc_b1n" data-i="copy3">복사</button></div>
-        <div class="acc-item"><div><div class="who" data-i="acc_b2">어머니 · 시바나카 카오리</div><div class="num" data-i="acc_b2n">○○은행 000-0000-0000</div></div><button class="copy-btn" data-copy-from="acc_b2n" data-i="copy4">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_b1">신부 · 노조미</div><div class="num" data-i="acc_b1n"></div></div><button class="copy-btn" data-copy-from="acc_b1n" data-i="copy3">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_b2">어머니 · 시바나카 카오리</div><div class="num" data-i="acc_b2n"></div></div><button class="copy-btn" data-copy-from="acc_b2n" data-i="copy4">복사</button></div>
       </div>
     </div>
+  </section>
+
+  <!-- GUESTBOOK -->
+  <section class="reveal" id="gbSection">
+    <div class="slabel">Guestbook</div>
+    <div class="stitle" data-i="gb_title">축하 메시지</div>
+    <p class="gb-intro" data-i="gb_intro">따뜻한 한마디를 남겨 주세요.<br>두 사람이 오래 간직하겠습니다.</p>
+    <div class="gb-form">
+      <div class="gb-row2">
+        <input type="text" id="gbName" maxlength="20" data-ph="gb_name_ph" placeholder="이름">
+        <input type="password" id="gbPw" inputmode="numeric" maxlength="8" data-ph="gb_pw_ph" placeholder="비밀번호 4자리">
+      </div>
+      <textarea id="gbMsg" maxlength="500" data-ph="gb_msg_ph" placeholder="축하 인사를 남겨 주세요"></textarea>
+      <button class="submit" id="gbSend" data-i="gb_send">메시지 남기기</button>
+    </div>
+    <div class="gb-list" id="gbList"></div>
+    <button class="gb-more" id="gbMore" hidden data-i="gb_more">더 보기</button>
   </section>
 
   <footer class="foot">
@@ -511,6 +558,7 @@
     <button class="on" data-adtab="ko">한국어</button>
     <button data-adtab="ja">日本語</button>
     <button data-adtab="cfg">설정</button>
+    <button data-adtab="rsvp">참석 현황</button>
   </div>
   <div class="ad-body">
     <div class="ad-hint">
@@ -520,6 +568,14 @@
     <div class="ad-panel on" id="adKo"></div>
     <div class="ad-panel" id="adJa"></div>
     <div class="ad-panel" id="adCfg"></div>
+    <div class="ad-panel" id="adRsvp">
+      <div class="ad-row">
+        <button id="rsvpLoad" class="ad-btn">구글 시트에서 불러오기</button>
+        <a id="rsvpSheet" class="ad-btn" href="#" target="_blank" rel="noopener">스프레드시트 열기</a>
+      </div>
+      <div id="rsvpSum" class="ad-sum"></div>
+      <div id="rsvpTable" class="ad-table"></div>
+    </div>
   </div>
 </div>
 <script id="siteData" type="application/json">
@@ -527,7 +583,6 @@
   "rev": 1,
   "ko": {},
   "ja": {
-    "names": "サンウォン &amp; のぞみ",
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
     "heroplace": "2026年11月7日（土）午後5時<br>JW ウェディングコンベンションセンター マジェスティックホール",
     "inv_title": "謹んでご案内申し上げます",
@@ -603,20 +658,27 @@
     "acc_g": "新郎側 口座番号",
     "acc_b": "新婦側 口座番号",
     "acc_g1": "新郎 · サンウォン",
-    "acc_g1n": "○○銀行 000-0000-0000",
+    "acc_g1n": "",
     "acc_g2": "父 · ペ・ジョンハン",
-    "acc_g2n": "○○銀行 000-0000-0000",
+    "acc_g2n": "",
     "acc_b1": "新婦 · のぞみ",
-    "acc_b1n": "○○銀行 000-0000-0000",
+    "acc_b1n": "",
     "acc_b2": "母 · <ruby>芝中香織<rt>かおり</rt></ruby>",
-    "acc_b2n": "○○銀行 000-0000-0000",
+    "acc_b2n": "",
     "copy": "コピー",
     "copy2": "コピー",
     "copy3": "コピー",
     "copy4": "コピー",
     "foot_msg": "2026年11月7日、<br>私たち二人の新しい門出に<br>お立ち会いいただきありがとうございます。",
     "share": "シェア",
-    "copylink": "リンクをコピー"
+    "copylink": "リンクをコピー",
+    "gb_title": "お祝いメッセージ",
+    "gb_intro": "温かいひとことをお寄せください。<br>二人でいつまでも大切にいたします。",
+    "gb_send": "メッセージを送る",
+    "gb_more": "もっと見る",
+    "gb_name_ph": "お名前",
+    "gb_pw_ph": "暗証番号4桁",
+    "gb_msg_ph": "お祝いのメッセージをどうぞ"
   },
   "cfg": {
     "music": "music.mp3",
@@ -625,13 +687,10 @@
     "naverUrl": "https://naver.me/5mvK1ll5",
     "groomTel": "010-2851-1949",
     "brideTel": "010-3970-8335",
-    "formUrl": "",
-    "entryName": "",
-    "entrySide": "",
-    "entryAttend": "",
-    "entryCount": "",
-    "entryMeal": "",
-    "rsvpUrl": ""
+    "sheetApiUrl": "https://script.google.com/macros/s/AKfycbx74M4zu5XmwCNPTUbhy7SxP5tf3QyHay6oQEW4s_SNrQQxPvbbdi3o5BSCs8eA5hjD/exec",
+    "sheetKey": "sw-nz-1107",
+    "sheetUrl": "",
+    "adminKey": ""
   }
 }
 </script>
@@ -664,7 +723,7 @@
     $$('[data-i]').forEach(function(el){
       KO[el.dataset.i] = (el instanceof SVGElement) ? el.textContent : el.innerHTML;
     });
-    KO['name_ph'] = $('#rName').getAttribute('placeholder');
+    $$('[data-ph]').forEach(function(el){ KO[el.dataset.ph] = el.getAttribute('placeholder') || ''; });
     KO['inv_sign'] = '';
   }
   function val(key, lang){
@@ -681,13 +740,23 @@
       if(el instanceof SVGElement){ el.textContent = v.replace(/<[^>]+>/g,''); }
       else { el.innerHTML = v; }
     });
-    $('#rName').setAttribute('placeholder', val('name_ph', lang));
+    $$('[data-ph]').forEach(function(el){ el.setAttribute('placeholder', val(el.dataset.ph, lang)); });
+    syncCopyButtons();
     $$('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
     document.title = (lang === 'ja')
       ? '裵相元 ♥ 芝中希望 — 結婚式のご案内'
       : '배상원 ♥ 시바나카 노조미 — 결혼합니다';
     renderMap();
     renderCountdown();
+  }
+
+  /* 계좌번호가 비어 있으면 복사 버튼 숨김 */
+  function syncCopyButtons(){
+    $$('.copy-btn').forEach(function(b){
+      var src = document.querySelector('[data-i="' + b.dataset.copyFrom + '"]');
+      var has = src && src.textContent.trim() !== '';
+      b.style.display = has ? '' : 'none';
+    });
   }
 
   /* ── 지도 ── */
@@ -789,36 +858,37 @@
     });
   });
 
-  /* ── Google Forms 전송 ── */
-  function sendToGoogleForm(payload){
-    var url = (DATA.cfg.formUrl || '').trim();
+  /* ── 구글 시트(Apps Script) 전송 ── */
+  function sendToSheet(payload){
+    var url = (DATA.cfg.sheetApiUrl || '').trim();
     if(!url) return false;
-    url = url.split('?')[0].replace(/\/viewform.*$/,'/formResponse').replace(/\/edit.*$/,'/formResponse');
-    if(url.indexOf('/formResponse') < 0) url = url.replace(/\/$/,'') + '/formResponse';
-    var map = [['entryName','name'],['entrySide','side'],['entryAttend','attend'],['entryCount','count'],['entryMeal','meal']];
-    var ifr = document.getElementById('gfTarget');
+    var ifr = document.getElementById('rsvpTarget');
     if(!ifr){
       ifr = document.createElement('iframe');
-      ifr.id = 'gfTarget'; ifr.name = 'gfTarget';
+      ifr.id = 'rsvpTarget'; ifr.name = 'rsvpTarget';
       ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;left:-9999px;';
       document.body.appendChild(ifr);
     }
     var f = document.createElement('form');
-    f.action = url; f.method = 'POST'; f.target = 'gfTarget';
+    f.action = url; f.method = 'POST'; f.target = 'rsvpTarget';
     f.style.cssText = 'position:absolute;left:-9999px;';
-    var sent = 0;
-    map.forEach(function(m){
-      var id = (DATA.cfg[m[0]] || '').trim();
-      if(!id) return;
-      if(id.indexOf('entry.') !== 0) id = 'entry.' + id.replace(/^entry\.?/,'');
+    var fields = {
+      key:    DATA.cfg.sheetKey || '',
+      name:   payload.name,
+      side:   payload.side,
+      attend: payload.attend,
+      count:  payload.count,
+      meal:   payload.meal,
+      lang:   payload.lang
+    };
+    Object.keys(fields).forEach(function(k){
       var i = document.createElement('input');
-      i.type = 'hidden'; i.name = id; i.value = payload[m[1]] || '';
-      f.appendChild(i); sent++;
+      i.type = 'hidden'; i.name = k; i.value = fields[k] == null ? '' : String(fields[k]);
+      f.appendChild(i);
     });
-    if(!sent) return false;
     document.body.appendChild(f);
     try{ f.submit(); }catch(e){}
-    setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); }, 2000);
+    setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); }, 3000);
     return true;
   }
 
@@ -839,12 +909,7 @@
     }
     var pick = function(n){ var r = $('.chip-row[data-name="'+n+'"] .chip.on'); return r ? r.textContent.trim() : ''; };
     var payload = { name:name, side:pick('side'), attend:pick('attend'), meal:pick('meal'), count:$('#rCnt').value, lang:LANG, at:new Date().toISOString() };
-    sendToGoogleForm(payload);
-    if(DATA.cfg.rsvpUrl){
-      try{
-        fetch(DATA.cfg.rsvpUrl, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload)});
-      }catch(e){}
-    }
+    sendToSheet(payload);
     $('#rsvpForm').style.display = 'none';
     $('#rsvpOk').style.display = 'block';
   });
@@ -913,6 +978,143 @@
     if(Math.abs(dx) > 45) nav(dx < 0 ? 1 : -1);
   }, {passive:true});
 
+  /* ── 축하 메시지(방명록) ── */
+  var GB = { rows: [], shown: 0, PAGE: 5, loaded: false, busy: false };
+
+  function apiUrl(params){
+    var url = (DATA.cfg.sheetApiUrl || '').trim();
+    if(!url) return '';
+    var q = [];
+    Object.keys(params).forEach(function(k){ q.push(k + '=' + encodeURIComponent(params[k])); });
+    return url + (url.indexOf('?') < 0 ? '?' : '&') + q.join('&');
+  }
+  function postToApi(fields, done){
+    var url = (DATA.cfg.sheetApiUrl || '').trim();
+    if(!url){ if(done) done(false); return; }
+    var ifr = document.getElementById('apiTarget');
+    if(!ifr){
+      ifr = document.createElement('iframe');
+      ifr.id = 'apiTarget'; ifr.name = 'apiTarget';
+      ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;left:-9999px;';
+      document.body.appendChild(ifr);
+    }
+    var f = document.createElement('form');
+    f.action = url; f.method = 'POST'; f.target = 'apiTarget';
+    f.style.cssText = 'position:absolute;left:-9999px;';
+    Object.keys(fields).forEach(function(k){
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = k; i.value = fields[k] == null ? '' : String(fields[k]);
+      f.appendChild(i);
+    });
+    document.body.appendChild(f);
+    try{ f.submit(); }catch(e){}
+    setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); if(done) done(true); }, 1400);
+  }
+
+  function gbWhen(v){
+    var d = new Date(String(v).replace(' ','T'));
+    if(isNaN(d)) return String(v || '');
+    return d.getFullYear() + '.' + ('0'+(d.getMonth()+1)).slice(-2) + '.' + ('0'+d.getDate()).slice(-2);
+  }
+  function gbEsc(v){
+    return String(v == null ? '' : v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function gbState(msg){ $('#gbList').innerHTML = '<div class="gb-state">' + gbEsc(msg) + '</div>'; $('#gbMore').hidden = true; }
+
+  function gbRender(){
+    var list = $('#gbList'), more = $('#gbMore');
+    if(!GB.rows.length){
+      gbState(LANG === 'ja' ? '最初のメッセージをお待ちしています。' : '첫 번째 메시지를 기다리고 있어요.');
+      return;
+    }
+    GB.shown = Math.max(GB.shown, GB.PAGE);
+    var view = GB.rows.slice(0, GB.shown), h = '';
+    view.forEach(function(r){
+      h += '<div class="gb-item" data-id="' + gbEsc(r.id) + '">' +
+             '<div class="gb-head"><span class="gb-who">' + gbEsc(r.name) + '</span>' +
+             '<span class="gb-when">' + gbEsc(gbWhen(r.at)) + '</span>' +
+             '<button class="gb-del" title="' + (LANG === 'ja' ? '削除' : '삭제') + '">✕</button></div>' +
+             '<div class="gb-body">' + gbEsc(r.msg) + '</div>' +
+           '</div>';
+    });
+    list.innerHTML = h;
+    more.hidden = GB.shown >= GB.rows.length;
+    $$('.gb-del', list).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        gbDelete(btn.closest('.gb-item').dataset.id);
+      });
+    });
+  }
+
+  function gbLoad(force){
+    if(GB.busy) return;
+    if(GB.loaded && !force) return;
+    var u = apiUrl({action:'guest'});
+    if(!u){ gbState(LANG === 'ja' ? '準備中です。' : '준비 중입니다.'); return; }
+    GB.busy = true;
+    if(!GB.loaded) gbState(LANG === 'ja' ? '読み込み中…' : '불러오는 중…');
+    fetch(u, {method:'GET'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        GB.busy = false; GB.loaded = true;
+        if(!j || !j.ok) { gbState(LANG === 'ja' ? '読み込めませんでした。' : '불러오지 못했습니다.'); return; }
+        GB.rows = (j.rows || []).map(function(r){
+          return { id:r[0], at:r[1], name:r[2], msg:r[3] };
+        }).reverse();
+        gbRender();
+      })
+      .catch(function(){
+        GB.busy = false;
+        gbState(LANG === 'ja' ? 'メッセージを読み込めませんでした。' : '메시지를 불러오지 못했습니다.');
+      });
+  }
+
+  $('#gbMore').addEventListener('click', function(){ GB.shown += GB.PAGE; gbRender(); });
+
+  $('#gbSend').addEventListener('click', function(){
+    var name = $('#gbName').value.trim();
+    var pw   = $('#gbPw').value.trim();
+    var msg  = $('#gbMsg').value.trim();
+    if(!name){ showToast(LANG === 'ja' ? 'お名前をご入力ください' : '이름을 입력해 주세요'); $('#gbName').focus(); return; }
+    if(!msg){ showToast(LANG === 'ja' ? 'メッセージをご入力ください' : '메시지를 입력해 주세요'); $('#gbMsg').focus(); return; }
+    if(pw.length < 4){ showToast(LANG === 'ja' ? '暗証番号は4桁以上でご入力ください' : '비밀번호를 4자리 이상 입력해 주세요'); $('#gbPw').focus(); return; }
+    if(!DATA.cfg.sheetApiUrl){ showToast(LANG === 'ja' ? '準備中です' : '준비 중입니다'); return; }
+    var btn = this; btn.disabled = true;
+    postToApi({ type:'guest', key:DATA.cfg.sheetKey || '', name:name, msg:msg, pw:pw, lang:LANG }, function(){
+      $('#gbMsg').value = ''; $('#gbPw').value = '';
+      btn.disabled = false;
+      showToast(LANG === 'ja' ? 'メッセージを登録しました' : '메시지를 남겼습니다');
+      GB.shown = GB.PAGE;
+      setTimeout(function(){ gbLoad(true); }, 400);
+    });
+  });
+
+  function gbDelete(id){
+    var pw = window.prompt(LANG === 'ja' ? '暗証番号をご入力ください' : '비밀번호를 입력해 주세요');
+    if(pw === null) return;
+    pw = String(pw).trim();
+    if(!pw) return;
+    postToApi({ type:'guestdel', key:DATA.cfg.sheetKey || '', id:id, pw:pw }, function(){
+      setTimeout(function(){
+        var before = GB.rows.length;
+        fetch(apiUrl({action:'guest'})).then(function(r){ return r.json(); }).then(function(j){
+          GB.rows = (j.rows || []).map(function(r){ return {id:r[0],at:r[1],name:r[2],msg:r[3]}; }).reverse();
+          gbRender();
+          showToast(GB.rows.length < before
+            ? (LANG === 'ja' ? '削除しました' : '삭제했습니다')
+            : (LANG === 'ja' ? '暗証番号が違います' : '비밀번호가 맞지 않습니다'));
+        }).catch(function(){});
+      }, 500);
+    });
+  }
+
+  /* 방명록 섹션이 화면에 보일 때 처음 한 번 불러오기 */
+  var gbIo = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ gbLoad(false); gbIo.unobserve(e.target); } });
+  },{threshold:.05});
+  gbIo.observe($('#gbSection'));
+
   /* ── 공유 ── */
   $('#shareBtn').addEventListener('click', function(){
     var t = document.title;
@@ -927,7 +1129,7 @@
 
   /* ─────────────  관리자 화면  ───────────── */
   var GROUPS = [
-    ['기본 · 인물', ['names','full','heroplace','p_groom','p_bride']],
+    ['기본 · 인물', ['full','heroplace','p_groom','p_bride']],
     ['초대 인사말', ['inv_title','inv_poem','inv_body','inv_sign']],
     ['예식 일시',   ['date_line','date_time','calhead']],
     ['갤러리',      ['gal_title','gal_note']],
@@ -937,10 +1139,11 @@
     ['연락처',      ['ct_g','ct_gn','ct_b','ct_bn','ct_call','ct_sms','ct_call2','ct_sms2']],
     ['참석 여부',   ['rsvp_title','rsvp_intro','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok']],
     ['마음 전하실 곳', ['acc_title','acc_intro','acc_g','acc_g1','acc_g1n','acc_g2','acc_g2n','acc_b','acc_b1','acc_b1n','acc_b2','acc_b2n','copy','copy2','copy3','copy4']],
+    ['축하 메시지',  ['gb_title','gb_intro','gb_send','gb_more','gb_name_ph','gb_pw_ph','gb_msg_ph']],
     ['맺음말',      ['foot_msg','share','copylink']]
   ];
   var LABEL = {
-    names:'큰 이름', full:'전체 이름', heroplace:'첫 화면 일시·장소',
+    full:'첫 화면 이름', heroplace:'첫 화면 일시·장소',
     p_groom:'신랑 부모님 줄', p_bride:'신부 부모님 줄',
     inv_title:'초대 제목', inv_poem:'인사 첫 문단', inv_body:'인사 본문', inv_sign:'맺음(일본어 전용 · 敬白/差出人)',
     date_line:'날짜', date_time:'시간', calhead:'달력 요일 머리글',
@@ -956,6 +1159,8 @@
     acc_title:'제목', acc_intro:'안내문',
     acc_g:'신랑측 그룹명', acc_g1:'신랑 표시', acc_g1n:'신랑 계좌', acc_g2:'아버지 표시', acc_g2n:'아버지 계좌',
     acc_b:'신부측 그룹명', acc_b1:'신부 표시', acc_b1n:'신부 계좌', acc_b2:'어머니 표시', acc_b2n:'어머니 계좌',
+    gb_title:'제목', gb_intro:'안내문', gb_send:'등록 버튼', gb_more:'더보기 버튼',
+    gb_name_ph:'이름 입력 안내', gb_pw_ph:'비밀번호 입력 안내', gb_msg_ph:'메시지 입력 안내',
     foot_msg:'마지막 인사', share:'공유 버튼', copylink:'링크복사 버튼'
   };
   var CFGLABEL = {
@@ -965,13 +1170,10 @@
     naverUrl:'네이버 지도 링크',
     groomTel:'신랑 연락처',
     brideTel:'신부 연락처',
-    formUrl:'[구글폼] 폼 주소 (viewform 또는 formResponse 링크 붙여넣기)',
-    entryName:'[구글폼] 성함 항목 ID (예: entry.123456789)',
-    entrySide:'[구글폼] 구분(신랑측/신부측) 항목 ID',
-    entryAttend:'[구글폼] 참석 여부 항목 ID',
-    entryCount:'[구글폼] 참석 인원 항목 ID',
-    entryMeal:'[구글폼] 식사 여부 항목 ID',
-    rsvpUrl:'(선택) Apps Script 웹앱 URL — 구글폼 대신 쓸 경우'
+    sheetApiUrl:'[구글시트] Apps Script 웹앱 주소 (…/exec 로 끝나는 링크)',
+    sheetKey:'[구글시트] 쓰기 키 — Apps Script의 WRITE_KEY 값과 똑같이',
+    sheetUrl:'[구글시트] 스프레드시트 바로가기 링크 (관리자 확인용)',
+    adminKey:'[구글시트] 관리자 키 — Apps Script의 ADMIN_KEY 값. 내보낸 파일에는 저장되지 않음'
   };
 
   var admin = $('#admin');
@@ -1004,7 +1206,82 @@
       wrap.appendChild(lb); wrap.appendChild(ta); cfgHost.appendChild(wrap);
     });
   }
-  function openAdmin(){ buildAdmin(); admin.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function esc(v){ return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmtCell(v){
+    if(v && /^\d{4}-\d{2}-\d{2}T/.test(String(v))){
+      var d = new Date(v);
+      if(!isNaN(d)) return d.getFullYear()+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+('0'+d.getDate()).slice(-2)+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+    }
+    return esc(v);
+  }
+  function loadRsvp(){
+    var url = (DATA.cfg.sheetApiUrl || '').trim();
+    var tbl = $('#rsvpTable'), sum = $('#rsvpSum');
+    if(!url){ sum.textContent = '설정 탭에서 Apps Script 웹앱 주소를 먼저 입력해 주세요.'; tbl.innerHTML = ''; return; }
+    sum.textContent = '불러오는 중…'; tbl.innerHTML = '';
+    var ak = (DATA.cfg.adminKey || '').trim();
+    if(!ak){
+      ak = window.prompt('관리자 키를 입력해 주세요 (Apps Script의 ADMIN_KEY)');
+      if(!ak){ sum.textContent = '관리자 키가 필요합니다.'; return; }
+      DATA.cfg.adminKey = ak.trim();
+      try{ localStorage.setItem(LSKEY, JSON.stringify({rev:DATA.rev, ko:DATA.ko, ja:DATA.ja, cfg:DATA.cfg})); }catch(e){}
+    }
+    var q = url + (url.indexOf('?') < 0 ? '?' : '&') + 'action=list&key=' + encodeURIComponent(ak);
+    fetch(q, {method:'GET'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(!j || !j.ok){
+          if(j && j.error === 'bad key'){
+            DATA.cfg.adminKey = '';
+            try{ localStorage.setItem(LSKEY, JSON.stringify({rev:DATA.rev, ko:DATA.ko, ja:DATA.ja, cfg:DATA.cfg})); }catch(e){}
+            sum.textContent = '관리자 키가 맞지 않습니다. 다시 눌러 입력해 주세요.';
+          }else{
+            sum.textContent = '불러오지 못했습니다' + (j && j.error ? ' (' + j.error + ')' : '');
+          }
+          return;
+        }
+        var rows = j.rows || [];
+        if(rows.length < 2){ sum.textContent = '아직 접수된 응답이 없습니다.'; return; }
+        var head = rows[0], data = rows.slice(1);
+        var idx = {};
+        head.forEach(function(h,i){ idx[String(h).trim()] = i; });
+        var yes = 0, no = 0, meal = 0, groom = 0, bride = 0;
+        data.forEach(function(r){
+          var att = String(r[idx['참석여부']] != null ? r[idx['참석여부']] : '');
+          var cnt = parseInt(String(r[idx['인원']] || '').replace(/[^0-9]/g,''), 10) || 1;
+          var side = String(r[idx['구분']] || '');
+          var ml = String(r[idx['식사']] || '');
+          if(/참석|出席/.test(att) && !/미참석|欠席/.test(att)){
+            yes += cnt;
+            if(/식사함|いただく/.test(ml) && !/안함|いただかない/.test(ml)) meal += cnt;
+            if(/신랑|新郎/.test(side)) groom += cnt; else if(/신부|新婦/.test(side)) bride += cnt;
+          } else { no += cnt; }
+        });
+        sum.innerHTML = '응답 <b>' + data.length + '</b>건 · 참석 <b>' + yes + '</b>명 (신랑측 ' + groom + ' / 신부측 ' + bride + ') · 미참석 <b>' + no + '</b>명 · 식사 <b>' + meal + '</b>명';
+        var h = '<table><thead><tr>';
+        head.forEach(function(c){ h += '<th>' + esc(c) + '</th>'; });
+        h += '</tr></thead><tbody>';
+        data.slice().reverse().forEach(function(r){
+          h += '<tr>';
+          head.forEach(function(_,i){ h += '<td>' + fmtCell(r[i]) + '</td>'; });
+          h += '</tr>';
+        });
+        tbl.innerHTML = h + '</tbody></table>';
+      })
+      .catch(function(){
+        sum.innerHTML = '브라우저에서 바로 불러오지 못했습니다. ' +
+          '<a href="' + esc(q) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">새 탭에서 확인</a> 하거나 스프레드시트를 열어 주세요.';
+      });
+  }
+  $('#rsvpLoad').addEventListener('click', loadRsvp);
+
+  function openAdmin(){
+    buildAdmin();
+    var sl = $('#rsvpSheet');
+    if(DATA.cfg.sheetUrl){ sl.href = DATA.cfg.sheetUrl; sl.style.display = ''; }
+    else { sl.style.display = 'none'; }
+    admin.classList.add('show'); document.body.style.overflow = 'hidden';
+  }
   function closeAdmin(){ admin.classList.remove('show'); document.body.style.overflow = ''; }
   $('#adClose').addEventListener('click', closeAdmin);
   $$('.ad-tabs button').forEach(function(b){
@@ -1012,7 +1289,7 @@
       $$('.ad-tabs button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on');
       $$('.ad-panel').forEach(function(p){ p.classList.remove('on'); });
-      $({ko:'#adKo',ja:'#adJa',cfg:'#adCfg'}[b.dataset.adtab]).classList.add('on');
+      $({ko:'#adKo',ja:'#adJa',cfg:'#adCfg',rsvp:'#adRsvp'}[b.dataset.adtab]).classList.add('on');
     });
   });
   function collect(){
@@ -1041,7 +1318,10 @@
     applyLang('ko');
     closeAdmin();
     DATA.rev = Date.now();
-    $('#siteData').textContent = "\n" + JSON.stringify({rev:DATA.rev, ko:{}, ja:DATA.ja, cfg:DATA.cfg}, null, 2) + "\n";
+    var cfgOut = {};
+    Object.keys(DATA.cfg).forEach(function(k){ if(k !== 'adminKey') cfgOut[k] = DATA.cfg[k]; });
+    cfgOut.adminKey = '';
+    $('#siteData').textContent = "\n" + JSON.stringify({rev:DATA.rev, ko:{}, ja:DATA.ja, cfg:cfgOut}, null, 2) + "\n";
     /* 실행 중 생긴 상태 정리 */
     $$('.reveal').forEach(function(el){ el.classList.remove('in'); });
     $('#petals').innerHTML = '';
@@ -1052,7 +1332,8 @@
     $('#bgm').classList.remove('playing');
     $('#rsvpForm').style.display = '';
     $('#rsvpOk').style.display = '';
-    $$('#admin .ad-panel').forEach(function(p){ p.innerHTML = ''; });
+    ['#adKo','#adJa','#adCfg'].forEach(function(sel){ $(sel).innerHTML = ''; });
+    $('#rsvpTable').innerHTML = ''; $('#rsvpSum').innerHTML = '';
     document.body.style.overflow = '';
     var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
     var blob = new Blob([html], {type:'text/html;charset=utf-8'});
