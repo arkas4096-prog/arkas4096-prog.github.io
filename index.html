@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:locale:alternate" content="ja_JP">
 <meta name="theme-color" content="#fbfaf7">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-16 -16 32 32'%3E%3Cg fill='%23b86e63'%3E%3Cellipse rx='5' ry='8.5' transform='rotate(0) translate(0 -7)'/%3E%3Cellipse rx='5' ry='8.5' transform='rotate(72) translate(0 -7)'/%3E%3Cellipse rx='5' ry='8.5' transform='rotate(144) translate(0 -7)'/%3E%3Cellipse rx='5' ry='8.5' transform='rotate(216) translate(0 -7)'/%3E%3Cellipse rx='5' ry='8.5' transform='rotate(288) translate(0 -7)'/%3E%3C/g%3E%3Ccircle r='3' fill='%23fbfaf7'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-16 -16 32 32'%3E%3Cg fill='%23f2b5c4' stroke='%23d0788f' stroke-width='.8' stroke-linejoin='round'%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(0)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(72)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(144)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(216)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='2.6' fill='%23d0788f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
@@ -36,8 +36,8 @@
     --card:#fff;
     --ink:#1c1a17;       /* 제목·강조 */
     --text:#48433c;      /* 본문 */
-    --sub:#7a746b;       /* 보조 */
-    --faint:#aaa398;     /* 흐린 정보 */
+    --sub:#6c665d;       /* 보조 */
+    --faint:#9d968b;     /* 흐린 정보 */
     --line:#e7e2d8;
     --line2:#f0ece4;
     --accent:#b86e63;    /* 한복 치마 톤의 차분한 로즈 */
@@ -82,6 +82,7 @@
   .lang::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:#fff;
     box-shadow:0 1px 3px rgba(0,0,0,.12),0 3px 10px rgba(0,0,0,.07);transition:transform .5s cubic-bezier(.3,1.35,.45,1);}
   html[lang="ja"] .lang::before{transform:translateX(100%);}
+  html.init .lang::before{transition:none;}
   .lang button{position:relative;z-index:1;width:68px;padding:6px 0;background:none;border:none;border-radius:999px;font:600 13px/1.4 var(--sans);
     color:var(--sub);cursor:pointer;transition:color .35s;}
   .lang button.on{color:var(--ink);}
@@ -94,13 +95,8 @@
   .bgm .ppbadge svg{width:8px;height:8px;fill:var(--ink);}
   .bgm .ico-pause{display:none;}.bgm.playing .ico-play{display:none;}.bgm.playing .ico-pause{display:block;}
 
-  /* ── 꽃잎 ── */
-  #petals{position:fixed;top:0;bottom:0;left:0;right:0;margin:0 auto;max-width:460px;pointer-events:none;z-index:35;overflow:hidden;}
-  .petal{position:absolute;top:-8%;will-change:transform;animation:fall linear infinite;}
-  .petal>i{display:block;border-radius:100% 0 100% 0;background:radial-gradient(circle at 30% 30%,#fdf1f4,#f2ccd7 70%,#e9bac8);
-    box-shadow:inset 0 0 3px rgba(215,150,168,.3);will-change:transform;animation:sway ease-in-out infinite alternate;}
-  @keyframes fall{from{transform:translateY(-12vh)}to{transform:translateY(112vh)}}
-  @keyframes sway{from{transform:translateX(-16px) rotate(-45deg)}to{transform:translateX(16px) rotate(55deg)}}
+  /* ── 벚꽃잎 (캔버스, 카드 폭 안에서만) ── */
+  #petals{position:fixed;top:0;left:0;right:0;margin:0 auto;display:block;width:100%;max-width:460px;height:100%;pointer-events:none;z-index:35;}
 
   /* ── 섹션 공통 ── */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
@@ -112,7 +108,7 @@
   .stitle.en{font:500 30px/1.3 var(--en);letter-spacing:.08em;}
   .lead,.rsvp-intro,.acc-intro,.gb-intro{margin-top:24px;font-size:15px;line-height:1.9;color:var(--text);}
   .rule-sm{width:24px;height:1px;background:var(--line);margin:24px auto;}
-  .orn{display:block;width:120px;height:20px;margin:40px auto 0;color:var(--accent);overflow:visible;}
+  .orn{display:block;width:136px;height:28px;margin:40px auto 0;color:#d4849a;overflow:visible;}
   .chev{flex:none;width:8px;height:8px;margin:0 4px 0 2px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;opacity:.55;
     transform:translateY(-2px) rotate(45deg);transition:transform .45s var(--ease);}
   .open>.th .chev,.acc-toggle.open .chev,.ct-btn.open .chev{transform:translateY(2px) rotate(225deg);}
@@ -267,7 +263,7 @@
   .field input,.field select{width:100%;padding:12px 16px;border:1px solid var(--line);background:var(--card);font:400 16px/1.6 var(--sans);color:var(--ink);border-radius:var(--r);
     transition:border-color .25s,box-shadow .25s;}
   .field select{-webkit-appearance:none;appearance:none;padding-right:40px;
-    background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%237a746b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center/11px;}
+    background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%236c665d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center/11px;}
   .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(184,110,99,.13);}
   .chip-row{display:flex;gap:8px;}
   #rsvpMore{margin-top:-16px;}
@@ -281,6 +277,30 @@
     box-shadow:0 6px 16px rgba(28,26,23,.16);transition:transform .15s var(--ease),box-shadow .25s,opacity .25s;}
   .submit:active{transform:scale(.98);box-shadow:0 2px 6px rgba(28,26,23,.16);}
   .submit:disabled{opacity:.55;}
+  .rsvp-sum{margin-top:12px;font-size:13px;color:var(--sub);}
+  .rsvp-again{margin-top:16px;}
+  .gb-hint{margin-top:4px;font-size:12px;color:var(--sub);text-align:center;}
+  .gb-item.pending{opacity:.6;}
+  .gb-item.pending .gb-when{color:var(--accent);}
+  .qen{font-family:var(--en);font-style:italic;font-size:1.15em;letter-spacing:.02em;}
+  /* 삭제 비밀번호 창 */
+  .modal{position:fixed;inset:0;z-index:250;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(20,18,16,.45);
+    opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;}
+  .modal.show{opacity:1;visibility:visible;}
+  .modal-card{width:100%;max-width:320px;padding:28px 24px 20px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--sh-2);text-align:center;
+    transform:translateY(12px) scale(.97);transition:transform .35s var(--ease);}
+  .modal.show .modal-card{transform:none;}
+  .modal-t{font:400 19px/1.5 var(--serif);color:var(--ink);}
+  .modal-d{margin-top:8px;font-size:13px;line-height:1.7;color:var(--sub);}
+  .modal-card input{width:100%;margin-top:20px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r);font:400 18px/1.4 var(--sans);letter-spacing:.3em;text-align:center;color:var(--ink);}
+  .modal-card input::placeholder{letter-spacing:0;font-size:15px;color:var(--faint);}
+  .modal-card input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(184,110,99,.13);}
+  .modal-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+  .modal-acts button{padding:12px 0;border-radius:var(--r);border:1px solid var(--line);background:var(--card);font:500 14px/1.4 var(--sans);color:var(--ink);cursor:pointer;
+    transition:transform .15s var(--ease);}
+  .modal-acts button:active{transform:scale(.97);}
+  .modal-acts .primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .ad-table tr.old td{opacity:.4;text-decoration:line-through;}
   .rsvp-ok{display:none;padding:28px 20px;margin-top:24px;border-radius:var(--r-lg);background:var(--card);box-shadow:var(--sh-1);color:var(--ink);font-size:15px;line-height:1.9;
     animation:pop .6s var(--ease);}
 
@@ -324,7 +344,7 @@
 
   /* ── footer ── */
   .foot{text-align:center;padding:64px 28px 72px;background:var(--sumi);color:#f1eee8;position:relative;z-index:2;}
-  .foot .orn{color:rgba(255,255,255,.55);margin:0 auto 24px;}
+  .foot .orn{color:#f3c2cf;opacity:.8;margin:0 auto 24px;}
   .foot .en{font:italic 400 26px/1.4 var(--en);letter-spacing:.06em;cursor:default;user-select:none;}
   .foot .msg{margin-top:24px;font-size:14px;line-height:2;color:rgba(241,238,232,.8);}
   .share{margin-top:32px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
@@ -427,12 +447,12 @@
   </div>
   <audio id="audio" loop preload="none"></audio>
 
-  <div id="petals" aria-hidden="true"></div>
+  <canvas id="petals" aria-hidden="true"></canvas>
 
   <!-- HERO -->
   <header class="hero">
     <div class="hero-photo">
-      <img src="images/hero.jpg" width="1080" height="1620" fetchpriority="high" decoding="async" alt="">
+      <img src="images/hero.jpg" width="1333" height="2000" fetchpriority="high" decoding="async" alt="">
       <div class="hero-veil"></div>
       <div class="hero-top">
         <div class="of fade-up d1">The wedding of</div>
@@ -480,7 +500,7 @@
         </div>
       </div></div>
     </div>
-    <svg class="orn" viewBox="0 0 120 20" aria-hidden="true"><path d="M8 10H46M74 10H112" stroke="currentColor" stroke-width=".7" opacity=".45"/><g transform="translate(60 10)" fill="none" stroke="currentColor" stroke-width=".8"><ellipse rx="2.4" ry="4.4" transform="rotate(0) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(72) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(144) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(216) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(288) translate(0 -4.4)"/><circle r="1.1" fill="currentColor" stroke="none"/></g></svg>
+    <svg class="orn" viewBox="0 0 120 24" aria-hidden="true"><path d="M6 12H44M76 12H114" stroke="currentColor" stroke-width=".7" opacity=".4"/><g transform="translate(60 12)"><g fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width=".75" stroke-linejoin="round"><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(0)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(72)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(144)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(216)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(288)"/></g><g stroke="currentColor" stroke-width=".5" stroke-linecap="round"><g transform="rotate(36)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(108)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(180)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(252)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(324)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g></g><circle r="1.4" fill="currentColor"/></g></svg>
   </section>
 
   <!-- DATE -->
@@ -570,16 +590,20 @@
     <div class="stitle" data-i="rsvp_title">참석 의사 전달</div>
     <p class="rsvp-intro" data-i="rsvp_intro">축하의 마음으로 참석해 주시는 모든 분을<br>더욱 정성껏 모실 수 있도록<br>참석 여부를 미리 알려 주시면 감사하겠습니다.</p>
     <div class="form" id="rsvpForm">
-      <div class="field"><label data-i="f_side">구분</label><div class="chip-row" data-name="side"><button type="button" class="chip on" data-i="c_g">신랑 측</button><button type="button" class="chip" data-i="c_b">신부 측</button></div></div>
+      <div class="field"><label data-i="f_side">구분</label><div class="chip-row" data-name="side"><button type="button" class="chip" data-i="c_g">신랑 측</button><button type="button" class="chip" data-i="c_b">신부 측</button></div></div>
       <div class="field"><label data-i="f_att">참석 여부</label><div class="chip-row" data-name="attend"><button type="button" class="chip on" data-i="c_y">참석</button><button type="button" class="chip" data-i="c_n">미참석</button></div></div>
-      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" data-ph="name_ph" placeholder="성함을 입력해 주세요"></div>
+      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" maxlength="20" autocomplete="name" data-ph="name_ph" placeholder="성함을 입력해 주세요"></div>
       <div class="fold open" id="rsvpMore"><div><div class="fold-in">
         <div class="field"><label data-i="f_cnt">참석 인원</label><select id="rCnt"><option data-i="o1">1명</option><option data-i="o2">2명</option><option data-i="o3">3명</option><option data-i="o4">4명</option><option data-i="o5">5명 이상</option></select></div>
-        <div class="field"><label data-i="f_meal">식사 여부</label><div class="chip-row" data-name="meal"><button type="button" class="chip on" data-i="c_m1">식사함</button><button type="button" class="chip" data-i="c_m2">식사 안 함</button></div></div>
+        <div class="field"><label data-i="f_meal">식사 여부</label><div class="chip-row" data-name="meal"><button type="button" class="chip" data-i="c_m1">식사함</button><button type="button" class="chip" data-i="c_m2">식사 안 함</button></div></div>
       </div></div></div>
       <button class="submit" id="rsvpBtn" data-i="submit">참석 의사 전달하기</button>
     </div>
-    <div class="rsvp-ok" id="rsvpOk" data-i="rsvp_ok">소중한 답변 감사합니다.<br>정성껏 준비하겠습니다.</div>
+    <div class="rsvp-ok" id="rsvpOk">
+      <p data-i="rsvp_ok">소중한 답변 감사합니다.<br>정성껏 준비하겠습니다.</p>
+      <p class="rsvp-sum" id="rsvpSumm"></p>
+      <button type="button" class="pill rsvp-again" id="rsvpAgain" data-i="rsvp_again">다시 작성하기</button>
+    </div>
   </section>
 
   <!-- ACCOUNTS -->
@@ -617,17 +641,19 @@
       </div>
       <textarea id="gbMsg" maxlength="500" data-ph="gb_msg_ph" placeholder="축하 인사를 남겨 주세요"></textarea>
       <button class="submit" id="gbSend" data-i="gb_send">메시지 남기기</button>
+      <p class="gb-hint" data-i="gb_hint">비밀번호는 메시지를 삭제할 때 필요합니다.</p>
     </div>
     <div class="gb-list" id="gbList"></div>
     <button class="gb-more" id="gbMore" hidden data-i="gb_more">더 보기</button>
   </section>
 
   <footer class="foot">
-    <svg class="orn" viewBox="0 0 120 20" aria-hidden="true"><path d="M8 10H46M74 10H112" stroke="currentColor" stroke-width=".7" opacity=".45"/><g transform="translate(60 10)" fill="none" stroke="currentColor" stroke-width=".8"><ellipse rx="2.4" ry="4.4" transform="rotate(0) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(72) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(144) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(216) translate(0 -4.4)"/><ellipse rx="2.4" ry="4.4" transform="rotate(288) translate(0 -4.4)"/><circle r="1.1" fill="currentColor" stroke="none"/></g></svg>
+    <svg class="orn" viewBox="0 0 120 24" aria-hidden="true"><path d="M6 12H44M76 12H114" stroke="currentColor" stroke-width=".7" opacity=".4"/><g transform="translate(60 12)"><g fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width=".75" stroke-linejoin="round"><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(0)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(72)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(144)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(216)"/><path d="M0 -.6C-3.6 -2.2 -4.4 -6.4 -2.4 -9.4Q-1.2 -10.2 0 -8.4Q1.2 -10.2 2.4 -9.4C4.4 -6.4 3.6 -2.2 0 -.6Z" transform="rotate(288)"/></g><g stroke="currentColor" stroke-width=".5" stroke-linecap="round"><g transform="rotate(36)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(108)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(180)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(252)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g><g transform="rotate(324)"><path d="M0 -1.7V-3.7"/><circle cy="-4.1" r=".55" fill="currentColor" stroke="none"/></g></g><circle r="1.4" fill="currentColor"/></g></svg>
     <div class="en" id="footName">Sangwon <span class="amp">&amp;</span> Nozomi</div>
     <div class="msg" data-i="foot_msg">저희 두 사람의 새로운 시작을<br>축복해 주시는 모든 분께<br>진심으로 감사드립니다.<br>서로 아끼며 행복하게 살겠습니다.</div>
     <div class="share">
-      <button type="button" class="kk only-ko" id="shareKakao"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6c-5.2 0-9.4 3.3-9.4 7.4 0 2.6 1.7 4.9 4.3 6.2l-.9 3.4c-.1.4.3.7.6.5l4-2.6c.5.1.9.1 1.4.1 5.2 0 9.4-3.3 9.4-7.5S17.2 3.6 12 3.6z"/></svg><span data-i="share_k">카카오톡 공유</span></button>
+      <button type="button" class="kk only-ko" id="shareKakao" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6c-5.2 0-9.4 3.3-9.4 7.4 0 2.6 1.7 4.9 4.3 6.2l-.9 3.4c-.1.4.3.7.6.5l4-2.6c.5.1.9.1 1.4.1 5.2 0 9.4-3.3 9.4-7.5S17.2 3.6 12 3.6z"/></svg><span data-i="share_k">카카오톡 공유</span></button>
+      <button type="button" class="only-ko" id="shareNative" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8M5 12.5v6a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-6"/></svg><span data-i="share">공유하기</span></button>
       <button type="button" class="ln only-ja" id="shareLine"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6c-5.2 0-9.4 3.3-9.4 7.4 0 2.6 1.7 4.9 4.3 6.2l-.9 3.4c-.1.4.3.7.6.5l4-2.6c.5.1.9.1 1.4.1 5.2 0 9.4-3.3 9.4-7.5S17.2 3.6 12 3.6z"/></svg><span data-i="share_l">LINE으로 보내기</span></button>
       <button type="button" id="copyLink"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-i="copylink">링크 복사</span></button>
     </div>
@@ -635,6 +661,15 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="modal" id="pwModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+    <p class="modal-t" id="pwTitle" data-i="gb_del_t">메시지 삭제</p>
+    <p class="modal-d" data-i="gb_del_d">작성할 때 입력한 비밀번호 4자리를 입력해 주세요.</p>
+    <input type="password" id="pwInput" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" data-ph="gb_pw_ph" placeholder="비밀번호 4자리">
+    <div class="modal-acts"><button type="button" id="pwCancel" data-i="cancel">취소</button><button type="button" class="primary" id="pwOk" data-i="del">삭제</button></div>
+  </div>
+</div>
 
 <div class="lb" id="lb">
   <button class="lb-close" id="lbClose" aria-label="닫기">✕</button>
@@ -683,7 +718,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1790776242921,
+  "rev": 1790777385327,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -749,7 +784,7 @@
     "gb_pw_ph": "暗証番号4桁",
     "gb_msg_ph": "お祝いのメッセージをどうぞ",
     "inv_quote": "愛するとは<br>互いに見つめ合うことではなく<br>ともに同じ方向を見つめることである",
-    "inv_quote_by": "— サン＝テグジュペリ",
+    "inv_quote_by": "— <span class=\"qen\">Antoine de Saint-Exupéry</span>",
     "map_btn_k": "カカオマップ",
     "trans_h": "交通のご案内",
     "cd_d": "日",
@@ -772,7 +807,14 @@
     "cal_g": "Googleカレンダー",
     "cal_i": "スマホのカレンダー",
     "share_k": "カカオトーク",
-    "share_l": "LINEで送る"
+    "share_l": "LINEで送る",
+    "share": "共有する",
+    "rsvp_again": "もう一度入力する",
+    "gb_hint": "暗証番号はメッセージを削除する際に必要です。",
+    "gb_del_t": "メッセージの削除",
+    "gb_del_d": "投稿時に入力した暗証番号（数字4桁）をご入力ください。",
+    "cancel": "キャンセル",
+    "del": "削除する"
   },
   "cfg": {
     "music": "music.mp3",
@@ -845,6 +887,7 @@
     applyContacts();
     updateCalLinks();
     if(GB && GB.loaded) gbRender(); else if(GB && GB.msg) gbState(GB.msg);
+    if($('#rsvpOk').style.display === 'block'){ var sv = loadRsvpSaved(); if(sv) $('#rsvpSumm').innerHTML = rsvpSummary(sv); }
     $$('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
     document.title = (lang === 'ja')
       ? '裵相元 ♥ 芝中希望 — 結婚式のご案内'
@@ -872,7 +915,7 @@
       dates: '20261107T170000/20261107T190000', ctz: 'Asia/Seoul',
       location: ja ? 'JWウェディングコンベンションセンター（大韓民国 蔚山広域市 北区 鎮長流通路35）'
                    : '울산 JW웨딩컨벤션센터 마제스틱홀 (울산광역시 북구 진장유통로 35)',
-      details: pageUrl()
+      details: pageUrl(LANG)
     };
     $('#calG').href = 'https://calendar.google.com/calendar/render?' +
       Object.keys(p).map(function(k){ return k + '=' + encodeURIComponent(p[k]); }).join('&');
@@ -927,6 +970,10 @@
   }
   function applyCfg(){
     applyContacts();
+    /* 카카오 JavaScript 키가 있을 때만 카카오톡 버튼, 없으면 일반 공유 버튼 */
+    var hasKakao = !!(DATA.cfg.kakaoKey || '').trim();
+    $('#shareKakao').hidden = !hasKakao;
+    $('#shareNative').hidden = hasKakao;
     var au = $('#audio');
     if(DATA.cfg.music && au.getAttribute('src') !== DATA.cfg.music) au.setAttribute('src', DATA.cfg.music);
   }
@@ -979,29 +1026,144 @@
     tickCountdown();
   }
 
+  /* 첫 언어: ?lang=ja 링크 → 이 기기에서 전에 고른 언어 → 휴대폰 언어가 일본어면 일본어 */
+  var LANGKEY = LSKEY + ':lang';
+  function initialLang(){
+    var q = /[?&]lang=(ko|ja)(?:&|$)/.exec(location.search);
+    if(q) return q[1];
+    try{ var saved = localStorage.getItem(LANGKEY); if(saved === 'ko' || saved === 'ja') return saved; }catch(e){}
+    return /^ja/i.test(navigator.language || '') ? 'ja' : 'ko';
+  }
+
   captureKO();
   applyCfg();
-  applyLang('ko');
+  document.documentElement.classList.add('init');
+  applyLang(initialLang());
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.documentElement.classList.remove('init'); }); });
   $$('.lang button').forEach(function(b){
-    b.addEventListener('click', function(){ applyLang(b.dataset.lang); });
+    b.addEventListener('click', function(){
+      applyLang(b.dataset.lang);
+      try{ localStorage.setItem(LANGKEY, b.dataset.lang); }catch(e){}
+    });
   });
 
   /* ── 꽃잎 ── */
-  function makePetals(){
-    var layer = $('#petals'), N = 16;
-    layer.innerHTML = '';
-    for(var i=0;i<N;i++){
-      var p = document.createElement('div'); p.className = 'petal';
-      p.style.left = (Math.random()*100)+'%';
-      p.style.animationDuration = (8+Math.random()*8)+'s';
-      p.style.animationDelay = (-Math.random()*16)+'s';
-      var inner = document.createElement('i'), s = 7+Math.random()*7;
-      inner.style.width = s+'px'; inner.style.height = (s*0.82)+'px';
-      inner.style.opacity = (0.4+Math.random()*0.4).toFixed(2);
-      inner.style.animationDuration = (2.4+Math.random()*2.6)+'s';
-      p.appendChild(inner); layer.appendChild(p);
+  /* ── 흩날리는 벚꽃잎 (캔버스) ──
+     꽃잎 모양을 미리 그려 둔 그림(앞·뒷면, 꽃송이)을 회전·뒤집기·바람으로 움직임.
+     가까운 꽃잎은 크고 진하게, 먼 꽃잎은 작고 옅게. 화면이 안 보이면 자동으로 멈춤. */
+  var Sakura = (function(){
+    var cv = $('#petals'), ctx = cv.getContext && cv.getContext('2d');
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 0, H = 0, DPR = 1, parts = [], spr = null, running = false, last = 0, t0 = 0;
+
+    /* 벚꽃잎 한 장 — 바깥 끝이 살짝 파인 모양 (위쪽이 바깥) */
+    function petalPath(g, s){
+      g.beginPath();
+      g.moveTo(0, s);
+      g.bezierCurveTo(-.62*s, .7*s, -.66*s, -.1*s, -.3*s, -.9*s);
+      g.quadraticCurveTo(-.14*s, -1.02*s, 0, -.74*s);
+      g.quadraticCurveTo(.14*s, -1.02*s, .3*s, -.9*s);
+      g.bezierCurveTo(.66*s, -.1*s, .62*s, .7*s, 0, s);
+      g.closePath();
     }
-  }
+    function canvas96(){ var c = document.createElement('canvas'); c.width = c.height = 96; return c; }
+    function makePetal(front){
+      var c = canvas96(), g = c.getContext('2d'), s = 40;
+      g.translate(48, 48);
+      var gr = g.createLinearGradient(0, s, 0, -s);
+      if(front){ gr.addColorStop(0, '#eb9db1'); gr.addColorStop(.45, '#f7c5d2'); gr.addColorStop(1, '#fff0f4'); }
+      else     { gr.addColorStop(0, '#f2bac9'); gr.addColorStop(.5, '#fad7e0'); gr.addColorStop(1, '#fff8fa'); }
+      petalPath(g, s); g.fillStyle = gr; g.fill();
+      g.strokeStyle = front ? 'rgba(206,110,138,.3)' : 'rgba(206,110,138,.16)';   /* 가운데 잎맥 */
+      g.lineWidth = 1.3; g.beginPath(); g.moveTo(0, s*.85); g.quadraticCurveTo(s*.05, 0, 0, -s*.68); g.stroke();
+      var hl = g.createRadialGradient(-s*.22, -s*.35, 0, -s*.22, -s*.35, s*.95);          /* 은은한 광택 */
+      hl.addColorStop(0, 'rgba(255,255,255,.6)'); hl.addColorStop(1, 'rgba(255,255,255,0)');
+      petalPath(g, s); g.fillStyle = hl; g.fill();
+      return c;
+    }
+    function makeBlossom(){
+      var c = canvas96(), g = c.getContext('2d'), s = 20;
+      g.translate(48, 48);
+      for(var i = 0; i < 5; i++){
+        g.save(); g.rotate(i * Math.PI * 2 / 5); g.translate(0, -s * 1.05);
+        var gr = g.createLinearGradient(0, s, 0, -s);
+        gr.addColorStop(0, '#ec9fb3'); gr.addColorStop(.5, '#f8c9d5'); gr.addColorStop(1, '#fff2f5');
+        petalPath(g, s); g.fillStyle = gr; g.fill();
+        g.restore();
+      }
+      g.fillStyle = '#dc7f98'; g.beginPath(); g.arc(0, 0, s * .3, 0, Math.PI * 2); g.fill();
+      g.fillStyle = '#f0c35a';                                                            /* 꽃술 */
+      for(var j = 0; j < 10; j++){ var a = j * Math.PI / 5; g.beginPath(); g.arc(Math.cos(a) * s * .5, Math.sin(a) * s * .5, s * .07, 0, Math.PI * 2); g.fill(); }
+      return c;
+    }
+
+    function spawn(p, anywhere, fromLeft){
+      var z = Math.random();                              /* 0 = 먼 곳, 1 = 가까운 곳 */
+      p.z = z;
+      p.bl = Math.random() < .06;                         /* 가끔 꽃송이째 */
+      p.size = p.bl ? 16 + z * 10 : 10 + z * 12;            /* 화면상 크기(px) */
+      p.x = fromLeft ? -30 : Math.random() * W;
+      p.y = anywhere ? Math.random() * H : (fromLeft ? Math.random() * H * .6 : -24 - Math.random() * 80);
+      p.vy = .3 + z * .55 + Math.random() * .2;           /* 16ms 당 이동량 */
+      p.vx = (Math.random() - .5) * .3;
+      p.rot = Math.random() * Math.PI * 2;
+      p.vrot = (Math.random() - .5) * (p.bl ? .02 : .04);
+      p.flip = Math.random() * Math.PI * 2;
+      p.vflip = .02 + Math.random() * .035;
+      p.swA = .35 + Math.random() * .8;
+      p.swF = .008 + Math.random() * .014;
+      p.swP = Math.random() * Math.PI * 2;
+      p.alpha = .62 + z * .33;
+      return p;
+    }
+    function resize(){
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+      var n = Math.round(Math.min(30, Math.max(18, W * H / 14000)));
+      while(parts.length < n) parts.push(spawn({}, true));
+      parts.length = n;
+    }
+    function frame(now){
+      if(!running) return;
+      var dt = Math.min(now - last, 50) / 16.67, t = now - t0;
+      last = now;
+      /* 천천히 바뀌는 바람 + 가끔 부는 돌풍 */
+      var gust = Math.max(0, Math.sin(t * .00047)) * Math.max(0, Math.sin(t * .0013));
+      var wind = .18 + Math.sin(t * .00021) * .3 + gust * 1.1;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      for(var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        p.swP += p.swF * dt;
+        p.x += (p.vx + wind * (.35 + p.z * .9) + Math.sin(p.swP) * p.swA) * dt;
+        p.y += (p.vy * (1 - gust * .25) + Math.cos(p.swP * 2) * .12) * dt;
+        p.rot += (p.vrot + Math.sin(p.swP) * .004) * dt;
+        p.flip += p.vflip * (1 + gust) * dt;
+        if(p.y > H + 30 || p.x > W + 40 || p.x < -50){ spawn(p, false, gust > .35 && Math.random() < .5); continue; }
+        var fx = Math.cos(p.flip), ax = Math.abs(fx);   /* 앞뒤로 뒤집히는 정도 (0 = 옆모습) */
+        var img = p.bl ? spr.bl : (fx >= 0 ? spr.front : spr.back);
+        var k = p.size / (p.bl ? 82 : 80) * DPR;
+        var sx = k * (p.bl ? 1 : .28 + .72 * ax), sy = k * (p.bl ? 1 : .86 + .14 * Math.abs(Math.sin(p.flip * .5)));
+        var cr = Math.cos(p.rot), sr = Math.sin(p.rot);
+        ctx.globalAlpha = p.alpha * (p.bl ? 1 : .72 + .28 * ax);
+        ctx.setTransform(cr * sx, sr * sx, -sr * sy, cr * sy, p.x * DPR, p.y * DPR);
+        ctx.drawImage(img, -48, -48);
+      }
+      requestAnimationFrame(frame);
+    }
+    function start(){
+      if(!ctx || reduce || running) return;
+      if(!spr) spr = { front: makePetal(true), back: makePetal(false), bl: makeBlossom() };
+      resize();
+      running = true; last = t0 = performance.now();
+      requestAnimationFrame(frame);
+    }
+    window.addEventListener('resize', function(){ if(running) resize(); });
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden) last = performance.now(); });
+    return { start: start };
+  })();
+  function makePetals(){ Sakura.start(); }
   makePetals();
 
   /* ── 스크롤 등장 ── */
@@ -1077,37 +1239,11 @@
   });
 
   /* ── 구글 시트(Apps Script) 전송 ── */
-  function sendToSheet(payload){
-    var url = (DATA.cfg.sheetApiUrl || '').trim();
-    if(!url) return false;
-    var ifr = document.getElementById('rsvpTarget');
-    if(!ifr){
-      ifr = document.createElement('iframe');
-      ifr.id = 'rsvpTarget'; ifr.name = 'rsvpTarget';
-      ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;left:-9999px;';
-      document.body.appendChild(ifr);
-    }
-    var f = document.createElement('form');
-    f.action = url; f.method = 'POST'; f.target = 'rsvpTarget';
-    f.style.cssText = 'position:absolute;left:-9999px;';
-    var fields = {
-      key:    DATA.cfg.sheetKey || '',
-      name:   payload.name,
-      side:   payload.side,
-      attend: payload.attend,
-      count:  payload.count,
-      meal:   payload.meal,
-      lang:   payload.lang
-    };
-    Object.keys(fields).forEach(function(k){
-      var i = document.createElement('input');
-      i.type = 'hidden'; i.name = k; i.value = fields[k] == null ? '' : String(fields[k]);
-      f.appendChild(i);
-    });
-    document.body.appendChild(f);
-    try{ f.submit(); }catch(e){}
-    setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); }, 3000);
-    return true;
+  function sendToSheet(payload, done){
+    postToApi({
+      key: DATA.cfg.sheetKey || '', name: payload.name, side: payload.side, attend: payload.attend,
+      count: payload.count, meal: payload.meal, lang: payload.lang
+    }, done);
   }
 
   /* ── RSVP ── */
@@ -1127,19 +1263,48 @@
       });
     });
   });
-  $('#rsvpBtn').addEventListener('click', function(){
-    var name = $('#rName').value.trim();
-    if(!name){
-      showToast(LANG === 'ja' ? 'お名前をご入力ください' : '성함을 입력해 주세요');
-      $('#rName').focus(); return;
-    }
-    var pick = function(n){ var r = $('.chip-row[data-name="'+n+'"] .chip.on'); return r ? r.textContent.trim() : ''; };
-    var no = notAttending();
-    var payload = { name:name, side:pick('side'), attend:pick('attend'), meal:no ? '' : pick('meal'), count:no ? '' : $('#rCnt').value, lang:LANG, at:new Date().toISOString() };
-    sendToSheet(payload);
+  /* 보낸 내용은 이 기기에 기억 → 다시 열면 요약과 '다시 작성하기' */
+  var RSVPKEY = LSKEY + ':rsvp';
+  function chipIndex(n){ var on = $('.chip-row[data-name="' + n + '"] .chip.on'); return on ? $$('.chip', on.parentNode).indexOf(on) : -1; }
+  function setChip(n, i){ $$('.chip-row[data-name="' + n + '"] .chip').forEach(function(c, k){ c.classList.toggle('on', k === i); }); }
+  function rsvpSummary(v){
+    var chipText = function(n, i){ var c = $$('.chip-row[data-name="' + n + '"] .chip')[i]; return c ? c.textContent.trim() : ''; };
+    var parts = [gbEsc(v.name) + (LANG === 'ja' ? ' 様' : ' 님'), chipText('side', v.side), chipText('attend', v.attend)];
+    if(v.attend === 0){ parts.push($('#rCnt').options[v.cnt].text); parts.push(chipText('meal', v.meal)); }
+    return parts.join(' · ');
+  }
+  function showRsvpDone(v){
+    $('#rsvpSumm').innerHTML = rsvpSummary(v);
     $('#rsvpForm').style.display = 'none';
     $('#rsvpOk').style.display = 'block';
+  }
+  function loadRsvpSaved(){ try{ return JSON.parse(localStorage.getItem(RSVPKEY) || 'null'); }catch(e){ return null; } }
+  $('#rsvpBtn').addEventListener('click', function(){
+    var ja = LANG === 'ja';
+    var name = $('#rName').value.trim();
+    if(chipIndex('side') < 0){ showToast(ja ? '新郎側・新婦側をお選びください' : '신랑 측 / 신부 측을 선택해 주세요'); return; }
+    if(!name){ showToast(ja ? 'お名前をご入力ください' : '성함을 입력해 주세요'); $('#rName').focus(); return; }
+    var no = notAttending();
+    if(!no && chipIndex('meal') < 0){ showToast(ja ? 'お食事の有無をお選びください' : '식사 여부를 선택해 주세요'); return; }
+    if(!DATA.cfg.sheetApiUrl){ showToast(ja ? '準備中です' : '준비 중입니다'); return; }
+    if(navigator.onLine === false){ showToast(ja ? 'インターネット接続をご確認ください' : '인터넷 연결을 확인해 주세요'); return; }
+    var pick = function(n){ var r = $('.chip-row[data-name="'+n+'"] .chip.on'); return r ? r.textContent.trim() : ''; };
+    var payload = { name:name, side:pick('side'), attend:pick('attend'), meal:no ? '' : pick('meal'), count:no ? '' : $('#rCnt').value, lang:LANG };
+    var saved = { name:name, side:chipIndex('side'), attend:chipIndex('attend'), meal:chipIndex('meal'), cnt:$('#rCnt').selectedIndex, at:Date.now() };
+    var btn = this; btn.disabled = true;
+    sendToSheet(payload, function(){
+      btn.disabled = false;
+      try{ localStorage.setItem(RSVPKEY, JSON.stringify(saved)); }catch(e){}
+      showRsvpDone(saved);
+    });
   });
+  $('#rsvpAgain').addEventListener('click', function(){
+    var v = loadRsvpSaved();
+    if(v){ $('#rName').value = v.name; setChip('side', v.side); setChip('attend', v.attend); setChip('meal', v.meal); $('#rCnt').selectedIndex = v.cnt || 0; syncRsvpFields(); }
+    $('#rsvpOk').style.display = 'none';
+    $('#rsvpForm').style.display = '';
+  });
+  (function(){ var v = loadRsvpSaved(); if(v) showRsvpDone(v); })();
 
   /* ── 배경음악 (자동재생 + 차단 시 첫 터치에 시작) ── */
   var audio = $('#audio'), bgm = $('#bgm');
@@ -1273,10 +1438,10 @@
     var view = GB.rows.slice(0, GB.shown), h = '', drawn = GB.drawn || 0;
     view.forEach(function(r, i){
       var isNew = i >= drawn;
-      h += '<div class="gb-item' + (isNew ? ' new' : '') + '"' + (isNew ? ' style="animation-delay:' + ((i - drawn) * 0.07).toFixed(2) + 's"' : '') + ' data-id="' + gbEsc(r.id) + '">' +
+      h += '<div class="gb-item' + (isNew ? ' new' : '') + (r.pending ? ' pending' : '') + '"' + (isNew ? ' style="animation-delay:' + ((i - drawn) * 0.07).toFixed(2) + 's"' : '') + ' data-id="' + gbEsc(r.id) + '">' +
              '<div class="gb-head"><span class="gb-who">' + gbEsc(r.name) + '</span>' +
-             '<span class="gb-when">' + gbEsc(gbWhen(r.at)) + '</span>' +
-             '<button class="gb-del" title="' + (LANG === 'ja' ? '削除' : '삭제') + '" aria-label="' + (LANG === 'ja' ? '削除' : '삭제') + '">✕</button></div>' +
+             '<span class="gb-when">' + (r.pending ? (LANG === 'ja' ? '登録中…' : '등록 중…') : gbEsc(gbWhen(r.at))) + '</span>' +
+             (r.pending ? '' : '<button class="gb-del" title="' + (LANG === 'ja' ? '削除' : '삭제') + '" aria-label="' + (LANG === 'ja' ? '削除' : '삭제') + '">✕</button>') + '</div>' +
              '<div class="gb-body">' + gbEsc(r.msg) + '</div>' +
            '</div>';
     });
@@ -1284,7 +1449,7 @@
     more.hidden = GB.shown >= GB.rows.length;
     $$('.gb-del', list).forEach(function(btn){
       btn.addEventListener('click', function(){
-        gbDelete(btn.closest('.gb-item').dataset.id);
+        openPw(btn.closest('.gb-item').dataset.id);
       });
     });
   }
@@ -1314,6 +1479,25 @@
 
   $('#gbMore').addEventListener('click', function(){ GB.shown += GB.PAGE; gbRender(); });
 
+  /* 서버 반영이 몇 초 늦을 수 있어, 조건이 맞을 때까지 몇 번 다시 확인 */
+  function gbFetch(){
+    return fetch(apiUrl({action:'guest'}), {method:'GET'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(!j || !j.ok) throw new Error('bad');
+        return (j.rows || []).map(function(r){ return { id:r[0], at:r[1], name:r[2], msg:r[3] }; }).reverse();
+      });
+  }
+  function gbPoll(test, tries, gap, done){
+    gbFetch().then(function(rows){
+      if(test(rows) || tries <= 1) done(rows, test(rows));
+      else setTimeout(function(){ gbPoll(test, tries - 1, gap, done); }, gap);
+    }).catch(function(){
+      if(tries <= 1) done(null, false);
+      else setTimeout(function(){ gbPoll(test, tries - 1, gap, done); }, gap);
+    });
+  }
+
   $('#gbSend').addEventListener('click', function(){
     var name = $('#gbName').value.trim();
     var pw   = $('#gbPw').value.trim();
@@ -1322,32 +1506,50 @@
     if(!msg){ showToast(LANG === 'ja' ? 'メッセージをご入力ください' : '메시지를 입력해 주세요'); $('#gbMsg').focus(); return; }
     if(!/^\d{4}$/.test(pw)){ showToast(LANG === 'ja' ? '暗証番号は数字4桁でご入力ください' : '비밀번호는 숫자 4자리로 입력해 주세요'); $('#gbPw').focus(); return; }
     if(!DATA.cfg.sheetApiUrl){ showToast(LANG === 'ja' ? '準備中です' : '준비 중입니다'); return; }
+    if(navigator.onLine === false){ showToast(LANG === 'ja' ? 'インターネット接続をご確認ください' : '인터넷 연결을 확인해 주세요'); return; }
     var btn = this; btn.disabled = true;
     postToApi({ type:'guest', key:DATA.cfg.sheetKey || '', name:name, msg:msg, pw:pw, lang:LANG }, function(){
       $('#gbMsg').value = ''; $('#gbPw').value = '';
-      btn.disabled = false;
+      /* 서버에 반영되기 전이라도 바로 목록 맨 위에 '등록 중'으로 보여 줌 */
+      GB.rows.unshift({ id:'', at:'', name:name, msg:msg, pending:true });
+      GB.loaded = true; GB.shown = Math.max(GB.shown, GB.PAGE); GB.drawn = 0;
+      gbRender();
       showToast(LANG === 'ja' ? 'メッセージを登録しました' : '메시지를 남겼습니다');
-      GB.shown = GB.PAGE; GB.drawn = 0;
-      setTimeout(function(){ gbLoad(true); }, 400);
+      gbPoll(function(rows){ return rows.some(function(r){ return r.name === name && r.msg === msg; }); }, 5, 2000, function(rows, found){
+        btn.disabled = false;
+        if(rows && found){ GB.rows = rows; GB.drawn = GB.shown; gbRender(); }
+      });
     });
   });
 
-  function gbDelete(id){
-    var pw = window.prompt(LANG === 'ja' ? '暗証番号をご入力ください' : '비밀번호를 입력해 주세요');
-    if(pw === null) return;
-    pw = String(pw).trim();
-    if(!pw) return;
+  /* 삭제: 기본 입력창(prompt) 대신 직접 만든 비밀번호 창 — 카카오톡 앱 안에서도 동작 */
+  var delId = null;
+  function openPw(id){
+    delId = id; $('#pwInput').value = '';
+    $('#pwModal').classList.add('show'); $('#pwModal').setAttribute('aria-hidden', 'false');
+    setTimeout(function(){ $('#pwInput').focus(); }, 60);
+  }
+  function closePw(){ $('#pwModal').classList.remove('show'); $('#pwModal').setAttribute('aria-hidden', 'true'); delId = null; }
+  $('#pwCancel').addEventListener('click', closePw);
+  $('#pwModal').addEventListener('click', function(e){ if(e.target === this) closePw(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && $('#pwModal').classList.contains('show')) closePw(); });
+  $('#pwInput').addEventListener('keydown', function(e){ if(e.key === 'Enter') $('#pwOk').click(); });
+  $('#pwOk').addEventListener('click', function(){
+    var pw = $('#pwInput').value.trim();
+    if(!/^\d{4}$/.test(pw)){ showToast(LANG === 'ja' ? '暗証番号は数字4桁でご入力ください' : '비밀번호는 숫자 4자리로 입력해 주세요'); $('#pwInput').focus(); return; }
+    var id = delId; closePw(); gbDelete(id, pw);
+  });
+  function gbDelete(id, pw){
+    var item = $('.gb-item[data-id="' + id + '"]');
+    if(item) item.classList.add('pending');
     postToApi({ type:'guestdel', key:DATA.cfg.sheetKey || '', id:id, pw:pw }, function(){
-      setTimeout(function(){
-        var before = GB.rows.length;
-        fetch(apiUrl({action:'guest'})).then(function(r){ return r.json(); }).then(function(j){
-          GB.rows = (j.rows || []).map(function(r){ return {id:r[0],at:r[1],name:r[2],msg:r[3]}; }).reverse();
-          gbRender();
-          showToast(GB.rows.length < before
-            ? (LANG === 'ja' ? '削除しました' : '삭제했습니다')
-            : (LANG === 'ja' ? '暗証番号が違います' : '비밀번호가 맞지 않습니다'));
-        }).catch(function(){});
-      }, 500);
+      /* 삭제가 반영될 때까지 몇 번 확인한 뒤에만 '비밀번호 오류'로 판단 */
+      gbPoll(function(rows){ return !rows.some(function(r){ return String(r.id) === String(id); }); }, 4, 1800, function(rows, gone){
+        if(rows){ GB.rows = rows; GB.drawn = GB.shown; gbRender(); }
+        else if(item) item.classList.remove('pending');
+        showToast(gone ? (LANG === 'ja' ? '削除しました' : '삭제했습니다')
+                       : (LANG === 'ja' ? '削除できませんでした。暗証番号をご確認ください' : '삭제되지 않았습니다. 비밀번호를 확인해 주세요'));
+      });
     });
   }
 
@@ -1359,7 +1561,14 @@
 
   /* ── 공유: 카카오톡(설정에 JavaScript 키가 있을 때) · LINE · 링크 복사 ── */
   var KAKAO_SDK = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
-  function pageUrl(){ return location.href.split('#')[0]; }
+  /* 공유용 주소: 일본어면 ?lang=ja 를 붙여 받는 사람도 일본어로 열리게 */
+  function pageUrl(lang){
+    try{
+      var u = new URL(location.href); u.hash = '';
+      if(lang === 'ja') u.searchParams.set('lang', 'ja'); else u.searchParams.delete('lang');
+      return u.href;
+    }catch(e){ return location.href.split('#')[0]; }
+  }
   function kakaoReady(){ return !!(window.Kakao && Kakao.isInitialized && Kakao.isInitialized()); }
   function loadKakao(){
     var key = (DATA.cfg.kakaoKey || '').trim();
@@ -1370,7 +1579,7 @@
     document.head.appendChild(sc);
   }
   function nativeShare(){
-    if(navigator.share){ navigator.share({ title: document.title, url: pageUrl() }).catch(function(){}); }
+    if(navigator.share){ navigator.share({ title: document.title, url: pageUrl(LANG) }).catch(function(){}); }
     else { copyLink(); }
   }
   $('#shareKakao').addEventListener('click', function(){
@@ -1387,12 +1596,13 @@
       buttons: [{ title: '모바일 청첩장 보기', link: { mobileWebUrl: url, webUrl: url } }]
     });
   });
+  $('#shareNative').addEventListener('click', nativeShare);
   $('#shareLine').addEventListener('click', function(){
-    var text = '裵相元・芝中希望 結婚式のご案内\n' + pageUrl();
+    var text = '裵相元・芝中希望 結婚式のご案内\n' + pageUrl('ja');
     window.open('https://line.me/R/share?text=' + encodeURIComponent(text), '_blank', 'noopener');
   });
   function copyLink(){
-    copyText(pageUrl(), LANG === 'ja' ? 'リンクをコピーしました' : '링크가 복사되었습니다');
+    copyText(pageUrl(LANG), LANG === 'ja' ? 'リンクをコピーしました' : '링크가 복사되었습니다');
   }
   $('#copyLink').addEventListener('click', copyLink);
   loadKakao();
@@ -1407,10 +1617,10 @@
     ['교통 안내',   ['trans_h','t_ktx_h','t_ktx','t_car_h','t_car','t_bus_h','t_bus','t_air_h','t_air','t_far_h','t_far']],
     ['안내사항',    ['info_title','info_meal_h','info_meal','info_park_h','info_park']],
     ['연락처',      ['ct_btn','ct_gside','ct_g','ct_gn','ct_gf','ct_gfn','ct_gm','ct_gmn','ct_bside','ct_b','ct_bn']],
-    ['참석 여부',   ['rsvp_title','rsvp_intro','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok']],
+    ['참석 여부',   ['rsvp_title','rsvp_intro','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok','rsvp_again']],
     ['마음 전하실 곳', ['acc_title','acc_intro','acc_g','acc_g1','acc_g1n','acc_g2','acc_g2n','acc_g3','acc_g3n','acc_b','acc_b1','acc_b1n','acc_b2','acc_b2n','acc_b3','acc_b3n','copy','copy2','copy5','copy3','copy4','copy6']],
-    ['축하 메시지',  ['gb_title','gb_intro','gb_send','gb_more','gb_name_ph','gb_pw_ph','gb_msg_ph']],
-    ['맺음말',      ['foot_msg','share_k','share_l','copylink']]
+    ['축하 메시지',  ['gb_title','gb_intro','gb_send','gb_hint','gb_more','gb_name_ph','gb_pw_ph','gb_msg_ph','gb_del_t','gb_del_d','cancel','del']],
+    ['맺음말',      ['foot_msg','share','share_k','share_l','copylink']]
   ];
   var LABEL = {
     full:'첫 화면 이름', heroplace:'첫 화면 일시·장소',
@@ -1430,9 +1640,10 @@
     acc_title:'제목', acc_intro:'안내문',
     acc_g:'신랑 측 그룹명', acc_g1:'신랑 표시', acc_g1n:'신랑 계좌 (은행명 + 번호)', acc_g2:'신랑 아버지 표시', acc_g2n:'신랑 아버지 계좌', acc_g3:'신랑 어머니 표시', acc_g3n:'신랑 어머니 계좌',
     acc_b:'신부 측 그룹명', acc_b1:'신부 표시', acc_b1n:'신부 계좌', acc_b2:'신부 아버지 표시', acc_b2n:'신부 아버지 계좌', acc_b3:'신부 어머니 표시', acc_b3n:'신부 어머니 계좌',
+    rsvp_again:'다시 작성하기 버튼', gb_hint:'비밀번호 안내', gb_del_t:'삭제 창 제목', gb_del_d:'삭제 창 안내', cancel:'취소 버튼', del:'삭제 버튼',
     gb_title:'제목', gb_intro:'안내문', gb_send:'등록 버튼', gb_more:'더보기 버튼',
     gb_name_ph:'이름 입력 안내', gb_pw_ph:'비밀번호 입력 안내', gb_msg_ph:'메시지 입력 안내',
-    foot_msg:'마지막 인사', share_k:'카카오톡 공유 버튼', share_l:'LINE 공유 버튼(일본어판)', copylink:'링크복사 버튼'
+    foot_msg:'마지막 인사', share:'공유하기 버튼(카카오 키 없을 때)', share_k:'카카오톡 공유 버튼', share_l:'LINE 공유 버튼(일본어판)', copylink:'링크복사 버튼'
   };
   var CFGLABEL = {
     music:'배경음악 파일명 또는 URL (예: music.mp3)',
@@ -1522,8 +1733,16 @@
         var head = rows[0], data = rows.slice(1);
         var idx = {};
         head.forEach(function(h,i){ idx[String(h).trim()] = i; });
+        /* 같은 이름·같은 측으로 여러 번 보낸 경우 마지막 응답만 집계 */
+        var nameCol = ['이름','성함','name','Name'].map(function(k){ return idx[k]; }).filter(function(v){ return v != null; })[0];
+        var who = function(r){ return String(r[nameCol] || '').replace(/\s+/g, '').toLowerCase() + '|' + (/신부|新婦/.test(String(r[idx['구분']] || '')) ? 'b' : 'g'); };
+        var lastOf = {};
+        if(nameCol != null) data.forEach(function(r, i){ lastOf[who(r)] = i; });
+        var isOld = function(r, i){ return nameCol != null && lastOf[who(r)] !== i; };
+        var dup = data.filter(isOld).length;
         var yes = 0, no = 0, meal = 0, groom = 0, bride = 0;
-        data.forEach(function(r){
+        data.forEach(function(r, i){
+          if(isOld(r, i)) return;
           var att = String(r[idx['참석여부']] != null ? r[idx['참석여부']] : '');
           var cnt = parseInt(String(r[idx['인원']] || '').replace(/[^0-9]/g,''), 10) || 1;
           var side = String(r[idx['구분']] || '');
@@ -1534,12 +1753,13 @@
             if(/신랑|新郎/.test(side)) groom += cnt; else if(/신부|新婦/.test(side)) bride += cnt;
           } else { no += cnt; }
         });
-        sum.innerHTML = '응답 <b>' + data.length + '</b>건 · 참석 <b>' + yes + '</b>명 (신랑 측 ' + groom + ' / 신부 측 ' + bride + ') · 미참석 <b>' + no + '</b>명 · 식사 <b>' + meal + '</b>명';
+        sum.innerHTML = '응답 <b>' + (data.length - dup) + '</b>명' + (dup ? ' (중복 ' + dup + '건 제외)' : '') + ' · 참석 <b>' + yes + '</b>명 (신랑 측 ' + groom + ' / 신부 측 ' + bride + ') · 미참석 <b>' + no + '</b>명 · 식사 <b>' + meal + '</b>명';
         var h = '<table><thead><tr>';
         head.forEach(function(c){ h += '<th>' + esc(c) + '</th>'; });
         h += '</tr></thead><tbody>';
-        data.slice().reverse().forEach(function(r){
-          h += '<tr>';
+        data.map(function(r, i){ return [r, isOld(r, i)]; }).reverse().forEach(function(x){
+          var r = x[0];
+          h += '<tr' + (x[1] ? ' class="old" title="같은 분이 다시 보낸 응답이 있어 집계에서 제외"' : '') + '>';
           head.forEach(function(_,i){ h += '<td>' + fmtCell(r[i]) + '</td>'; });
           h += '</tr>';
         });
@@ -1628,7 +1848,6 @@
     $('#siteData').textContent = "\n" + JSON.stringify({rev:DATA.rev, ko:{}, ja:DATA.ja, cfg:cfgOut}, null, 2) + "\n";
     /* 실행 중 생긴 상태 정리 */
     $$('.reveal').forEach(function(el){ el.classList.remove('in'); });
-    $('#petals').innerHTML = '';
     $('#lbImg').removeAttribute('src');
     $('#lb').classList.remove('show');
     $('#lbCnt').textContent = '';
@@ -1636,7 +1855,9 @@
     $('#bgm').classList.remove('playing');
     $('#rsvpForm').style.display = '';
     $('#rsvpOk').style.display = '';
-    $$('.chip-row').forEach(function(row){ $$('.chip', row).forEach(function(c, i){ c.classList.toggle('on', i === 0); }); });
+    $('#rsvpSumm').textContent = '';
+    $$('.chip-row').forEach(function(row){ $$('.chip', row).forEach(function(c, i){ c.classList.toggle('on', row.dataset.name === 'attend' && i === 0); }); });
+    $('#pwModal').classList.remove('show');
     syncRsvpFields();
     $('#gbList').innerHTML = ''; $('#gbMore').hidden = true;
     ['rsvpTarget','apiTarget'].forEach(function(id){ var x = document.getElementById(id); if(x) x.parentNode.removeChild(x); });
