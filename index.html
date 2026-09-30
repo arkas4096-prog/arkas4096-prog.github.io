@@ -15,12 +15,30 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:locale:alternate" content="ja_JP">
 <meta name="theme-color" content="#fbfaf7">
+<meta name="color-scheme" content="only light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-16 -16 32 32'%3E%3Cg fill='%23f2b5c4' stroke='%23d0788f' stroke-width='.8' stroke-linejoin='round'%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(0)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(72)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(144)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(216)'/%3E%3Cpath d='M0 -1C-5.2 -3.2 -6.4 -9.3 -3.5 -13.6Q-1.7 -14.8 0 -12.2Q1.7 -14.8 3.5 -13.6C6.4 -9.3 5.2 -3.2 0 -1Z' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='2.6' fill='%23d0788f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-jp-dynamic-subset.min.css">
+<script>
+/* 일본어로 열릴 때 한국어 본문이 잠깐 보이거나 한국어 글꼴까지 내려받지 않도록,
+   언어가 적용될 때까지 본문을 잠시 숨김 (스크립트가 실패해도 3초 뒤에는 표시) */
+(function(){
+  try{
+    var q = /[?&]lang=(ko|ja)(?:&|$)/.exec(location.search), l = q ? q[1] : null;
+    if(!l){ try{ l = localStorage.getItem('sw-nz-invite-v1:lang'); }catch(e){} }
+    if(l !== 'ko' && l !== 'ja') l = /^ja/i.test(navigator.language || '') ? 'ja' : 'ko';
+    if(l === 'ja'){
+      var h = document.documentElement;
+      h.lang = 'ja'; h.className += ' pre-ja';
+      setTimeout(function(){ h.className = h.className.replace(/\s*pre-ja/g, ''); }, 3000);
+    }
+  }catch(e){}
+})();
+</script>
 <style>
   /* 마루부리 (네이버 한글 명조) — 제목·인사말에만 쓰므로 Regular 한 벌만 불러옴 */
   @font-face{font-family:"MaruBuri";font-weight:100 900;font-display:swap;
@@ -31,6 +49,7 @@
      간격: 4의 배수 (4 · 8 · 12 · 16 · 20 · 24 · 28 · 32 · 40 · 48 · 72)
      모서리: 8(사진) · 12(버튼·입력칸) · 16(카드) · 999(알약)             */
   :root{
+    color-scheme:only light;   /* 다크모드 폰에서 색이 강제로 뒤집히지 않도록 */
     --bg:#fbfaf7;        /* 한지 느낌의 미색 */
     --alt:#f4f1eb;       /* 섹션 교차 배경 */
     --card:#fff;
@@ -55,6 +74,7 @@
   html[lang="ja"]{--serif:"Shippori Mincho","MaruBuri",serif;}
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   [hidden]{display:none !important;}
+  html.pre-ja .frame,html.pre-ja .modal{display:none;}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
   body{
     color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.8;
@@ -234,7 +254,8 @@
   .loc-hall{margin-top:2px;font-size:14px;color:var(--sub);}
   .loc-addr{margin-top:12px;font-size:14px;color:var(--text);line-height:1.8;}
   .mapwrap{margin-top:24px;border-radius:var(--r-lg);overflow:hidden;background:#f2efe9;box-shadow:var(--sh-1);}
-  .mapwrap iframe{width:100%;height:240px;border:0;display:block;}
+  /* 구글 지도 공유(iframe)는 색 설정이 불가해 필터로 페이지의 미색·로즈 톤에 맞춤 (핀은 알아볼 정도로 남김) */
+  .mapwrap iframe{width:100%;height:240px;border:0;display:block;filter:grayscale(.6) sepia(.25) saturate(1.1) contrast(.93) brightness(1.02);}
   .btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
   .map-btn{display:block;text-align:center;text-decoration:none;padding:12px 0;border:1px solid var(--line);border-radius:var(--r);color:var(--ink);background:var(--card);
     font:500 13px/1.5 var(--sans);white-space:nowrap;box-shadow:0 1px 2px rgba(72,52,40,.05);
@@ -537,13 +558,13 @@
   <section class="reveal">
     <div class="stitle en">Gallery</div>
     <div class="gstrip" id="gallery">
-      <div class="gcell wide"><img src="images/g1.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell"><img src="images/g2.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell"><img src="images/g3.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell wide"><img src="images/g4.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell"><img src="images/g5.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell"><img src="images/g6.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
-      <div class="gcell wide"><img src="images/g7.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></div>
+      <div class="gcell wide"><img src="images/g1.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 1"></div>
+      <div class="gcell"><img src="images/g2.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
+      <div class="gcell"><img src="images/g3.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
+      <div class="gcell wide"><img src="images/g4.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
+      <div class="gcell"><img src="images/g5.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
+      <div class="gcell"><img src="images/g6.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
+      <div class="gcell wide"><img src="images/g7.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
     </div>
     <div class="gnote" data-i="gal_note">사진을 누르면 크게 볼 수 있어요</div>
   </section>
@@ -586,7 +607,7 @@
   </section>
 
   <!-- RSVP -->
-  <section class="reveal">
+  <section class="reveal" id="rsvpSection">
     <div class="stitle" data-i="rsvp_title">참석 의사 전달</div>
     <p class="rsvp-intro" data-i="rsvp_intro">축하의 마음으로 참석해 주시는 모든 분을<br>더욱 정성껏 모실 수 있도록<br>참석 여부를 미리 알려 주시면 감사하겠습니다.</p>
     <div class="form" id="rsvpForm">
@@ -1024,6 +1045,10 @@
         : '함께해 주셔서 감사합니다';
     }
     tickCountdown();
+    /* 예식이 끝난 다음 날부터는 참석 의사·캘린더 저장이 필요 없으므로 숨김 */
+    var over = diff < 0;
+    if($('#rsvpSection').hidden !== over){ $('#rsvpSection').hidden = over; stripe(); }
+    $('.cal-add').hidden = over; $('.cal-cap').hidden = over;
   }
 
   /* 첫 언어: ?lang=ja 링크 → 이 기기에서 전에 고른 언어 → 휴대폰 언어가 일본어면 일본어 */
@@ -1039,6 +1064,7 @@
   applyCfg();
   document.documentElement.classList.add('init');
   applyLang(initialLang());
+  document.documentElement.classList.remove('pre-ja');
   requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.documentElement.classList.remove('init'); }); });
   $$('.lang button').forEach(function(b){
     b.addEventListener('click', function(){
