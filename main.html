@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-jp-dynamic-subset.min.css">
 <script>
 /* 일본어로 열릴 때 한국어 본문이 잠깐 보이거나 한국어 글꼴까지 내려받지 않도록,
@@ -153,10 +153,14 @@
   @keyframes kb{from{transform:scale(1)}to{transform:scale(1.075)}}
   .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.12) 26%,transparent 40%,transparent 78%,rgba(0,0,0,.45));}
   .hero-top{position:absolute;top:28px;left:0;right:0;z-index:2;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35),0 2px 16px rgba(0,0,0,.35);}
-  .hero-top .of{font:italic 400 13px/1.4 var(--en);letter-spacing:.26em;}
-  .hero-top .en{font:italic 400 32px/1.4 var(--en);letter-spacing:.06em;margin-top:4px;}
+  /* 손글씨처럼 써지는 We're getting married */
+  .hand{display:block;width:min(94%,420px);height:auto;margin:0 auto;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
+  .hand .pen{stroke-dasharray:1;stroke-dashoffset:1;}
+  .hero-top .names{margin-top:2px;font:italic 400 15px/1.4 var(--en);letter-spacing:.2em;}
+  .hero-copy{font:400 19px/1.5 var(--serif);letter-spacing:.08em;margin-bottom:10px;}
+  .d4{animation-delay:4.7s !important;}
   .amp{font-style:normal;font-weight:300;font-size:.8em;margin:0 .1em;opacity:.9;}
-  .hero-bottom{position:absolute;bottom:24px;left:0;right:0;z-index:2;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4),0 2px 12px rgba(0,0,0,.35);}
+  .hero-bottom{position:absolute;bottom:22px;left:0;right:0;z-index:2;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4),0 2px 12px rgba(0,0,0,.35);}
   .hero-bottom .dt{font:500 12px/1.4 var(--sans);letter-spacing:.24em;}
   .scroll-cue{display:block;width:1px;height:28px;margin:12px auto 0;background:linear-gradient(rgba(255,255,255,.9),rgba(255,255,255,0));
     transform-origin:top;animation:cue 2.4s var(--ease) infinite;}
@@ -237,17 +241,28 @@
   html[lang="ja"] .cal-add{flex-direction:column;align-items:center;}
 
   /* ── 갤러리 ── */
-  .gstrip{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .gcell{aspect-ratio:3/4;overflow:hidden;background:#ece9e2;cursor:pointer;position:relative;border-radius:var(--r-sm);
-    opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .gstrip{margin-top:32px;display:grid;grid-template-columns:repeat(6,1fr);gap:4px;}
+  .gcell{grid-column:span 2;aspect-ratio:3/4;overflow:hidden;background:#ece9e2;cursor:pointer;position:relative;
+    opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
   .reveal.in .gcell{opacity:1;transform:none;}
-  .gcell:nth-child(2){transition-delay:.08s}.gcell:nth-child(3){transition-delay:.16s}.gcell:nth-child(4){transition-delay:.24s}
-  .gcell:nth-child(5){transition-delay:.32s}.gcell:nth-child(6){transition-delay:.4s}.gcell:nth-child(7){transition-delay:.48s}
-  .gcell.wide{grid-column:1 / -1;aspect-ratio:4/3;}
+  .gcell:nth-child(3n+2){transition-delay:.08s}.gcell:nth-child(3n){transition-delay:.16s}
   .gcell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
-  .gcell:active img{transform:scale(1.04);}
-  @media (hover:hover){ .gcell:hover img{transform:scale(1.04);} }
+  .gcell.pair{grid-column:span 3;}
+  .gcell.landscape{grid-column:1/-1;aspect-ratio:auto;}
+  .gcell.landscape img{height:auto;object-fit:contain;}
+  .gcell:active img{transform:scale(1.05);}
+  @media (hover:hover){ .gcell:hover img{transform:scale(1.05);} }
+  .gcell.more{display:none;}
+  .gstrip.open .gcell.more{display:block;animation:fadeIn .6s var(--ease) both;}
+  .gstrip.open .gcell.more:nth-child(11){animation-delay:.06s}.gstrip.open .gcell.more:nth-child(12){animation-delay:.12s}
+  .gstrip.open .gcell.more:nth-child(13){animation-delay:.18s}.gstrip.open .gcell.more:nth-child(14){animation-delay:.24s}
+  .gmore{margin-top:20px;}
+  .gmore.open .chev{transform:translateY(2px) rotate(225deg);}
   .gnote{margin-top:16px;font-size:13px;color:var(--sub);}
+
+  .upload-copy{margin:24px 0;line-height:2;font-size:15px;color:var(--text);}
+  .upload-link{display:inline-flex;gap:12px;text-decoration:none;min-height:48px;}
+  .upload-note{margin-top:16px;font-size:12px;line-height:1.9;color:var(--sub);}
 
   /* ── 오시는 길 ── */
   .loc-name{margin-top:24px;font:400 19px/1.6 var(--serif);color:var(--ink);}
@@ -277,6 +292,28 @@
   .info-ic .ico{width:19px;height:19px;stroke-width:1.5;}
   .info-h{font-size:15px;font-weight:600;color:var(--ink);line-height:1.5;padding-top:1px;}
   .info-p{margin-top:4px;font-size:14px;line-height:1.8;color:var(--text);}
+
+  .snap-icon{display:block;width:32px;height:32px;margin:0 auto 16px;color:var(--accent);}
+  .rsvp-invite{text-align:center;padding:28px 24px;}
+  .rsvp-invite .rsvp-intro{font-size:14px;line-height:2;}
+  .rsvp-invite-details{margin:24px 0;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13px;line-height:1.9;}
+  .rsvp-invite-details p+p{margin-top:8px;}
+  .rsvp-invite .submit{width:100%;}
+  .rsvp-today{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;min-height:44px;font-size:12px;color:var(--sub);cursor:pointer;}
+  .rsvp-today input{width:16px;height:16px;accent-color:var(--accent);}
+  .rsvp-open{margin-top:28px;}
+  .rsvp-dialog{position:fixed;inset:0;margin:auto;width:calc(100% - 32px);max-width:420px;max-height:calc(100dvh - 40px);padding:24px;border:1px solid var(--line2);border-radius:20px;background:var(--bg);color:var(--text);box-shadow:var(--sh-2);overflow-y:auto;overscroll-behavior:contain;opacity:0;transform:translateY(20px);transition:opacity .22s ease,transform .22s var(--ease);}
+  .rsvp-dialog.visible{opacity:1;transform:none;}
+  .rsvp-dialog::backdrop{background:rgba(28,26,23,.48);backdrop-filter:blur(4px);}
+  .rsvp-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .dialog-close{flex-shrink:0;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--sub);font:500 13px var(--sans);cursor:pointer;}
+  .dialog-close:active{transform:scale(.96);}
+  .rsvp-dialog-note{margin-top:12px;font-size:13px;line-height:1.8;}
+  .rsvp-dialog .form{margin-top:24px;gap:16px;}
+  .rsvp-dialog .rsvp-ok{text-align:center;}
+  .rsvp-notice{font-size:13px;color:var(--accent);text-align:center;}
+  .rsvp-notice:not(:empty){margin-top:16px;}
+  @media(prefers-reduced-motion:reduce){.rsvp-dialog{transition:none;transform:none;}}
 
   /* ── RSVP ── */
   .form{margin-top:32px;display:flex;flex-direction:column;gap:16px;text-align:left;}
@@ -430,6 +467,8 @@
   @media (prefers-reduced-motion: reduce){
     #petals{display:none;}
     .hero-photo img,.scroll-cue{animation:none;}
+    .hand .pen{stroke-dashoffset:0;}
+
     .fade-up{animation:none;opacity:1;transform:none;}
     .reveal,.gcell{transition:none;opacity:1;transform:none;}
     .dmark::after{display:none;}
@@ -476,11 +515,12 @@
       <img src="images/hero.jpg" width="1333" height="2000" fetchpriority="high" decoding="async" alt="">
       <div class="hero-veil"></div>
       <div class="hero-top">
-        <div class="of fade-up d1">The wedding of</div>
-        <div class="en fade-up d2">Sangwon <span class="amp">&amp;</span> Nozomi</div>
+        <svg class="hand" viewBox="0 0 500 190" role="img" aria-label="We’re getting married!"><title>We’re getting married!</title><g fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path class="pen" d="M-8 17 C2 -3 24 -13 23 1 C22 12 3 58 11 58 C18 58 39 8 39 8 C31 31 24 60 32 58 C43 55 65 5 62 -2 C60 -7 54 -4 54 2" transform="translate(44.09 20) scale(1.18)"/><path class="pen" d="M0 42 C9 40 25 23 18 21 C8 17 1 44 8 49 C15 56 24 43 27 39" transform="translate(119.61 20) scale(1.18)"/><path class="pen" d="M7 3 Q12 8 2 15" transform="translate(149.11 20) scale(1.18)"/><path class="pen" d="M0 42 C5 35 12 21 12 21 L6 47 C11 33 22 18 24 23 C26 27 19 31 19 31 C17 32 27 31 29 34" transform="translate(160.91 20) scale(1.18)"/><path class="pen" d="M0 42 C9 40 25 23 18 21 C8 17 1 44 8 49 C15 56 24 43 27 39" transform="translate(191.59 20) scale(1.18)"/><path class="pen" d="M22 25 C14 13 2 29 4 43 C6 59 23 41 25 23 L14 73 C10 87 -3 89 -1 76 C1 66 18 62 32 39" transform="translate(242.33 20) scale(1.18)"/><path class="pen" d="M0 42 C9 40 25 23 18 21 C8 17 1 44 8 49 C15 56 24 43 27 39" transform="translate(276.55 20) scale(1.18)"/><path class="pen" d="M0 42 C10 29 18 8 19 3 L9 39 C3 59 17 51 26 39" transform="translate(306.05 20) scale(1.18)"/><path class="pen" d="M5 24 C16 21 25 21 31 21" transform="translate(306.05 20) scale(1.18)"/><path class="pen" d="M0 42 C10 29 18 8 19 3 L9 39 C3 59 17 51 26 39" transform="translate(333.19 20) scale(1.18)"/><path class="pen" d="M5 24 C16 21 25 21 31 21" transform="translate(333.19 20) scale(1.18)"/><path class="pen" d="M0 42 L12 23 C9 32 3 51 11 50 C16 50 21 40 22 39" transform="translate(360.33 20) scale(1.18)"/><path class="pen" d="M15 12 l.4 -.5" transform="translate(360.33 20) scale(1.18)"/><path class="pen" d="M0 42 L13 23 L6 48 C14 29 26 17 28 25 C29 29 15 49 25 50 C31 50 36 40 37 39" transform="translate(381.57 20) scale(1.18)"/><path class="pen" d="M22 25 C14 13 2 29 4 43 C6 59 23 41 25 23 L14 73 C10 87 -3 89 -1 76 C1 66 18 62 32 39" transform="translate(421.69 20) scale(1.18)"/><path class="pen" d="M0 42 L13 23 L6 48 C14 29 26 17 28 25 L18 47 C29 26 41 17 41 26 C38 36 30 50 39 50 C44 49 49 41 51 39" transform="translate(115.39 111) scale(1.22)"/><path class="pen" d="M24 26 C18 16 5 23 4 39 C2 57 20 48 25 23 L18 43 C15 55 25 49 31 39" transform="translate(173.95 111) scale(1.22)"/><path class="pen" d="M0 42 C5 35 12 21 12 21 L6 47 C11 33 22 18 24 23 C26 27 19 31 19 31 C17 32 27 31 29 34" transform="translate(208.11 111) scale(1.22)"/><path class="pen" d="M0 42 C5 35 12 21 12 21 L6 47 C11 33 22 18 24 23 C26 27 19 31 19 31 C17 32 27 31 29 34" transform="translate(239.83 111) scale(1.22)"/><path class="pen" d="M0 42 L12 23 C9 32 3 51 11 50 C16 50 21 40 22 39" transform="translate(271.55 111) scale(1.22)"/><path class="pen" d="M15 12 l.4 -.5" transform="translate(271.55 111) scale(1.22)"/><path class="pen" d="M0 42 C9 40 25 23 18 21 C8 17 1 44 8 49 C15 56 24 43 27 39" transform="translate(293.51 111) scale(1.22)"/><path class="pen" d="M23 26 C18 15 3 26 4 42 C6 61 24 39 26 24 L40 -7 C43 -15 35 -12 31 -1 C23 20 12 48 22 50 C27 51 33 40 34 39" transform="translate(324.01 111) scale(1.22)"/><path class="pen" d="M18 1 Q14 18 8 36" transform="translate(369 111) scale(1.22)"/><path class="pen" d="M4 49 l.5 -1" transform="translate(369 111) scale(1.22)"/></g></svg>
+        <div class="names fade-up d4">Sangwon <span class="amp">&amp;</span> Nozomi</div>
       </div>
       <div class="hero-bottom">
-        <div class="dt fade-up d3">2026 . 11 . 07　SAT　17 : 00</div>
+        <p class="hero-copy fade-up d4" data-i="hero_copy">저희, 부부가 됩니다</p>
+        <div class="dt fade-up d4">2026 . 11 . 07　SAT　17 : 00</div>
         <i class="scroll-cue" aria-hidden="true"></i>
       </div>
     </div>
@@ -558,14 +598,22 @@
   <section class="reveal">
     <div class="stitle en">Gallery</div>
     <div class="gstrip" id="gallery">
-      <div class="gcell wide"><img src="images/g1.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 1"></div>
-      <div class="gcell"><img src="images/g2.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
-      <div class="gcell"><img src="images/g3.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
-      <div class="gcell wide"><img src="images/g4.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
-      <div class="gcell"><img src="images/g5.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
-      <div class="gcell"><img src="images/g6.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
-      <div class="gcell wide"><img src="images/g7.jpg" width="675" height="900" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
+      <div class="gcell"><img src="images/gallery/02_t.webp" data-full="images/gallery/02.webp" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
+      <div class="gcell"><img src="images/gallery/12_t.webp" data-full="images/gallery/12.webp" loading="lazy" decoding="async" alt="웨딩 사진 12"></div>
+      <div class="gcell"><img src="images/gallery/05_t.webp" data-full="images/gallery/05.webp" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
+      <div class="gcell"><img src="images/gallery/10_t.webp" data-full="images/gallery/10.webp" loading="lazy" decoding="async" alt="웨딩 사진 10"></div>
+      <div class="gcell"><img src="images/gallery/07_t.webp" data-full="images/gallery/07.webp" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
+      <div class="gcell"><img src="images/gallery/01_t.webp" data-full="images/gallery/01.webp" loading="lazy" decoding="async" alt="웨딩 사진 1"></div>
+      <div class="gcell pair"><img src="images/gallery/09_t.webp" data-full="images/gallery/09.webp" loading="lazy" decoding="async" alt="웨딩 사진 9"></div>
+      <div class="gcell pair"><img src="images/gallery/04_t.webp" data-full="images/gallery/04.webp" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
+      <div class="gcell landscape"><img src="images/gallery/03.webp" data-full="images/gallery/03.webp" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
+      <div class="gcell more"><img src="images/gallery/06_t.webp" data-full="images/gallery/06.webp" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
+      <div class="gcell more"><img src="images/gallery/08_t.webp" data-full="images/gallery/08.webp" loading="lazy" decoding="async" alt="웨딩 사진 8"></div>
+      <div class="gcell more"><img src="images/gallery/13_t.webp" data-full="images/gallery/13.webp" loading="lazy" decoding="async" alt="웨딩 사진 13"></div>
+      <div class="gcell more pair"><img src="images/gallery/14_t.webp" data-full="images/gallery/14.webp" loading="lazy" decoding="async" alt="웨딩 사진 14"></div>
+      <div class="gcell more pair"><img src="images/gallery/11_t.webp" data-full="images/gallery/11.webp" loading="lazy" decoding="async" alt="웨딩 사진 11"></div>
     </div>
+    <button type="button" class="pill gmore" id="gMore" aria-expanded="false"><span data-i="gal_more">더 보기</span><i class="chev" aria-hidden="true"></i></button>
     <div class="gnote" data-i="gal_note">사진을 누르면 크게 볼 수 있어요</div>
   </section>
 
@@ -610,21 +658,16 @@
   <section class="reveal" id="rsvpSection">
     <div class="stitle" data-i="rsvp_title">참석 의사 전달</div>
     <p class="rsvp-intro" data-i="rsvp_intro">축하의 마음으로 참석해 주시는 모든 분을<br>더욱 정성껏 모실 수 있도록<br>참석 여부를 미리 알려 주시면 감사하겠습니다.</p>
-    <div class="form" id="rsvpForm">
-      <div class="field"><label data-i="f_side">구분</label><div class="chip-row" data-name="side"><button type="button" class="chip" data-i="c_g">신랑 측</button><button type="button" class="chip" data-i="c_b">신부 측</button></div></div>
-      <div class="field"><label data-i="f_att">참석 여부</label><div class="chip-row" data-name="attend"><button type="button" class="chip on" data-i="c_y">참석</button><button type="button" class="chip" data-i="c_n">미참석</button></div></div>
-      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" maxlength="20" autocomplete="name" data-ph="name_ph" placeholder="성함을 입력해 주세요"></div>
-      <div class="fold open" id="rsvpMore"><div><div class="fold-in">
-        <div class="field"><label data-i="f_cnt">참석 인원</label><select id="rCnt"><option data-i="o1">1명</option><option data-i="o2">2명</option><option data-i="o3">3명</option><option data-i="o4">4명</option><option data-i="o5">5명 이상</option></select></div>
-        <div class="field"><label data-i="f_meal">식사 여부</label><div class="chip-row" data-name="meal"><button type="button" class="chip" data-i="c_m1">식사함</button><button type="button" class="chip" data-i="c_m2">식사 안 함</button></div></div>
-      </div></div></div>
-      <button class="submit" id="rsvpBtn" data-i="submit">참석 의사 전달하기</button>
-    </div>
-    <div class="rsvp-ok" id="rsvpOk">
-      <p data-i="rsvp_ok">소중한 답변 감사합니다.<br>정성껏 준비하겠습니다.</p>
-      <p class="rsvp-sum" id="rsvpSumm"></p>
-      <button type="button" class="pill rsvp-again" id="rsvpAgain" data-i="rsvp_again">다시 작성하기</button>
-    </div>
+    <button type="button" class="pill rsvp-open" id="rsvpOpen" aria-haspopup="dialog" aria-controls="rsvpDialog"><span id="rsvpOpenNew" data-i="rsvp_open">참석 여부 알려주기</span><span id="rsvpOpenSaved" data-i="rsvp_review" hidden>내 응답 확인·수정</span></button>
+  </section>
+
+  <!-- GUEST PHOTOS: shown only when a valid Dropbox file-request link is configured -->
+  <section class="reveal" id="uploadSection" hidden>
+    <svg class="snap-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 7l2-3h6l2 3h5a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V10a3 3 0 0 1 3-3z"/><circle cx="16" cy="17" r="6"/><path d="M24 11h1"/></svg>
+    <h2 class="stitle" data-i="upload_title">게스트 스냅</h2>
+    <p class="upload-copy" data-i="upload_intro">여러분이 담은 저희의 하루를 보내주세요.<br>사진 한 장, 짧은 영상도 소중히 간직하겠습니다.</p>
+    <a class="pill upload-link" id="uploadLink" target="_blank" rel="noopener noreferrer" hidden><span data-i="upload_button">사진·영상 보내기</span><span aria-hidden="true">↗</span></a>
+    <p class="upload-note" data-i="upload_note">가입 없이 새 창에서 업로드할 수 있어요.</p>
   </section>
 
   <!-- ACCOUNTS -->
@@ -680,6 +723,35 @@
     </div>
   </footer>
 </div>
+
+<dialog id="rsvpInvite" class="rsvp-dialog rsvp-invite" aria-labelledby="rsvpInviteTitle">
+  <div class="rsvp-dialog-top"><h2 id="rsvpInviteTitle" class="modal-t" data-i="rsvp_title">참석 의사 전달</h2><button type="button" id="rsvpInviteClose" class="dialog-close" data-i="rsvp_close" autofocus>닫기</button></div>
+  <p class="rsvp-intro" data-i="rsvp_intro">축하의 마음으로 참석해 주시는 모든 분을<br>더욱 정성껏 모실 수 있도록<br>참석 여부를 미리 알려 주시면 감사하겠습니다.</p>
+  <div class="rsvp-invite-details"><p data-i="full">배상원 · 시바나카 노조미</p><p data-i="heroplace">2026년 11월 7일 토요일 오후 5시<br>울산 JW웨딩컨벤션센터 마제스틱홀</p></div>
+  <button type="button" id="rsvpInviteGo" class="submit" data-i="rsvp_open">참석 여부 알려주기</button>
+  <label class="rsvp-today"><input id="rsvpHideToday" type="checkbox"><span data-i="rsvp_hide_today">오늘 하루 보지 않기</span></label>
+</dialog>
+
+<dialog id="rsvpDialog" class="rsvp-dialog" aria-labelledby="rsvpDialogTitle">
+  <div class="rsvp-dialog-top"><h2 id="rsvpDialogTitle" class="modal-t" data-i="rsvp_title">참석 의사 전달</h2><button type="button" id="rsvpClose" class="dialog-close" data-i="rsvp_close" autofocus>닫기</button></div>
+  <p class="rsvp-dialog-note" data-i="rsvp_dialog_note">아래 항목을 선택해 참석 여부를 알려주세요.</p>
+    <div class="form" id="rsvpForm">
+      <div class="field"><label data-i="f_side">구분</label><div class="chip-row" data-name="side"><button type="button" class="chip" data-i="c_g">신랑 측</button><button type="button" class="chip" data-i="c_b">신부 측</button></div></div>
+      <div class="field"><label data-i="f_att">참석 여부</label><div class="chip-row" data-name="attend"><button type="button" class="chip on" data-i="c_y">참석</button><button type="button" class="chip" data-i="c_n">미참석</button></div></div>
+      <div class="field"><label data-i="f_name">성함</label><input type="text" id="rName" maxlength="20" autocomplete="name" data-ph="name_ph" placeholder="성함을 입력해 주세요"></div>
+      <div class="fold open" id="rsvpMore"><div><div class="fold-in">
+        <div class="field"><label data-i="f_cnt">참석 인원</label><select id="rCnt"><option data-i="o1">1명</option><option data-i="o2">2명</option><option data-i="o3">3명</option><option data-i="o4">4명</option><option data-i="o5">5명 이상</option></select></div>
+        <div class="field"><label data-i="f_meal">식사 여부</label><div class="chip-row" data-name="meal"><button type="button" class="chip" data-i="c_m1">식사함</button><button type="button" class="chip" data-i="c_m2">식사 안 함</button></div></div>
+      </div></div></div>
+      <button class="submit" id="rsvpBtn" data-i="submit">참석 의사 전달하기</button>
+    </div>
+    <div class="rsvp-ok" id="rsvpOk">
+      <p data-i="rsvp_ok">소중한 답변 감사합니다.<br>정성껏 준비하겠습니다.</p>
+      <p class="rsvp-sum" id="rsvpSumm"></p>
+      <button type="button" class="pill rsvp-again" id="rsvpAgain" data-i="rsvp_again">다시 작성하기</button>
+    </div>
+  <p id="rsvpNotice" class="rsvp-notice" role="status" aria-live="polite"></p>
+</dialog>
 
 <div class="toast" id="toast"></div>
 
@@ -739,7 +811,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1790777385327,
+  "rev": 1791069577405,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -835,7 +907,18 @@
     "gb_del_t": "メッセージの削除",
     "gb_del_d": "投稿時に入力した暗証番号（数字4桁）をご入力ください。",
     "cancel": "キャンセル",
-    "del": "削除する"
+    "del": "削除する",
+    "hero_copy": "私たち、結婚します",
+    "gal_more": "もっと見る",
+    "upload_title": "皆さまからのお写真",
+    "upload_intro": "皆さまが撮影されたお写真や動画を<br>大切な思い出としてお寄せください。",
+    "upload_button": "写真・動画を送る",
+    "upload_note": "登録不要・別ウィンドウでアップロードできます。",
+    "rsvp_open": "出欠を回答する",
+    "rsvp_close": "閉じる",
+    "rsvp_dialog_note": "以下の項目を選び、ご出欠をお知らせください。",
+    "rsvp_hide_today": "今日は表示しない",
+    "rsvp_review": "回答内容を確認・変更する"
   },
   "cfg": {
     "music": "music.mp3",
@@ -851,7 +934,8 @@
     "sheetApiUrl": "https://script.google.com/macros/s/AKfycbx74M4zu5XmwCNPTUbhy7SxP5tf3QyHay6oQEW4s_SNrQQxPvbbdi3o5BSCs8eA5hjD/exec",
     "sheetKey": "sw-nz-1107",
     "sheetUrl": "",
-    "adminKey": ""
+    "adminKey": "",
+    "dropboxRequestUrl": "https://www.dropbox.com/request/hnfalv00tt07vrsc235v"
   }
 }
 </script>
@@ -894,6 +978,35 @@
     return ko;
   }
 
+  function syncUpload(){
+    var link = $('#uploadLink'), url;
+    try{
+      url = new URL((DATA.cfg.dropboxRequestUrl || '').trim());
+      if(url.protocol !== 'https:' || !/^(www\.)?dropbox\.com$/.test(url.hostname) || !/^\/request\/[A-Za-z0-9_-]+\/?$/.test(url.pathname) || url.username || url.password || url.port) url = null;
+    }catch(e){ url = null; }
+    $('#uploadSection').hidden = !url;
+    link.hidden = !url;
+    if(url) link.href = url.href; else link.removeAttribute('href');
+  }
+
+  /* Draw actual pen centerlines; no downloaded font is required. */
+  (function(){
+    var paths = $$('.hand .pen'), media = matchMedia('(prefers-reduced-motion: reduce)'), animations = [];
+    function draw(){
+      animations.forEach(function(a){ a.cancel(); }); animations = [];
+      var total = paths.reduce(function(sum,p){ return sum+p.getTotalLength(); },0), start = 350;
+      paths.forEach(function(p){
+        var length = p.getTotalLength(), duration = length/total*3900;
+        p.style.strokeDasharray = length; p.style.strokeDashoffset = media.matches ? 0 : length;
+        if(!media.matches){
+          animations.push(p.animate([{strokeDashoffset:length},{strokeDashoffset:0}],{duration:duration,delay:start,fill:'forwards',easing:'linear'}));
+          start += duration+12;
+        }
+      });
+    }
+    media.addEventListener('change',draw); draw();
+  })();
+
   function applyLang(lang){
     LANG = lang;
     document.documentElement.lang = (lang === 'ja' ? 'ja' : 'ko');
@@ -904,9 +1017,12 @@
     });
     $$('[data-ph]').forEach(function(el){ el.setAttribute('placeholder', val(el.dataset.ph, lang)); });
     syncAccounts();
+    syncUpload();
     stripe();
     applyContacts();
     updateCalLinks();
+    syncGalleryToggle();
+    syncRsvpOpenLabel();
     if(GB && GB.loaded) gbRender(); else if(GB && GB.msg) gbState(GB.msg);
     if($('#rsvpOk').style.display === 'block'){ var sv = loadRsvpSaved(); if(sv) $('#rsvpSumm').innerHTML = rsvpSummary(sv); }
     $$('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
@@ -990,6 +1106,8 @@
     });
   }
   function applyCfg(){
+    syncUpload();
+    stripe();
     applyContacts();
     /* 카카오 JavaScript 키가 있을 때만 카카오톡 버튼, 없으면 일반 공유 버튼 */
     var hasKakao = !!(DATA.cfg.kakaoKey || '').trim();
@@ -1201,6 +1319,7 @@
   /* ── 토스트 ── */
   var toast = $('#toast');
   function showToast(m){
+    if($('#rsvpDialog').open) $('#rsvpNotice').textContent = m;
     toast.textContent = m; toast.classList.add('show');
     setTimeout(function(){ toast.classList.remove('show'); }, 1700);
   }
@@ -1274,6 +1393,59 @@
 
   /* ── RSVP ── */
   function notAttending(){ return !!$('.chip-row[data-name="attend"] .chip.on[data-i="c_n"]'); }
+  var rsvpDialog = $('#rsvpDialog'), rsvpReturnFocus, rsvpCloseTimer, rsvpOverflow;
+  function closeRsvpDialog(){
+    if(!rsvpDialog.open) return;
+    rsvpDialog.classList.remove('visible');
+    clearTimeout(rsvpCloseTimer);
+    rsvpCloseTimer = setTimeout(function(){ rsvpDialog.close(); }, REDUCED ? 0 : 220);
+  }
+  function openRsvpForm(){
+    autoRsvpHandled = true; clearTimeout(autoRsvpTimer);
+    if($('#rsvpSection').hidden || rsvpDialog.open) return;
+    clearTimeout(rsvpCloseTimer);rsvpReturnFocus=document.activeElement;rsvpOverflow=document.body.style.overflow;
+    $('#rsvpNotice').textContent='';rsvpDialog.showModal();document.body.style.overflow='hidden';
+    rsvpDialog.scrollTop=0;requestAnimationFrame(function(){rsvpDialog.classList.add('visible');});
+  }
+  $('#rsvpOpen').addEventListener('click',openRsvpForm);
+  $('#rsvpClose').addEventListener('click',closeRsvpDialog);
+  $('#rsvpForm').addEventListener('input',function(){ $('#rsvpNotice').textContent=''; });
+  $('#rsvpForm').addEventListener('click',function(e){ if(e.target.closest('.chip')) $('#rsvpNotice').textContent=''; });
+  rsvpDialog.addEventListener('cancel',function(e){e.preventDefault();closeRsvpDialog();});
+  rsvpDialog.addEventListener('click',function(e){
+    var r=rsvpDialog.getBoundingClientRect();
+    if(e.target===rsvpDialog && (e.clientX<r.left || e.clientX>r.right || e.clientY<r.top || e.clientY>r.bottom))closeRsvpDialog();
+  });
+  rsvpDialog.addEventListener('close',function(){document.body.style.overflow=rsvpOverflow||'';rsvpDialog.classList.remove('visible');if(rsvpReturnFocus)rsvpReturnFocus.focus({preventScroll:true});});
+
+  // One invitation per page visit; opt-out persists until the next Korean calendar day.
+  var rsvpInvite = $('#rsvpInvite'), autoRsvpHandled = false, autoRsvpTimer;
+  var inviteOverflow = '', inviteFocus = null, inviteClosing;
+  function rsvpToday(){return new Date(Date.now()+9*60*60*1000).toISOString().slice(0,10);}
+  function hideRsvpToday(){try{return localStorage.getItem(LSKEY+':rsvp-hide-day')===rsvpToday();}catch(e){return false;}}
+  function closeRsvpInvite(immediate){
+    if(!rsvpInvite.open)return;
+    if($('#rsvpHideToday').checked){try{localStorage.setItem(LSKEY+':rsvp-hide-day',rsvpToday());}catch(e){}}
+    clearTimeout(inviteClosing);rsvpInvite.classList.remove('visible');
+    function finish(){rsvpInvite.close();document.body.style.overflow=inviteOverflow;if(inviteFocus)inviteFocus.focus({preventScroll:true});}
+    if(immediate || REDUCED)finish();else inviteClosing=setTimeout(finish,220);
+  }
+  $('#rsvpInviteClose').addEventListener('click',function(){closeRsvpInvite(false);});
+  rsvpInvite.addEventListener('cancel',function(e){e.preventDefault();closeRsvpInvite(false);});
+  rsvpInvite.addEventListener('click',function(e){var r=rsvpInvite.getBoundingClientRect();if(e.target===rsvpInvite&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))closeRsvpInvite(false);});
+  $('#rsvpInviteGo').addEventListener('click',function(){closeRsvpInvite(true);openRsvpForm();});
+  function tryAutoRsvp(){
+    if(autoRsvpHandled)return;
+    if(hideRsvpToday() || loadRsvpSaved() || $('#rsvpSection').hidden){autoRsvpHandled=true;return;}
+    if(document.hidden || document.querySelector('dialog[open],.modal.show,.lb.show') || $('#admin').classList.contains('show') || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){
+      autoRsvpTimer=setTimeout(tryAutoRsvp,1000);return;
+    }
+    autoRsvpHandled=true;inviteFocus=document.activeElement;inviteOverflow=document.body.style.overflow;
+    $('#rsvpHideToday').checked=false;rsvpInvite.showModal();document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){rsvpInvite.classList.add('visible');});
+  }
+  autoRsvpTimer=setTimeout(tryAutoRsvp,10000);
+
   function syncRsvpFields(){
     var no = notAttending();
     var more = $('#rsvpMore');
@@ -1299,7 +1471,15 @@
     if(v.attend === 0){ parts.push($('#rCnt').options[v.cnt].text); parts.push(chipText('meal', v.meal)); }
     return parts.join(' · ');
   }
+  function syncRsvpOpenLabel(){
+    var saved = false;
+    try{ saved = !!JSON.parse(localStorage.getItem(LSKEY + ':rsvp') || 'null'); }catch(e){}
+    $('#rsvpOpenNew').hidden = saved;
+    $('#rsvpOpenSaved').hidden = !saved;
+  }
   function showRsvpDone(v){
+    syncRsvpOpenLabel();
+    $('#rsvpNotice').textContent = '';
     $('#rsvpSumm').innerHTML = rsvpSummary(v);
     $('#rsvpForm').style.display = 'none';
     $('#rsvpOk').style.display = 'block';
@@ -1383,10 +1563,23 @@
   /* ── 갤러리 라이트박스 ── */
   var imgs = $$('#gallery img');
   var lb = $('#lb'), lbImg = $('#lbImg'), lbCnt = $('#lbCnt'), idx = 0;
-  function openLb(i){ idx = i; lbImg.src = imgs[i].src; lbCnt.textContent = (i+1) + ' / ' + imgs.length; lb.classList.add('show'); document.body.style.overflow = 'hidden'; }
-  function nav(d){ idx = (idx + d + imgs.length) % imgs.length; lbImg.src = imgs[idx].src; lbCnt.textContent = (idx+1) + ' / ' + imgs.length; }
+  function full(i){ return imgs[i].dataset.full || imgs[i].src; }
+  function openLb(i){ idx = i; lbImg.src = full(i); lbCnt.textContent = (i+1) + ' / ' + imgs.length; lb.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function nav(d){ idx = (idx + d + imgs.length) % imgs.length; lbImg.src = full(idx); lbCnt.textContent = (idx+1) + ' / ' + imgs.length; }
   function closeLb(){ lb.classList.remove('show'); document.body.style.overflow = ''; }
   imgs.forEach(function(im,i){ im.addEventListener('click', function(){ openLb(i); }); });
+  function syncGalleryToggle(){
+    var open = $('#gallery').classList.contains('open');
+    var button = $('#gMore');
+    button.classList.toggle('open', open);
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('[data-i="gal_more"]', button).textContent = open ? (LANG === 'ja' ? '閉じる' : '접기') : val('gal_more');
+  }
+  $('#gMore').addEventListener('click', function(){
+    var open = $('#gallery').classList.toggle('open');
+    syncGalleryToggle();
+    if(!open) $('#gallery').scrollIntoView({block:'start'});
+  });
   $('#lbClose').addEventListener('click', closeLb);
   $('#lbPrev').addEventListener('click', function(e){ e.stopPropagation(); nav(-1); });
   $('#lbNext').addEventListener('click', function(e){ e.stopPropagation(); nav(1); });
@@ -1639,23 +1832,29 @@
     ['기본 · 인물', ['full','heroplace','p_groom','p_bride']],
     ['초대 인사말', ['inv_title','inv_quote','inv_quote_by','inv_poem','inv_body','inv_sign']],
     ['예식 일시',   ['date_line','date_time','calhead','cd_d','cd_h','cd_m','cd_s','cal_h','cal_g','cal_i']],
-    ['갤러리',      ['gal_note']],
+    ['갤러리',      ['gal_more','gal_note']],
+    ['사진·영상 받기', ['upload_title','upload_intro','upload_button','upload_note']],
+    ['첫 화면',     ['hero_copy']],
     ['오시는 길',   ['loc_title','loc_name','loc_hall','loc_addr','map_btn_n','map_btn_k','map_btn_g']],
     ['교통 안내',   ['trans_h','t_ktx_h','t_ktx','t_car_h','t_car','t_bus_h','t_bus','t_air_h','t_air','t_far_h','t_far']],
     ['안내사항',    ['info_title','info_meal_h','info_meal','info_park_h','info_park']],
     ['연락처',      ['ct_btn','ct_gside','ct_g','ct_gn','ct_gf','ct_gfn','ct_gm','ct_gmn','ct_bside','ct_b','ct_bn']],
-    ['참석 여부',   ['rsvp_title','rsvp_intro','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok','rsvp_again']],
+    ['참석 여부',   ['rsvp_title','rsvp_intro','rsvp_open','rsvp_review','rsvp_close','rsvp_dialog_note','rsvp_hide_today','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok','rsvp_again']],
     ['마음 전하실 곳', ['acc_title','acc_intro','acc_g','acc_g1','acc_g1n','acc_g2','acc_g2n','acc_g3','acc_g3n','acc_b','acc_b1','acc_b1n','acc_b2','acc_b2n','acc_b3','acc_b3n','copy','copy2','copy5','copy3','copy4','copy6']],
     ['축하 메시지',  ['gb_title','gb_intro','gb_send','gb_hint','gb_more','gb_name_ph','gb_pw_ph','gb_msg_ph','gb_del_t','gb_del_d','cancel','del']],
     ['맺음말',      ['foot_msg','share','share_k','share_l','copylink']]
   ];
   var LABEL = {
+    rsvp_review:'참석 응답 완료 후 버튼',
+    rsvp_hide_today:'참석 안내 오늘 하루 숨김',
+    rsvp_open:'참석 팝업 열기',rsvp_close:'참석 팝업 닫기',rsvp_dialog_note:'팝업 안내',
+    upload_title:'업로드 제목', upload_intro:'업로드 안내', upload_button:'업로드 버튼', upload_note:'업로드 이용 안내',
     full:'첫 화면 이름', heroplace:'첫 화면 일시·장소',
     p_groom:'신랑 부모님 줄', p_bride:'신부 부모님 줄',
     inv_title:'초대 제목', inv_quote:'인용구', inv_quote_by:'인용구 출처', inv_poem:'인사 첫 문단', inv_body:'인사 본문', inv_sign:'맺음(일본어 전용 · 謹白/날짜/보내는 사람)',
     date_line:'날짜', date_time:'시간', calhead:'달력 요일 머리글',
     cd_d:'카운트다운 - 일', cd_h:'카운트다운 - 시간', cd_m:'카운트다운 - 분', cd_s:'카운트다운 - 초', trans_h:'교통 안내 제목',
-    gal_note:'갤러리 안내문',
+    gal_note:'갤러리 안내문', gal_more:'갤러리 더보기 버튼', hero_copy:'첫 화면 사진 위 문구',
     loc_title:'섹션 제목', loc_name:'예식장 이름', loc_hall:'홀 이름', loc_addr:'주소·전화',
     map_btn_g:'구글지도 버튼', map_btn_n:'네이버지도 버튼', map_btn_k:'카카오맵 버튼',
     ct_btn:'연락하기 버튼', ct_gside:'신랑 측 제목', ct_bside:'신부 측 제목',
@@ -1673,6 +1872,7 @@
     foot_msg:'마지막 인사', share:'공유하기 버튼(카카오 키 없을 때)', share_k:'카카오톡 공유 버튼', share_l:'LINE 공유 버튼(일본어판)', copylink:'링크복사 버튼'
   };
   var CFGLABEL = {
+    dropboxRequestUrl:'Dropbox 파일 요청 링크 (https://www.dropbox.com/request/… · 비워두면 섹션 숨김)',
     music:'배경음악 파일명 또는 URL (예: music.mp3)',
     autoplay:'자동재생 (on / off)',
     mapQuery:'지도 검색어 (구글지도용 주소)',
@@ -1874,6 +2074,10 @@
     cfgOut.adminKey = '';
     $('#siteData').textContent = "\n" + JSON.stringify({rev:DATA.rev, ko:{}, ja:DATA.ja, cfg:cfgOut}, null, 2) + "\n";
     /* 실행 중 생긴 상태 정리 */
+    autoRsvpHandled=true;clearTimeout(autoRsvpTimer);closeRsvpInvite(true);
+    rsvpInvite.removeAttribute("open");rsvpInvite.classList.remove("visible");
+    clearTimeout(rsvpCloseTimer); if(rsvpDialog.open) rsvpDialog.close();
+    rsvpDialog.removeAttribute('open'); rsvpDialog.classList.remove('visible'); $('#rsvpNotice').textContent='';
     $$('.reveal').forEach(function(el){ el.classList.remove('in'); });
     $('#lbImg').removeAttribute('src');
     $('#lb').classList.remove('show');
