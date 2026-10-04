@@ -29,6 +29,7 @@
 (function(){
   try{
     var q = /[?&]lang=(ko|ja)(?:&|$)/.exec(location.search), l = q ? q[1] : null;
+    if(!l && /(?:^|\/)ja\.html$/i.test(location.pathname)) l = 'ja';
     if(!l){ try{ l = localStorage.getItem('sw-nz-invite-v1:lang'); }catch(e){} }
     if(l !== 'ko' && l !== 'ja') l = /^ja/i.test(navigator.language || '') ? 'ja' : 'ko';
     if(l === 'ja'){
@@ -469,6 +470,18 @@
   .ad-table th,.ad-table td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
   .ad-table th{background:#f7f5f0;font-weight:700;color:var(--ink);position:sticky;top:0;}
   .ad-table td{color:#5b574f;}
+  .ad-gallery-note{font-size:12px;line-height:1.75;color:var(--sub);margin-bottom:12px;}
+  .ad-gallery-list{display:grid;gap:8px;}
+  .ad-gallery-item{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 1px 2px rgba(72,52,40,.04);}
+  .ad-gallery-item.dragging{opacity:.45;}
+  .ad-gallery-thumb{width:56px;height:56px;object-fit:cover;border-radius:7px;background:#eee;}
+  .ad-gallery-info{min-width:0;}
+  .ad-gallery-name{font-size:13px;font-weight:650;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ad-gallery-sub{margin-top:2px;font-size:11px;color:var(--sub);}
+  .ad-gallery-move{display:grid;grid-template-columns:34px 34px;gap:5px;}
+  .ad-gallery-move button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:700 15px/1 var(--sans);cursor:pointer;}
+  .ad-gallery-move button:disabled{opacity:.28;cursor:default;}
+  .ad-gallery-move button:active:not(:disabled){background:var(--accent-50);border-color:var(--accent);}
 
   @media (prefers-reduced-motion: reduce){
     #petals{display:none;}
@@ -684,8 +697,8 @@
       <button class="acc-toggle" data-acc aria-expanded="false"><span data-i="acc_g">신랑 측 계좌번호</span><i class="chev" aria-hidden="true"></i></button>
       <div class="acc-body fold" inert><div class="acc-in">
         <div class="acc-item"><div><div class="who" data-i="acc_g1">신랑 · 배상원</div><div class="num" data-i="acc_g1n">카카오뱅크 3333-08-5768637</div></div><button class="copy-btn" data-copy-from="acc_g1n" data-i="copy">복사</button></div>
-        <div class="acc-item"><div><div class="who" data-i="acc_g2">아버지 · 배종한</div><div class="num" data-i="acc_g2n"></div></div><button class="copy-btn" data-copy-from="acc_g2n" data-i="copy2">복사</button></div>
-        <div class="acc-item"><div><div class="who" data-i="acc_g3">어머니 · 박용병</div><div class="num" data-i="acc_g3n"></div></div><button class="copy-btn" data-copy-from="acc_g3n" data-i="copy5">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_g2">아버지 · 배종한</div><div class="num" data-i="acc_g2n">경남은행 517220067880</div></div><button class="copy-btn" data-copy-from="acc_g2n" data-i="copy2">복사</button></div>
+        <div class="acc-item"><div><div class="who" data-i="acc_g3">어머니 · 박용병</div><div class="num" data-i="acc_g3n">농협 81508156076893</div></div><button class="copy-btn" data-copy-from="acc_g3n" data-i="copy5">복사</button></div>
       </div>
       </div>
     </div>
@@ -791,6 +804,7 @@
     <button class="on" data-adtab="ko">한국어</button>
     <button data-adtab="ja">日本語</button>
     <button data-adtab="cfg">설정</button>
+    <button data-adtab="gallery">사진순서</button>
     <button data-adtab="rsvp">참석 현황</button>
   </div>
   <div class="ad-body">
@@ -801,6 +815,10 @@
     <div class="ad-panel on" id="adKo"></div>
     <div class="ad-panel" id="adJa"></div>
     <div class="ad-panel" id="adCfg"></div>
+    <div class="ad-panel" id="adGallery">
+      <div class="ad-gallery-note">사진을 드래그하거나 ↑ ↓ 버튼으로 순서를 바꿀 수 있습니다.<br>앞의 9장은 바로 보이고, 10번째부터는 ‘더 보기’에 들어갑니다.</div>
+      <div class="ad-gallery-list" id="adGalleryList"></div>
+    </div>
     <div class="ad-panel" id="adRsvp">
       <div class="ad-row">
         <button id="rsvpLoad" class="ad-btn">참석여부 불러오기</button>
@@ -817,7 +835,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1791069577405,
+  "rev": 1791078817602,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -929,6 +947,11 @@
   "cfg": {
     "music": "music.mp3",
     "autoplay": "on",
+    "galleryOrder": "02,12,05,10,07,01,09,04,03,06,08,13,14,11",
+    "ogTitleKo": "배상원 ♥ 시바나카 노조미 — 결혼합니다",
+    "ogDescriptionKo": "2026. 11. 07 SAT 17:00 · 울산 JW웨딩컨벤션센터 마제스틱홀",
+    "ogTitleJa": "裵相元 ♥ 芝中希望 — 結婚式のご案内",
+    "ogDescriptionJa": "2026. 11. 07 SAT 17:00 · 蔚山 JWウェディングコンベンションセンター マジェスティックホール",
     "mapQuery": "울산광역시 북구 진장유통로 35 JW웨딩컨벤션센터",
     "naverUrl": "https://naver.me/5mvK1ll5",
     "kakaoUrl": "https://map.kakao.com/link/to/JW컨벤션센터,35.5739298,129.3562895",
@@ -1013,6 +1036,27 @@
     media.addEventListener('change',draw); draw();
   })();
 
+  function shareMeta(lang){
+    var ja = lang === 'ja';
+    return {
+      title: (ja ? DATA.cfg.ogTitleJa : DATA.cfg.ogTitleKo) || (ja ? '裵相元 ♥ 芝中希望 — 結婚式のご案内' : '배상원 ♥ 시바나카 노조미 — 결혼합니다'),
+      desc: (ja ? DATA.cfg.ogDescriptionJa : DATA.cfg.ogDescriptionKo) || (ja ? '2026. 11. 07 SAT 17:00 · 蔚山 JWウェディングコンベンションセンター マジェスティックホール' : '2026. 11. 07 SAT 17:00 · 울산 JW웨딩컨벤션센터 마제스틱홀'),
+      locale: ja ? 'ja_JP' : 'ko_KR',
+      alternate: ja ? 'ko_KR' : 'ja_JP'
+    };
+  }
+  function applyShareMeta(lang, root){
+    root = root || document;
+    var m = shareMeta(lang), htmlEl = root.documentElement || root;
+    if(htmlEl && htmlEl.setAttribute) htmlEl.setAttribute('lang', lang === 'ja' ? 'ja' : 'ko');
+    var t = root.querySelector('title'); if(t) t.textContent = m.title;
+    var d = root.querySelector('meta[name="description"]'); if(d) d.setAttribute('content', m.desc);
+    var ot = root.querySelector('meta[property="og:title"]'); if(ot) ot.setAttribute('content', m.title);
+    var od = root.querySelector('meta[property="og:description"]'); if(od) od.setAttribute('content', m.desc);
+    var ol = root.querySelector('meta[property="og:locale"]'); if(ol) ol.setAttribute('content', m.locale);
+    var oa = root.querySelector('meta[property="og:locale:alternate"]'); if(oa) oa.setAttribute('content', m.alternate);
+  }
+
   function applyLang(lang){
     LANG = lang;
     document.documentElement.lang = (lang === 'ja' ? 'ja' : 'ko');
@@ -1032,9 +1076,7 @@
     if(GB && GB.loaded) gbRender(); else if(GB && GB.msg) gbState(GB.msg);
     if($('#rsvpOk').style.display === 'block'){ var sv = loadRsvpSaved(); if(sv) $('#rsvpSumm').innerHTML = rsvpSummary(sv); }
     $$('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
-    document.title = (lang === 'ja')
-      ? '裵相元 ♥ 芝中希望 — 結婚式のご案内'
-      : '배상원 ♥ 시바나카 노조미 — 결혼합니다';
+    applyShareMeta(lang);
     renderMap();
     renderCountdown();
   }
@@ -1112,6 +1154,7 @@
     });
   }
   function applyCfg(){
+    applyGalleryOrder();
     syncUpload();
     stripe();
     applyContacts();
@@ -1121,6 +1164,7 @@
     $('#shareNative').hidden = hasKakao;
     var au = $('#audio');
     if(DATA.cfg.music && au.getAttribute('src') !== DATA.cfg.music) au.setAttribute('src', DATA.cfg.music);
+    applyShareMeta(LANG);
   }
 
   /* ── D-day ── */
@@ -1175,11 +1219,12 @@
     $('.cal-add').hidden = over; $('.cal-cap').hidden = over;
   }
 
-  /* 첫 언어: ?lang=ja 링크 → 이 기기에서 전에 고른 언어 → 휴대폰 언어가 일본어면 일본어 */
+  /* 첫 언어: ?lang=... → ja.html이면 일본어 → 이 기기에서 전에 고른 언어 → 휴대폰 언어 */
   var LANGKEY = LSKEY + ':lang';
   function initialLang(){
     var q = /[?&]lang=(ko|ja)(?:&|$)/.exec(location.search);
     if(q) return q[1];
+    if(/(?:^|\/)ja\.html$/i.test(location.pathname)) return 'ja';
     try{ var saved = localStorage.getItem(LANGKEY); if(saved === 'ko' || saved === 'ja') return saved; }catch(e){}
     return /^ja/i.test(navigator.language || '') ? 'ja' : 'ko';
   }
@@ -1574,14 +1619,57 @@
   });
   autoStart();
 
-  /* ── 갤러리 라이트박스 ── */
-  var imgs = $$('#gallery img');
+  /* ── 갤러리 순서 · 라이트박스 ── */
+  var imgs = [];
   var lb = $('#lb'), lbImg = $('#lbImg'), lbCnt = $('#lbCnt'), idx = 0;
+  function galleryId(cell){
+    if(cell.dataset.galleryId) return cell.dataset.galleryId;
+    var im = $('img', cell), src = (im && (im.dataset.full || im.getAttribute('src'))) || '';
+    var m = src.match(/\/([^\/]+?)(?:_t)?\.(?:webp|png|jpe?g|avif)$/i);
+    var id = m ? m[1] : String($$('#gallery .gcell').indexOf(cell) + 1);
+    cell.dataset.galleryId = id;
+    return id;
+  }
+  function currentGalleryOrder(){
+    return $$('#gallery .gcell').map(function(cell){ return galleryId(cell); });
+  }
+  function refreshGalleryImgs(){ imgs = $$('#gallery img'); }
+  function normalizeGalleryMore(){
+    $$('#gallery .gcell').forEach(function(cell, i){ cell.classList.toggle('more', i >= 9); });
+  }
+  function applyGalleryOrder(){
+    var gallery = $('#gallery'), cells = $$('.gcell', gallery);
+    if(!cells.length) return;
+    var raw = String((DATA.cfg && DATA.cfg.galleryOrder) || '').trim();
+    if(raw){
+      var byId = {};
+      cells.forEach(function(cell){ byId[galleryId(cell)] = cell; });
+      raw.split(',').map(function(v){ return v.trim(); }).filter(Boolean).forEach(function(id){
+        if(byId[id]){ gallery.appendChild(byId[id]); delete byId[id]; }
+      });
+      cells.forEach(function(cell){
+        var id = galleryId(cell);
+        if(byId[id]){ gallery.appendChild(cell); delete byId[id]; }
+      });
+    }
+    normalizeGalleryMore();
+    DATA.cfg.galleryOrder = currentGalleryOrder().join(',');
+    refreshGalleryImgs();
+  }
+  function commitGalleryOrder(){
+    normalizeGalleryMore();
+    DATA.cfg.galleryOrder = currentGalleryOrder().join(',');
+    refreshGalleryImgs();
+  }
   function full(i){ return imgs[i].dataset.full || imgs[i].src; }
-  function openLb(i){ idx = i; lbImg.src = full(i); lbCnt.textContent = (i+1) + ' / ' + imgs.length; lb.classList.add('show'); document.body.style.overflow = 'hidden'; }
-  function nav(d){ idx = (idx + d + imgs.length) % imgs.length; lbImg.src = full(idx); lbCnt.textContent = (idx+1) + ' / ' + imgs.length; }
+  function openLb(i){ refreshGalleryImgs(); if(i < 0 || i >= imgs.length) return; idx = i; lbImg.src = full(i); lbCnt.textContent = (i+1) + ' / ' + imgs.length; lb.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function nav(d){ refreshGalleryImgs(); if(!imgs.length) return; idx = (idx + d + imgs.length) % imgs.length; lbImg.src = full(idx); lbCnt.textContent = (idx+1) + ' / ' + imgs.length; }
   function closeLb(){ lb.classList.remove('show'); document.body.style.overflow = ''; }
-  imgs.forEach(function(im,i){ im.addEventListener('click', function(){ openLb(i); }); });
+  $('#gallery').addEventListener('click', function(e){
+    var im = e.target.closest ? e.target.closest('img') : null;
+    if(!im || !$('#gallery').contains(im)) return;
+    refreshGalleryImgs(); openLb(imgs.indexOf(im));
+  });
   function syncGalleryToggle(){
     var open = $('#gallery').classList.contains('open');
     var button = $('#gMore');
@@ -1794,12 +1882,14 @@
 
   /* ── 공유: 카카오톡(설정에 JavaScript 키가 있을 때) · LINE · 링크 복사 ── */
   var KAKAO_SDK = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
-  /* 공유용 주소: 일본어면 ?lang=ja 를 붙여 받는 사람도 일본어로 열리게 */
+  /* 공유용 주소: 한국어는 main.html, 일본어는 ja.html — OG 미리보기도 언어별로 분리 */
   function pageUrl(lang){
     try{
-      var u = new URL(location.href); u.hash = '';
-      u.pathname = u.pathname.replace(/main\.html$/, '');   /* 공유는 사이트 첫 주소(오프닝)로 */
-      if(lang === 'ja') u.searchParams.set('lang', 'ja'); else u.searchParams.delete('lang');
+      var u = new URL(location.href); u.hash = ''; u.searchParams.delete('lang');
+      var file = (lang === 'ja') ? 'ja.html' : 'index.html';
+      if(/\/(?:index|main|ja)\.html$/i.test(u.pathname)) u.pathname = u.pathname.replace(/(?:index|main|ja)\.html$/i, file);
+      else if(/\/$/.test(u.pathname)) u.pathname += file;
+      else u.pathname = u.pathname.replace(/[^\/]*$/, file);
       return u.href;
     }catch(e){ return location.href.split('#')[0]; }
   }
@@ -1889,6 +1979,10 @@
     dropboxRequestUrl:'Dropbox 파일 요청 링크 (https://www.dropbox.com/request/… · 비워두면 섹션 숨김)',
     music:'배경음악 파일명 또는 URL (예: music.mp3)',
     autoplay:'자동재생 (on / off)',
+    ogTitleKo:'[공유] 한국어 제목 (카카오·문자·SNS 링크 미리보기)',
+    ogDescriptionKo:'[공유] 한국어 설명',
+    ogTitleJa:'[공유] 일본어 제목 (LINE·문자·SNS 링크 미리보기)',
+    ogDescriptionJa:'[공유] 일본어 설명',
     mapQuery:'지도 검색어 (구글지도용 주소)',
     naverUrl:'네이버 지도 링크',
     kakaoUrl:'카카오맵 링크 (길찾기)',
@@ -1916,6 +2010,61 @@
     wrap.appendChild(lb); wrap.appendChild(ta);
     return wrap;
   }
+  var galleryDragId = '';
+  function buildGalleryAdmin(){
+    var host = $('#adGalleryList');
+    if(!host) return;
+    host.innerHTML = '';
+    var cells = $$('#gallery .gcell');
+    cells.forEach(function(cell, i){
+      var id = galleryId(cell), im = $('img', cell);
+      var row = document.createElement('div');
+      row.className = 'ad-gallery-item'; row.draggable = true; row.dataset.galleryId = id;
+
+      var thumb = document.createElement('img');
+      thumb.className = 'ad-gallery-thumb'; thumb.src = im.getAttribute('src'); thumb.alt = '';
+
+      var info = document.createElement('div'); info.className = 'ad-gallery-info';
+      var name = document.createElement('div'); name.className = 'ad-gallery-name'; name.textContent = (i + 1) + '. 사진 ' + id;
+      var sub = document.createElement('div'); sub.className = 'ad-gallery-sub'; sub.textContent = i < 9 ? '첫 화면 갤러리' : '더 보기';
+      info.appendChild(name); info.appendChild(sub);
+
+      var move = document.createElement('div'); move.className = 'ad-gallery-move';
+      var up = document.createElement('button'); up.type = 'button'; up.textContent = '↑'; up.title = '위로'; up.disabled = i === 0;
+      var down = document.createElement('button'); down.type = 'button'; down.textContent = '↓'; down.title = '아래로'; down.disabled = i === cells.length - 1;
+      up.addEventListener('click', function(){ moveGallery(id, -1); });
+      down.addEventListener('click', function(){ moveGallery(id, 1); });
+      move.appendChild(up); move.appendChild(down);
+
+      row.appendChild(thumb); row.appendChild(info); row.appendChild(move);
+      row.addEventListener('dragstart', function(){ galleryDragId = id; row.classList.add('dragging'); });
+      row.addEventListener('dragend', function(){ galleryDragId = ''; row.classList.remove('dragging'); });
+      row.addEventListener('dragover', function(e){ e.preventDefault(); });
+      row.addEventListener('drop', function(e){
+        e.preventDefault();
+        if(!galleryDragId || galleryDragId === id) return;
+        var gallery = $('#gallery');
+        var dragged = $('.gcell[data-gallery-id="' + galleryDragId + '"]', gallery);
+        var target = $('.gcell[data-gallery-id="' + id + '"]', gallery);
+        if(dragged && target){
+          gallery.insertBefore(dragged, target);
+          commitGalleryOrder();
+          buildGalleryAdmin();
+        }
+      });
+      host.appendChild(row);
+    });
+  }
+
+  function moveGallery(id, dir){
+    var gallery = $('#gallery'), cell = $('.gcell[data-gallery-id="' + id + '"]', gallery);
+    if(!cell) return;
+    if(dir < 0 && cell.previousElementSibling) gallery.insertBefore(cell, cell.previousElementSibling);
+    if(dir > 0 && cell.nextElementSibling) gallery.insertBefore(cell.nextElementSibling, cell);
+    commitGalleryOrder();
+    buildGalleryAdmin();
+  }
+
   function buildAdmin(){
     ['ko','ja'].forEach(function(lang){
       var host = $(lang === 'ko' ? '#adKo' : '#adJa');
@@ -1927,8 +2076,10 @@
         g[1].forEach(function(k){ host.appendChild(field(lang, k)); });
       });
     });
+    buildGalleryAdmin();
     var cfgHost = $('#adCfg'); cfgHost.innerHTML = '';
     Object.keys(DATA.cfg).forEach(function(k){
+      if(k === 'galleryOrder' || k === 'ogTitleKo' || k === 'ogDescriptionKo' || k === 'ogTitleJa' || k === 'ogDescriptionJa') return;
       var wrap = document.createElement('div'); wrap.className = 'ad-f';
       var lb = document.createElement('label'); lb.textContent = CFGLABEL[k] || k;
       var ta = document.createElement('textarea'); ta.rows = 1; ta.dataset.cfg = k; ta.value = DATA.cfg[k] || '';
@@ -2054,10 +2205,11 @@
       $$('.ad-tabs button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on');
       $$('.ad-panel').forEach(function(p){ p.classList.remove('on'); });
-      $({ko:'#adKo',ja:'#adJa',cfg:'#adCfg',rsvp:'#adRsvp'}[b.dataset.adtab]).classList.add('on');
+      $({ko:'#adKo',ja:'#adJa',cfg:'#adCfg',gallery:'#adGallery',rsvp:'#adRsvp'}[b.dataset.adtab]).classList.add('on');
     });
   });
   function collect(){
+    DATA.cfg.galleryOrder = currentGalleryOrder().join(',');
     $$('#admin textarea[data-k]').forEach(function(ta){
       var k = ta.dataset.k, lang = ta.dataset.lang, v = ta.value;
       if(lang === 'ja'){ DATA.ja[k] = v; }
@@ -2112,19 +2264,21 @@
     var ksdk = document.getElementById('kakaoSdk'); if(ksdk) ksdk.parentNode.removeChild(ksdk);
     $$('.flipc').forEach(function(f){ f.classList.remove('go'); });
     $$('.copy-btn').forEach(function(b){ b.classList.remove('done'); });
-    ['#adKo','#adJa','#adCfg'].forEach(function(sel){ $(sel).innerHTML = ''; });
+    ['#adKo','#adJa','#adCfg'].forEach(function(sel){ $(sel).innerHTML = ''; }); $('#adGalleryList').innerHTML = '';
     $('#rsvpTable').innerHTML = ''; $('#rsvpSum').innerHTML = '';
     $('#apiDiag').innerHTML = ''; $('#apiDiag').hidden = true;
     document.body.style.overflow = '';
-    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    applyShareMeta('ko');
+    var html = '<!DOCTYPE html>\\n' + document.documentElement.outerHTML;
     var blob = new Blob([html], {type:'text/html;charset=utf-8'});
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'main.html';
+    var a = document.createElement('a'), url = URL.createObjectURL(blob);
+    a.href = url; a.download = 'main.html';
     document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
     try{ localStorage.setItem(LSKEY, JSON.stringify({rev:DATA.rev, ko:DATA.ko, ja:DATA.ja, cfg:DATA.cfg})); }catch(e){}
     makePetals();
     $$('.reveal').forEach(function(el){ io.observe(el); });
-    applyLang(restore);   /* 방명록 목록도 여기서 다시 그려짐 */
+    applyLang(restore);
     showToast('새 main.html을 내려받았습니다');
   });
 
