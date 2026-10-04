@@ -117,6 +117,11 @@
     border:1px solid var(--line);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.2);}
   .bgm .ppbadge svg{width:8px;height:8px;fill:var(--ink);}
   .bgm .ico-pause{display:none;}.bgm.playing .ico-play{display:none;}.bgm.playing .ico-pause{display:block;}
+  .music-status{min-height:34px;padding:7px 44px 7px 14px;border-bottom:1px solid var(--line2);
+    background:rgba(247,244,238,.96);color:var(--sub);font:500 12px/1.55 var(--sans);
+    text-align:center;letter-spacing:.01em;position:relative;z-index:36;}
+  .music-status::before{content:"♪";display:inline-block;margin-right:6px;color:var(--accent);font-size:13px;}
+  .music-status.on{color:var(--ink);}
 
   /* ── 벚꽃잎 (캔버스, 카드 폭 안에서만) ── */
   #petals{position:fixed;top:0;left:0;right:0;margin:0 auto;display:block;width:100%;max-width:460px;height:100%;pointer-events:none;z-index:35;}
@@ -524,6 +529,7 @@
       </span>
     </button>
   </div>
+  <div class="music-status" id="musicStatus" role="status" aria-live="polite">BGM OFF · 우측 음반 버튼을 눌러 재생할 수 있어요</div>
   <audio id="audio" loop preload="none"></audio>
 
   <canvas id="petals" aria-hidden="true"></canvas>
@@ -617,20 +623,20 @@
   <section class="reveal">
     <div class="stitle en">Gallery</div>
     <div class="gstrip" id="gallery">
-      <div class="gcell"><img src="images/gallery/02_t.webp" data-full="images/gallery/02.webp" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
-      <div class="gcell"><img src="images/gallery/12_t.webp" data-full="images/gallery/12.webp" loading="lazy" decoding="async" alt="웨딩 사진 12"></div>
-      <div class="gcell"><img src="images/gallery/05_t.webp" data-full="images/gallery/05.webp" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
-      <div class="gcell"><img src="images/gallery/10_t.webp" data-full="images/gallery/10.webp" loading="lazy" decoding="async" alt="웨딩 사진 10"></div>
-      <div class="gcell"><img src="images/gallery/07_t.webp" data-full="images/gallery/07.webp" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
       <div class="gcell"><img src="images/gallery/01_t.webp" data-full="images/gallery/01.webp" loading="lazy" decoding="async" alt="웨딩 사진 1"></div>
-      <div class="gcell pair"><img src="images/gallery/09_t.webp" data-full="images/gallery/09.webp" loading="lazy" decoding="async" alt="웨딩 사진 9"></div>
-      <div class="gcell pair"><img src="images/gallery/04_t.webp" data-full="images/gallery/04.webp" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
-      <div class="gcell landscape"><img src="images/gallery/03.webp" data-full="images/gallery/03.webp" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
-      <div class="gcell more"><img src="images/gallery/06_t.webp" data-full="images/gallery/06.webp" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
-      <div class="gcell more"><img src="images/gallery/08_t.webp" data-full="images/gallery/08.webp" loading="lazy" decoding="async" alt="웨딩 사진 8"></div>
-      <div class="gcell more"><img src="images/gallery/13_t.webp" data-full="images/gallery/13.webp" loading="lazy" decoding="async" alt="웨딩 사진 13"></div>
-      <div class="gcell more pair"><img src="images/gallery/14_t.webp" data-full="images/gallery/14.webp" loading="lazy" decoding="async" alt="웨딩 사진 14"></div>
-      <div class="gcell more pair"><img src="images/gallery/11_t.webp" data-full="images/gallery/11.webp" loading="lazy" decoding="async" alt="웨딩 사진 11"></div>
+      <div class="gcell pair"><img src="images/gallery/02_t.webp" data-full="images/gallery/02.webp" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
+      <div class="gcell"><img src="images/gallery/03_t.webp" data-full="images/gallery/03.webp" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
+      <div class="gcell"><img src="images/gallery/04_t.webp" data-full="images/gallery/04.webp" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
+      <div class="gcell"><img src="images/gallery/05_t.webp" data-full="images/gallery/05.webp" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
+      <div class="gcell"><img src="images/gallery/06_t.webp" data-full="images/gallery/06.webp" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
+      <div class="gcell pair"><img src="images/gallery/07_t.webp" data-full="images/gallery/07.webp" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
+      <div class="gcell pair"><img src="images/gallery/08_t.webp" data-full="images/gallery/08.webp" loading="lazy" decoding="async" alt="웨딩 사진 8"></div>
+      <div class="gcell landscape"><img src="images/gallery/09.webp" data-full="images/gallery/09.webp" loading="lazy" decoding="async" alt="웨딩 사진 9"></div>
+      <div class="gcell more"><img src="images/gallery/10_t.webp" data-full="images/gallery/10.webp" loading="lazy" decoding="async" alt="웨딩 사진 10"></div>
+      <div class="gcell more"><img src="images/gallery/11_t.webp" data-full="images/gallery/11.webp" loading="lazy" decoding="async" alt="웨딩 사진 11"></div>
+      <div class="gcell more"><img src="images/gallery/12_t.webp" data-full="images/gallery/12.webp" loading="lazy" decoding="async" alt="웨딩 사진 12"></div>
+      <div class="gcell more pair"><img src="images/gallery/13_t.webp" data-full="images/gallery/13.webp" loading="lazy" decoding="async" alt="웨딩 사진 13"></div>
+      <div class="gcell more"><img src="images/gallery/14_t.webp" data-full="images/gallery/14.webp" loading="lazy" decoding="async" alt="웨딩 사진 14"></div>
     </div>
     <button type="button" class="pill gmore" id="gMore" aria-expanded="false"><span data-i="gal_more">더 보기</span><i class="chev" aria-hidden="true"></i></button>
     <div class="gnote" data-i="gal_note">사진을 누르면 크게 볼 수 있어요</div>
@@ -835,7 +841,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1791078817602,
+  "rev": 1791080762094,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -856,16 +862,16 @@
     "loc_addr": "大韓民国 蔚山広域市 北区 鎮長流通路35<br>（鎮長洞125-17）<br>TEL +82-52-289-9851",
     "map_btn_g": "Google マップ",
     "map_btn_n": "NAVER マップ",
-    "t_ktx_h": "KTX 蔚山（ウルサン）駅",
-    "t_ktx": "・リムジンバス5001番 → 太和江駅で下車<br>　タクシーで約10分<br>・リムジンバス5003番 → <ruby>兵営<rt>ピョンヨン</rt></ruby>交差点で下車<br>　タクシーで約5分<br>・リムジンバス5005番 → 北区庁前で下車<br>　タクシーで約3分",
-    "t_car_h": "お車でお越しの場合",
-    "t_car": "カーナビで「JW컨벤션센터」を検索してください<br>・京釜高速道路：蔚山IC → 北部循環路<br>　→ 鎮長交差点を右折<br>・東海高速道路：青良IC → 産業路<br>　→ 経済振興院を左折<br>・慶州・仏国寺方面：産業路 → 蔚山空港方面",
-    "t_bus_h": "路線バス",
-    "t_bus": "「蔚山郵便集中局（울산 우편집중국）」で下車<br>・幹線<br>　122・225・226・422・462・472・742・772<br>・支線<br>　中区01・中区03・中区04・北区07",
-    "t_air_h": "蔚山空港から",
-    "t_air": "タクシーで約5分",
-    "t_far_h": "日本からお越しの皆様へ",
-    "t_far": "・金海（キメ）国際空港（釜山）が便利です<br>　空港から蔚山まではリムジンバスで約1時間<br>・仁川国際空港を経由する場合<br>　仁川空港 → ソウル駅（空港鉄道 約1時間）<br>　ソウル駅 → 蔚山駅（KTX 約2時間20分）",
+    "t_ktx_h": "金海国際空港（PUS）から",
+    "t_ktx": "<b>おすすめ：空港バス → タクシー</b><br>① 到着ロビーから、市外バス案内で「蔚山（ウルサン）行き」をご確認ください。<br>② 金海空港 → 蔚山・太和（テファ）ロータリーまで、空港バスで約1時間10分～1時間30分が目安です。<br>③ 太和ロータリー到着後、タクシーで「JW웨딩컨벤션센터（JWウェディングコンベンションセンター）」へお越しください。所要約15～20分です。<br><br>※ 金海空港から蔚山行きの市外バスが運行されています。乗り場・時刻は変更される場合がありますので、当日の空港表示をご確認ください。",
+    "t_car_h": "仁川国際空港（ICN）から",
+    "t_car": "<b>おすすめ：6770番バス → KTX → タクシー</b><br>① 仁川国際空港（第1・第2ターミナル）から、KTX光明（クァンミョン）駅行き「6770番」空港バスに乗車します。<br>② 光明駅でKTXに乗り換え、「KTX 蔚山駅（通度寺）」まで移動してください。<br>③ KTX蔚山駅から会場「JW웨딩컨벤션센터」まではタクシーで約25～30分です。<br><br>※ 仁川空港～光明駅のKTX空港バスは概ね20～30分間隔で運行されています。<br>※ KTXは事前予約をおすすめします。入国審査・荷物受取の時間も含め、余裕をもってご移動ください。",
+    "t_bus_h": "",
+    "t_bus": "",
+    "t_air_h": "",
+    "t_air": "",
+    "t_far_h": "",
+    "t_far": "",
     "ct_g": "新郎",
     "ct_gn": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby>",
     "ct_b": "新婦",
@@ -903,7 +909,7 @@
     "inv_quote": "愛するとは<br>互いに見つめ合うことではなく<br>ともに同じ方向を見つめることである",
     "inv_quote_by": "— <span class=\"qen\">Antoine de Saint-Exupéry</span>",
     "map_btn_k": "カカオマップ",
-    "trans_h": "交通のご案内",
+    "trans_h": "日本からお越しの方へ",
     "cd_d": "日",
     "cd_h": "時間",
     "cd_m": "分",
@@ -946,8 +952,8 @@
   },
   "cfg": {
     "music": "music.mp3",
-    "autoplay": "on",
-    "galleryOrder": "02,12,05,10,07,01,09,04,03,06,08,13,14,11",
+    "autoplay": "off",
+    "galleryOrder": "01,02,03,04,05,06,07,08,09,10,11,12,13,14",
     "ogTitleKo": "배상원 ♥ 시바나카 노조미 — 결혼합니다",
     "ogDescriptionKo": "2026. 11. 07 SAT 17:00 · 울산 JW웨딩컨벤션센터 마제스틱홀",
     "ogTitleJa": "裵相元 ♥ 芝中希望 — 結婚式のご案内",
@@ -1057,6 +1063,18 @@
     var oa = root.querySelector('meta[property="og:locale:alternate"]'); if(oa) oa.setAttribute('content', m.alternate);
   }
 
+  function syncTransportRows(){
+    $$('#transport .titem').forEach(function(item){
+      var h = $('.th span[data-i]', item);
+      item.hidden = !!h && !String(h.innerHTML || h.textContent || '').trim();
+      if(item.hidden){
+        item.classList.remove('open');
+        var b = $('.th', item); if(b) b.setAttribute('aria-expanded','false');
+        var f = $('.fold', item); if(f) f.classList.remove('open');
+      }
+    });
+  }
+
   function applyLang(lang){
     LANG = lang;
     document.documentElement.lang = (lang === 'ja' ? 'ja' : 'ko');
@@ -1072,11 +1090,13 @@
     applyContacts();
     updateCalLinks();
     syncGalleryToggle();
+    syncTransportRows();
     syncRsvpOpenLabel();
     if(GB && GB.loaded) gbRender(); else if(GB && GB.msg) gbState(GB.msg);
     if($('#rsvpOk').style.display === 'block'){ var sv = loadRsvpSaved(); if(sv) $('#rsvpSumm').innerHTML = rsvpSummary(sv); }
     $$('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
     applyShareMeta(lang);
+    if(typeof updateMusicStatus === 'function') updateMusicStatus();
     renderMap();
     renderCountdown();
   }
@@ -1571,53 +1591,65 @@
   });
   (function(){ var v = loadRsvpSaved(); if(v) showRsvpDone(v); })();
 
-  /* ── 배경음악 (자동재생 + 차단 시 첫 터치에 시작) ── */
-  var audio = $('#audio'), bgm = $('#bgm');
-  var playing = false, userPaused = false, armed = false, broken = false, resumeOnShow = false;
+  /* ── 배경음악: 자동재생 없음. 우측 버튼을 눌렀을 때만 재생 ── */
+  var audio = $('#audio'), bgm = $('#bgm'), musicStatus = $('#musicStatus');
+  var playing = false, broken = false, resumeOnShow = false;
   audio.volume = 0.6;
 
-  function markPlaying(v){ playing = v; bgm.classList.toggle('playing', v); }
+  function musicStatusText(){
+    if(playing) return LANG === 'ja'
+      ? 'BGM ON · 再生中です（右上のボタンで一時停止できます）'
+      : 'BGM ON · 재생 중입니다 (우측 버튼으로 일시정지)';
+    return LANG === 'ja'
+      ? 'BGM OFF · 右上のレコードボタンを押すと再生できます'
+      : 'BGM OFF · 우측 음반 버튼을 눌러 재생할 수 있어요';
+  }
+  function updateMusicStatus(){
+    if(!musicStatus) return;
+    musicStatus.textContent = musicStatusText();
+    musicStatus.classList.toggle('on', playing);
+    bgm.setAttribute('aria-label', playing
+      ? (LANG === 'ja' ? 'BGMを一時停止' : 'BGM 일시정지')
+      : (LANG === 'ja' ? 'BGMを再生' : 'BGM 재생'));
+  }
+  function markPlaying(v){
+    playing = v;
+    bgm.classList.toggle('playing', v);
+    updateMusicStatus();
+  }
   function play(){
+    if(!audio.getAttribute('src')) return Promise.reject(new Error('no audio source'));
     return audio.play().then(function(){ markPlaying(true); });
-  }
-  function armFirstGesture(){
-    if(armed) return;
-    armed = true;
-    /* 재생이 허용되는 '사용자 동작' 이벤트만 사용 (scroll·touchstart 로는 재생 불가) */
-    var evs = ['pointerup','touchend','click','keydown'];
-    var disarm = function(){ evs.forEach(function(ev){ document.removeEventListener(ev, go, true); }); };
-    var go = function(e){
-      if(userPaused || playing || broken){ disarm(); return; }
-      if(e && e.target && e.target.closest && e.target.closest('#bgm')) return;   /* 음악 버튼은 자체 처리 */
-      play().then(disarm).catch(function(){});   /* 실패하면 다음 동작에서 다시 시도 */
-    };
-    evs.forEach(function(ev){ document.addEventListener(ev, go, true); });
-  }
-  function autoStart(){
-    if(String(DATA.cfg.autoplay || 'on').toLowerCase() === 'off') return;
-    if(!audio.getAttribute('src')) return;
-    play().catch(function(){ armFirstGesture(); });   /* 브라우저가 막으면 첫 터치에 재생 */
   }
   audio.addEventListener('error', function(){ broken = true; markPlaying(false); });
   audio.addEventListener('pause', function(){ markPlaying(false); });
   audio.addEventListener('playing', function(){ markPlaying(true); });
-  /* 카카오톡 등으로 화면을 벗어나면 잠시 멈췄다가 돌아오면 이어서 재생 */
+
   document.addEventListener('visibilitychange', function(){
-    if(document.hidden){ if(playing){ resumeOnShow = true; audio.pause(); } }
-    else if(resumeOnShow){ resumeOnShow = false; play().catch(function(){}); }
+    if(document.hidden){
+      if(playing){ resumeOnShow = true; audio.pause(); }
+    }else if(resumeOnShow){
+      resumeOnShow = false;
+      play().catch(function(){});
+    }
   });
 
   bgm.addEventListener('click', function(e){
     e.stopPropagation();
-    if(playing){ userPaused = true; audio.pause(); markPlaying(false); return; }
-    userPaused = false; broken = false;
+    if(playing){
+      resumeOnShow = false;
+      audio.pause();
+      markPlaying(false);
+      return;
+    }
+    broken = false;
     play().catch(function(){
       showToast(LANG === 'ja'
         ? '音楽ファイル（' + (DATA.cfg.music||'music.mp3') + '）が見つかりません'
         : '음악 파일(' + (DATA.cfg.music||'music.mp3') + ')을 찾을 수 없습니다');
     });
   });
-  autoStart();
+  updateMusicStatus();
 
   /* ── 갤러리 순서 · 라이트박스 ── */
   var imgs = [];
@@ -1634,8 +1666,15 @@
     return $$('#gallery .gcell').map(function(cell){ return galleryId(cell); });
   }
   function refreshGalleryImgs(){ imgs = $$('#gallery img'); }
-  function normalizeGalleryMore(){
-    $$('#gallery .gcell').forEach(function(cell, i){ cell.classList.toggle('more', i >= 9); });
+  function normalizeGalleryLayout(){
+    /* 칸 모양은 사진이 아니라 '자리'에 고정한다. */
+    var pairSlots = {1:true, 6:true, 7:true, 12:true}; /* 2,7,8,13번째 */
+    $$('#gallery .gcell').forEach(function(cell, i){
+      cell.classList.remove('pair','landscape','more');
+      if(pairSlots[i]) cell.classList.add('pair');
+      if(i === 8) cell.classList.add('landscape');      /* 9번째 가로 전폭 */
+      if(i >= 9) cell.classList.add('more');            /* 10번째부터 더보기 */
+    });
   }
   function applyGalleryOrder(){
     var gallery = $('#gallery'), cells = $$('.gcell', gallery);
@@ -1652,12 +1691,12 @@
         if(byId[id]){ gallery.appendChild(cell); delete byId[id]; }
       });
     }
-    normalizeGalleryMore();
+    normalizeGalleryLayout();
     DATA.cfg.galleryOrder = currentGalleryOrder().join(',');
     refreshGalleryImgs();
   }
   function commitGalleryOrder(){
-    normalizeGalleryMore();
+    normalizeGalleryLayout();
     DATA.cfg.galleryOrder = currentGalleryOrder().join(',');
     refreshGalleryImgs();
   }
@@ -2079,7 +2118,7 @@
     buildGalleryAdmin();
     var cfgHost = $('#adCfg'); cfgHost.innerHTML = '';
     Object.keys(DATA.cfg).forEach(function(k){
-      if(k === 'galleryOrder' || k === 'ogTitleKo' || k === 'ogDescriptionKo' || k === 'ogTitleJa' || k === 'ogDescriptionJa') return;
+      if(k === 'galleryOrder' || k === 'autoplay' || k === 'ogTitleKo' || k === 'ogDescriptionKo' || k === 'ogTitleJa' || k === 'ogDescriptionJa') return;
       var wrap = document.createElement('div'); wrap.className = 'ad-f';
       var lb = document.createElement('label'); lb.textContent = CFGLABEL[k] || k;
       var ta = document.createElement('textarea'); ta.rows = 1; ta.dataset.cfg = k; ta.value = DATA.cfg[k] || '';
