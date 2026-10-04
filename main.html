@@ -881,7 +881,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1791115624282,
+  "rev": 1791116183174,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -905,7 +905,7 @@
     "t_ktx_h": "",
     "t_ktx": "",
     "t_car_h": "金海国際空港（PUS）から",
-    "t_car": "<b>蔚山行き空港バス → タクシー</b><br>① 釜山の金海（キメ）国際空港で、蔚山行きの空港バスをご利用ください。<br>② 太和（テファ）ロータリーで下車し、タクシーに乗り換えます。<br>③ JWウェディングコンベンションセンターまでお越しください。太和ロータリーは会場ではなく、乗り換え地点です。<br><br>※ バスの乗り場・時刻・降車場所は、空港の案内所でご確認ください。お荷物が多い場合は、空港から会場まで直接タクシーを利用する方法もあります。長距離のため、料金は乗車前にご確認ください。<br><br><b>空港での乗り場</b><br>国際線ターミナル1階のバス乗り場で、蔚山行きの案内をご確認ください。乗り場の番号は、当日の案内表示または空港の案内所でご確認いただけます。<div class=\"transport-links\"><a class=\"transport-link\" href=\"https://www.airport.co.kr/gimhae/cms/frCon/index.do?MENU_ID=170\" target=\"_blank\" rel=\"noopener noreferrer\">空港公式・乗り場案内（韓国語） ↗</a><a class=\"transport-link\" href=\"http://www.taehwaairport.co.kr/bbs/board.php?bo_table=bod03&wr_id=1\" target=\"_blank\" rel=\"noopener noreferrer\">バス会社公式・時刻表（韓国語） ↗</a></div>",
+    "t_car": "<b>蔚山行き空港バス → タクシー</b><br>① 釜山の金海（キメ）国際空港で、蔚山行きの空港バスをご利用ください。<br>② 太和（テファ）ロータリーで下車し、タクシーに乗り換えます。<br>③ JWウェディングコンベンションセンターまでお越しください。太和ロータリーは会場ではなく、乗り換え地点です。<br><br>※ バスの乗り場・時刻・降車場所は、空港の案内所でご確認ください。お荷物が多い場合は、空港から会場まで直接タクシーを利用する方法もあります。長距離のため、料金は乗車前にご確認ください。<br><br><b>空港での乗り場</b><br>国際線ターミナル1階の4番出口を出て右側の乗車券売り場へお進みください。「4番」は建物の出口番号です。バス乗り場は当日の案内表示でご確認ください。<div class=\"transport-links\"><a class=\"transport-link\" href=\"gimhae-boarding-ja.html\">空港の乗り場ガイド（日本語） →</a><a class=\"transport-link\" href=\"gimhae-timetable-ja.html\">空港バスの時刻表（日本語） →</a></div>",
     "t_bus_h": "仁川国際空港（ICN）から",
     "t_bus": "<b>空港鉄道 → ソウル駅 → KTX → タクシー</b><br>① 仁川（インチョン）国際空港の第1・第2ターミナルから、空港鉄道AREXでソウル駅へ向かいます。<br>② ソウル駅で、蔚山駅に停車するKTXに乗り換えます。<br>③ KTX蔚山（ウルサン）駅で下車し、タクシーで会場へお越しください。<br><br>※ 入国審査・手荷物の受け取りに加え、ソウル駅での乗り換えにも余裕を持ってご計画ください。KTXの乗車券は事前予約をおすすめします。<div class=\"transport-links\"><a class=\"transport-link\" href=\"https://www.korail.com/global/jpn\" target=\"_blank\" rel=\"noopener noreferrer\">KTXの予約（KORAIL公式・日本語） ↗</a></div>",
     "t_air_h": "ソウル駅から",
@@ -1516,6 +1516,15 @@
   $('#taxiCopy').addEventListener('click',function(){
     copyText($('#taxiDestination').innerText, LANG === 'ja' ? '行き先をコピーしました' : '목적지를 복사했습니다');
   });
+  function openTaxiFromHash(){
+    if(LANG === 'ja' && location.hash === '#taxiHelp'){
+      $('#taxiHelp').classList.add('open');
+      $('#taxiHelp .th').setAttribute('aria-expanded','true');
+      $('#taxiFold').inert = false;
+    }
+  }
+  openTaxiFromHash();
+  window.addEventListener('hashchange', openTaxiFromHash);
 
   /* ── 구글 시트(Apps Script) 전송 ── */
   function sendToSheet(payload, done){
