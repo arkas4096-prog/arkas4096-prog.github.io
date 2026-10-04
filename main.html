@@ -1,9 +1,5 @@
-<!DOCTYPE html>\n<html lang="ko" class=""><head><style>
-  .imageye-selected {
-    outline: 2px solid black !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
-  }
-</style></head><body style="">\n
+<!DOCTYPE html>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>배상원 ♥ 시바나카 노조미 — 결혼합니다</title>
@@ -314,6 +310,15 @@
   @media (hover:hover){ .map-btn:hover{border-color:var(--accent);color:var(--accent);} }
   .trans-h{margin-top:48px;font:400 17px/1.5 var(--serif);color:var(--ink);}
   .tlist{margin-top:16px;text-align:left;}
+
+  .transport-links{display:grid;gap:8px;margin-top:16px;}
+  .transport-link{display:block;padding:12px 16px;border:1px solid var(--line);border-radius:12px;color:var(--text);text-decoration:none;font-size:13px;line-height:1.6;background:var(--bg);transition:transform .2s ease;}
+  .transport-link:active{transform:scale(.98);}
+  #taxiHelp{margin-top:20px;border:1px solid var(--line);border-radius:16px;padding:0 16px;}
+  #taxiHelp[hidden]{display:none;}
+  .taxi-destination{margin:16px 0;padding:20px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#1c1a17;font-family:'Pretendard JP',sans-serif;font-size:17px;line-height:1.8;word-break:keep-all;}
+  .taxi-destination strong{display:block;font-size:19px;margin-bottom:12px;}
+  @media(prefers-reduced-motion:reduce){.transport-link{transition:none;}}
   .titem{border-top:1px solid var(--line);}
   .titem:last-child{border-bottom:1px solid var(--line);}
   .titem .th{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 4px;background:none;border:none;cursor:pointer;text-align:left;
@@ -527,13 +532,8 @@
     html{scroll-behavior:auto;}
   }
 </style>
-<style>
-  .imageye-selected {
-    outline: 2px solid black !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
-  }
-</style>
-
+</head>
+<body>
 <div class="frame">
 
   <div class="topbar">
@@ -698,6 +698,15 @@
       <div class="titem"><button type="button" class="th" aria-expanded="false"><span data-i="t_bus_h">시내버스</span><i class="chev" aria-hidden="true"></i></button><div class="fold"><div><div class="td" data-i="t_bus">‘울산 우편집중국’ 하차<br>· 간선 122 · 225 · 226 · 422 · 462 · 472 · 742 · 772<br>· 지선 중구01 · 중구03 · 중구04 · 북구07</div></div></div></div>
       <div class="titem"><button type="button" class="th" aria-expanded="false"><span data-i="t_air_h">울산공항</span><i class="chev" aria-hidden="true"></i></button><div class="fold"><div><div class="td" data-i="t_air">택시로 약 5분</div></div></div></div>
       <div class="titem"><button type="button" class="th" aria-expanded="false"><span data-i="t_far_h">서울 · 김해공항에서</span><i class="chev" aria-hidden="true"></i></button><div class="fold"><div><div class="td" data-i="t_far">· 서울역 → KTX 울산역 약 2시간 20분<br>· 김해공항 → 리무진 · 택시 약 1시간</div></div></div></div>
+    </div>
+
+    <div class="titem" id="taxiHelp" hidden>
+      <button type="button" class="th" aria-expanded="false" aria-controls="taxiFold"><span data-i="taxi_title">택시 기사에게 보여주기</span><i class="chev" aria-hidden="true"></i></button>
+      <div class="fold" id="taxiFold" inert><div><div class="td">
+        <p data-i="taxi_note">아래 한국어 목적지를 기사님께 보여주세요.</p>
+        <div class="taxi-destination" id="taxiDestination" lang="ko"><strong>JW웨딩컨벤션센터</strong>울산광역시 북구<br>진장유통로 35<br><br>이곳으로 가 주세요.</div>
+        <button type="button" class="map-btn" id="taxiCopy" data-i="taxi_copy">목적지 복사</button>
+      </div></div></div>
     </div>
   </section>
 
@@ -872,7 +881,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1791114433757,
+  "rev": 1791115624282,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -893,14 +902,14 @@
     "loc_addr": "大韓民国 蔚山広域市 北区 鎮長流通路35<br>（鎮長洞125-17）<br>TEL +82-52-289-9851",
     "map_btn_g": "Google マップ",
     "map_btn_n": "NAVER マップ",
-    "t_ktx_h": "金浦空港（GMP）→ 蔚山空港（USN）",
-    "t_ktx": "<b>国内線で蔚山へ → タクシーで会場へ</b><br>① ソウルの金浦（キンポ）空港から、蔚山（ウルサン）空港行きの国内線をご利用ください。<br>② 蔚山空港に到着後、タクシーでJWウェディングコンベンションセンターへお越しください。<br><br>※ 釜山の金海（キメ）空港とは別の空港です。乗り継ぎの際は、入国手続き・手荷物の受け取り・国内線の搭乗手続きに十分な時間をお取りください。運航日・時刻は航空会社の最新案内をご確認ください。",
+    "t_ktx_h": "",
+    "t_ktx": "",
     "t_car_h": "金海国際空港（PUS）から",
-    "t_car": "<b>蔚山行き空港バス → タクシー</b><br>① 釜山の金海（キメ）国際空港で、蔚山行きの空港バスをご利用ください。<br>② 太和（テファ）ロータリーで下車し、タクシーに乗り換えます。<br>③ JWウェディングコンベンションセンターまでお越しください。太和ロータリーは会場ではなく、乗り換え地点です。<br><br>※ バスの乗り場・時刻・降車場所は、空港の案内所でご確認ください。お荷物が多い場合は、空港から会場まで直接タクシーを利用する方法もあります。長距離のため、料金は乗車前にご確認ください。",
+    "t_car": "<b>蔚山行き空港バス → タクシー</b><br>① 釜山の金海（キメ）国際空港で、蔚山行きの空港バスをご利用ください。<br>② 太和（テファ）ロータリーで下車し、タクシーに乗り換えます。<br>③ JWウェディングコンベンションセンターまでお越しください。太和ロータリーは会場ではなく、乗り換え地点です。<br><br>※ バスの乗り場・時刻・降車場所は、空港の案内所でご確認ください。お荷物が多い場合は、空港から会場まで直接タクシーを利用する方法もあります。長距離のため、料金は乗車前にご確認ください。<br><br><b>空港での乗り場</b><br>国際線ターミナル1階のバス乗り場で、蔚山行きの案内をご確認ください。乗り場の番号は、当日の案内表示または空港の案内所でご確認いただけます。<div class=\"transport-links\"><a class=\"transport-link\" href=\"https://www.airport.co.kr/gimhae/cms/frCon/index.do?MENU_ID=170\" target=\"_blank\" rel=\"noopener noreferrer\">空港公式・乗り場案内（韓国語） ↗</a><a class=\"transport-link\" href=\"http://www.taehwaairport.co.kr/bbs/board.php?bo_table=bod03&wr_id=1\" target=\"_blank\" rel=\"noopener noreferrer\">バス会社公式・時刻表（韓国語） ↗</a></div>",
     "t_bus_h": "仁川国際空港（ICN）から",
-    "t_bus": "<b>空港鉄道 → ソウル駅 → KTX → タクシー</b><br>① 仁川（インチョン）国際空港の第1・第2ターミナルから、空港鉄道AREXでソウル駅へ向かいます。<br>② ソウル駅で、蔚山駅に停車するKTXに乗り換えます。<br>③ KTX蔚山（ウルサン）駅で下車し、タクシーで会場へお越しください。<br><br>※ 入国審査・手荷物の受け取りに加え、ソウル駅での乗り換えにも余裕を持ってご計画ください。KTXの乗車券は事前予約をおすすめします。",
+    "t_bus": "<b>空港鉄道 → ソウル駅 → KTX → タクシー</b><br>① 仁川（インチョン）国際空港の第1・第2ターミナルから、空港鉄道AREXでソウル駅へ向かいます。<br>② ソウル駅で、蔚山駅に停車するKTXに乗り換えます。<br>③ KTX蔚山（ウルサン）駅で下車し、タクシーで会場へお越しください。<br><br>※ 入国審査・手荷物の受け取りに加え、ソウル駅での乗り換えにも余裕を持ってご計画ください。KTXの乗車券は事前予約をおすすめします。<div class=\"transport-links\"><a class=\"transport-link\" href=\"https://www.korail.com/global/jpn\" target=\"_blank\" rel=\"noopener noreferrer\">KTXの予約（KORAIL公式・日本語） ↗</a></div>",
     "t_air_h": "ソウル駅から",
-    "t_air": "<b>KTXで蔚山駅へ → タクシーで会場へ</b><br>① ソウル駅から、蔚山駅に停車するKTXをご利用ください。<br>② KTX蔚山（ウルサン）駅で下車します。<br>③ 駅のタクシー乗り場から、JWウェディングコンベンションセンターへお越しください。<br><br>※ 予約時の到着駅は「Ulsan」をお選びください。KTX蔚山駅と太和江（テファガン）駅は別の駅です。列車によって停車駅が異なりますので、ご予約時にご確認ください。",
+    "t_air": "<b>KTXで蔚山駅へ → タクシーで会場へ</b><br>① ソウル駅から、蔚山駅に停車するKTXをご利用ください。<br>② KTX蔚山（ウルサン）駅で下車します。<br>③ 駅のタクシー乗り場から、JWウェディングコンベンションセンターへお越しください。<br><br>※ 予約時の到着駅は「Ulsan」をお選びください。KTX蔚山駅と太和江（テファガン）駅は別の駅です。列車によって停車駅が異なりますので、ご予約時にご確認ください。<div class=\"transport-links\"><a class=\"transport-link\" href=\"https://www.korail.com/global/jpn\" target=\"_blank\" rel=\"noopener noreferrer\">KTXの予約（KORAIL公式・日本語） ↗</a></div>",
     "t_far_h": "",
     "t_far": "",
     "ct_g": "新郎",
@@ -979,7 +988,10 @@
     "rsvp_close": "閉じる",
     "rsvp_dialog_note": "以下の項目を選び、ご出欠をお知らせください。",
     "rsvp_hide_today": "今日は表示しない",
-    "rsvp_review": "回答内容を確認・変更する"
+    "rsvp_review": "回答内容を確認・変更する",
+    "taxi_title": "タクシーの運転手に見せる",
+    "taxi_note": "下の韓国語の行き先を運転手にお見せください。",
+    "taxi_copy": "行き先をコピー"
   },
   "cfg": {
     "music": "music.mp3",
@@ -1122,6 +1134,12 @@
     updateCalLinks();
     syncGalleryToggle();
     syncTransportRows();
+    $('#taxiHelp').hidden = lang !== 'ja';
+    if(lang !== 'ja'){
+      $('#taxiHelp').classList.remove('open');
+      $('#taxiHelp .th').setAttribute('aria-expanded','false');
+      $('#taxiFold').inert = true;
+    }
     syncRsvpOpenLabel();
     if(GB && GB.loaded) gbRender(); else if(GB && GB.msg) gbState(GB.msg);
     if($('#rsvpOk').style.display === 'block'){ var sv = loadRsvpSaved(); if(sv) $('#rsvpSumm').innerHTML = rsvpSummary(sv); }
@@ -1487,10 +1505,16 @@
 
   /* ── 교통 안내 펼침 ── */
   $$('.titem .th').forEach(function(btn){
+    btn.nextElementSibling.inert = !btn.parentNode.classList.contains('open');
     btn.addEventListener('click', function(){
       var open = btn.parentNode.classList.toggle('open');
+      var fold = btn.nextElementSibling; if(fold) fold.inert = !open;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+  });
+
+  $('#taxiCopy').addEventListener('click',function(){
+    copyText($('#taxiDestination').innerText, LANG === 'ja' ? '行き先をコピーしました' : '목적지를 복사했습니다');
   });
 
   /* ── 구글 시트(Apps Script) 전송 ── */
@@ -2008,7 +2032,7 @@
     ['사진·영상 받기', ['upload_title','upload_intro','upload_button','upload_note']],
     ['첫 화면',     ['hero_copy']],
     ['오시는 길',   ['loc_title','loc_name','loc_hall','loc_addr','map_btn_n','map_btn_k','map_btn_g']],
-    ['교통 안내',   ['trans_h','t_ktx_h','t_ktx','t_car_h','t_car','t_bus_h','t_bus','t_air_h','t_air','t_far_h','t_far']],
+    ['교통 안내',   ['taxi_title','taxi_note','taxi_copy','trans_h','t_ktx_h','t_ktx','t_car_h','t_car','t_bus_h','t_bus','t_air_h','t_air','t_far_h','t_far']],
     ['안내사항',    ['info_title','info_meal_h','info_meal','info_park_h','info_park']],
     ['연락처',      ['ct_btn','ct_gside','ct_g','ct_gn','ct_gf','ct_gfn','ct_gm','ct_gmn','ct_bside','ct_b','ct_bn']],
     ['참석 여부',   ['rsvp_title','rsvp_intro','rsvp_open','rsvp_review','rsvp_close','rsvp_dialog_note','rsvp_hide_today','f_side','c_g','c_b','f_att','c_y','c_n','f_name','name_ph','f_cnt','o1','o2','o3','o4','o5','f_meal','c_m1','c_m2','submit','rsvp_ok','rsvp_again']],
@@ -2017,6 +2041,7 @@
     ['맺음말',      ['foot_msg','share','share_k','share_l','copylink']]
   ];
   var LABEL = {
+    taxi_title:'택시 주소 카드 제목',taxi_note:'택시 카드 안내',taxi_copy:'택시 주소 복사 버튼',
     rsvp_review:'참석 응답 완료 후 버튼',
     rsvp_hide_today:'참석 안내 오늘 하루 숨김',
     rsvp_open:'참석 팝업 열기',rsvp_close:'참석 팝업 닫기',rsvp_dialog_note:'팝업 안내',
@@ -2327,7 +2352,7 @@
     $('#gbList').innerHTML = ''; $('#gbMore').hidden = true;
     ['rsvpTarget','apiTarget'].forEach(function(id){ var x = document.getElementById(id); if(x) x.parentNode.removeChild(x); });
     $$('[data-acc]').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); b.nextElementSibling.inert = true; });
-    $$('.titem').forEach(function(t){ t.classList.remove('open'); $('.th', t).setAttribute('aria-expanded','false'); });
+    $$('.titem').forEach(function(t){ t.classList.remove('open'); $('.th', t).setAttribute('aria-expanded','false'); $('.fold', t).inert = true; });
     $$('[data-toggle]').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); b.nextElementSibling.inert = true; });
     var ksdk = document.getElementById('kakaoSdk'); if(ksdk) ksdk.parentNode.removeChild(ksdk);
     $$('.flipc').forEach(function(f){ f.classList.remove('go'); });
@@ -2337,7 +2362,7 @@
     $('#apiDiag').innerHTML = ''; $('#apiDiag').hidden = true;
     document.body.style.overflow = '';
     applyShareMeta('ko');
-    var html = '<!DOCTYPE html>\\n' + document.documentElement.outerHTML;
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
     var blob = new Blob([html], {type:'text/html;charset=utf-8'});
     var a = document.createElement('a'), url = URL.createObjectURL(blob);
     a.href = url; a.download = 'main.html';
