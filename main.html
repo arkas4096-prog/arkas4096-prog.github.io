@@ -249,22 +249,45 @@
   .cal-add{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
   html[lang="ja"] .cal-add{flex-direction:column;align-items:center;}
 
-  /* ── 갤러리 ── */
-  .gstrip{margin-top:32px;display:grid;grid-template-columns:repeat(6,1fr);gap:4px;}
-  .gcell{grid-column:span 2;aspect-ratio:3/4;overflow:hidden;background:#ece9e2;cursor:pointer;position:relative;
-    opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  /* ── 갤러리: 3열 고정 · 모든 사진 동일 크기 ── */
+  .gstrip{
+    margin-top:32px;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:3px;
+  }
+  .gcell,
+  .gcell.pair,
+  .gcell.landscape{
+    grid-column:auto;
+    aspect-ratio:3 / 4;
+    overflow:hidden;
+    background:#ece9e2;
+    cursor:pointer;
+    position:relative;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .55s var(--ease),transform .55s var(--ease);
+  }
   .reveal.in .gcell{opacity:1;transform:none;}
-  .gcell:nth-child(3n+2){transition-delay:.08s}.gcell:nth-child(3n){transition-delay:.16s}
-  .gcell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);}
-  .gcell.pair{grid-column:span 3;}
-  .gcell.landscape{grid-column:1/-1;aspect-ratio:auto;}
-  .gcell.landscape img{height:auto;object-fit:contain;}
-  .gcell:active img{transform:scale(1.05);}
-  @media (hover:hover){ .gcell:hover img{transform:scale(1.05);} }
+  .gcell:nth-child(3n+2){transition-delay:.05s;}
+  .gcell:nth-child(3n){transition-delay:.1s;}
+  .gcell img,
+  .gcell.landscape img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+    display:block;
+    transition:transform .6s var(--ease);
+  }
+  .gcell:active img{transform:scale(1.035);}
+  @media (hover:hover){.gcell:hover img{transform:scale(1.035);}}
   .gcell.more{display:none;}
-  .gstrip.open .gcell.more{display:block;animation:fadeIn .6s var(--ease) both;}
-  .gstrip.open .gcell.more:nth-child(11){animation-delay:.06s}.gstrip.open .gcell.more:nth-child(12){animation-delay:.12s}
-  .gstrip.open .gcell.more:nth-child(13){animation-delay:.18s}.gstrip.open .gcell.more:nth-child(14){animation-delay:.24s}
+  .gstrip.open .gcell.more{
+    display:block;
+    animation:fadeIn .45s var(--ease) both;
+  }
   .gmore{margin-top:20px;}
   .gmore.open .chev{transform:translateY(2px) rotate(225deg);}
   .gnote{margin-top:16px;font-size:13px;color:var(--sub);}
@@ -624,18 +647,18 @@
     <div class="stitle en">Gallery</div>
     <div class="gstrip" id="gallery">
       <div class="gcell"><img src="images/gallery/01_t.webp" data-full="images/gallery/01.webp" loading="lazy" decoding="async" alt="웨딩 사진 1"></div>
-      <div class="gcell pair"><img src="images/gallery/02_t.webp" data-full="images/gallery/02.webp" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
+      <div class="gcell"><img src="images/gallery/02_t.webp" data-full="images/gallery/02.webp" loading="lazy" decoding="async" alt="웨딩 사진 2"></div>
       <div class="gcell"><img src="images/gallery/03_t.webp" data-full="images/gallery/03.webp" loading="lazy" decoding="async" alt="웨딩 사진 3"></div>
       <div class="gcell"><img src="images/gallery/04_t.webp" data-full="images/gallery/04.webp" loading="lazy" decoding="async" alt="웨딩 사진 4"></div>
       <div class="gcell"><img src="images/gallery/05_t.webp" data-full="images/gallery/05.webp" loading="lazy" decoding="async" alt="웨딩 사진 5"></div>
       <div class="gcell"><img src="images/gallery/06_t.webp" data-full="images/gallery/06.webp" loading="lazy" decoding="async" alt="웨딩 사진 6"></div>
-      <div class="gcell pair"><img src="images/gallery/07_t.webp" data-full="images/gallery/07.webp" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
-      <div class="gcell pair"><img src="images/gallery/08_t.webp" data-full="images/gallery/08.webp" loading="lazy" decoding="async" alt="웨딩 사진 8"></div>
-      <div class="gcell landscape"><img src="images/gallery/09.webp" data-full="images/gallery/09.webp" loading="lazy" decoding="async" alt="웨딩 사진 9"></div>
+      <div class="gcell"><img src="images/gallery/07_t.webp" data-full="images/gallery/07.webp" loading="lazy" decoding="async" alt="웨딩 사진 7"></div>
+      <div class="gcell"><img src="images/gallery/08_t.webp" data-full="images/gallery/08.webp" loading="lazy" decoding="async" alt="웨딩 사진 8"></div>
+      <div class="gcell"><img src="images/gallery/09_t.webp" data-full="images/gallery/09.webp" loading="lazy" decoding="async" alt="웨딩 사진 9"></div>
       <div class="gcell more"><img src="images/gallery/10_t.webp" data-full="images/gallery/10.webp" loading="lazy" decoding="async" alt="웨딩 사진 10"></div>
       <div class="gcell more"><img src="images/gallery/11_t.webp" data-full="images/gallery/11.webp" loading="lazy" decoding="async" alt="웨딩 사진 11"></div>
       <div class="gcell more"><img src="images/gallery/12_t.webp" data-full="images/gallery/12.webp" loading="lazy" decoding="async" alt="웨딩 사진 12"></div>
-      <div class="gcell more pair"><img src="images/gallery/13_t.webp" data-full="images/gallery/13.webp" loading="lazy" decoding="async" alt="웨딩 사진 13"></div>
+      <div class="gcell more"><img src="images/gallery/13_t.webp" data-full="images/gallery/13.webp" loading="lazy" decoding="async" alt="웨딩 사진 13"></div>
       <div class="gcell more"><img src="images/gallery/14_t.webp" data-full="images/gallery/14.webp" loading="lazy" decoding="async" alt="웨딩 사진 14"></div>
     </div>
     <button type="button" class="pill gmore" id="gMore" aria-expanded="false"><span data-i="gal_more">더 보기</span><i class="chev" aria-hidden="true"></i></button>
@@ -822,7 +845,7 @@
     <div class="ad-panel" id="adJa"></div>
     <div class="ad-panel" id="adCfg"></div>
     <div class="ad-panel" id="adGallery">
-      <div class="ad-gallery-note">사진을 드래그하거나 ↑ ↓ 버튼으로 순서를 바꿀 수 있습니다.<br>앞의 9장은 바로 보이고, 10번째부터는 ‘더 보기’에 들어갑니다.</div>
+      <div class="ad-gallery-note">사진을 드래그하거나 ↑ ↓ 버튼으로 순서를 바꿀 수 있습니다.<br>모든 사진은 동일한 3:4 크기로 표시되며, 앞의 9장은 바로 보이고 10번째부터는 ‘더 보기’에 들어갑니다.</div>
       <div class="ad-gallery-list" id="adGalleryList"></div>
     </div>
     <div class="ad-panel" id="adRsvp">
@@ -841,7 +864,7 @@
 </div>
 <script id="siteData" type="application/json">
 {
-  "rev": 1791080762094,
+  "rev": 1791081762094,
   "ko": {},
   "ja": {
     "full": "<ruby>裵相元<rt>ペ・サンウォン</rt></ruby> ・ <ruby>芝中希望<rt>しばなか のぞみ</rt></ruby>",
@@ -1667,13 +1690,11 @@
   }
   function refreshGalleryImgs(){ imgs = $$('#gallery img'); }
   function normalizeGalleryLayout(){
-    /* 칸 모양은 사진이 아니라 '자리'에 고정한다. */
-    var pairSlots = {1:true, 6:true, 7:true, 12:true}; /* 2,7,8,13번째 */
+    /* 순서를 바꿔도 모든 사진은 항상 동일한 3:4 크기.
+       10번째부터만 '더 보기' 영역으로 처리한다. */
     $$('#gallery .gcell').forEach(function(cell, i){
       cell.classList.remove('pair','landscape','more');
-      if(pairSlots[i]) cell.classList.add('pair');
-      if(i === 8) cell.classList.add('landscape');      /* 9번째 가로 전폭 */
-      if(i >= 9) cell.classList.add('more');            /* 10번째부터 더보기 */
+      if(i >= 9) cell.classList.add('more');
     });
   }
   function applyGalleryOrder(){
